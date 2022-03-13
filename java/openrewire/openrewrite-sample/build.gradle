@@ -4,11 +4,17 @@ plugins {
     id 'maven-publish'
 }
 
+group = 'rhirabay'
+version = '0.0.1'
 sourceCompatibility = 11
 targetCompatibility = 11
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    enabled = true
 }
 
 repositories {
@@ -44,4 +50,12 @@ rewrite {
     activeRecipe(
             "org.openrewrite.java.format.AutoFormat"
     )
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }

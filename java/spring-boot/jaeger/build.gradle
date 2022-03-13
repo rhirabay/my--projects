@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyManagementVersion}"
+    id 'java'
+    id 'com.github.ben-manes.versions' version "${benManesVersions}"
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+
+    // cf. https://github.com/opentracing-contrib/java-spring-jaeger
+    implementation 'io.opentracing.contrib:opentracing-spring-jaeger-web-starter:3.3.1'
+
+    // cf.
+    // - https://github.com/opentracing-contrib/java-jdbc
+    // - https://mvnrepository.com/artifact/io.opentracing.contrib/opentracing-jdbc
+    implementation 'io.opentracing.contrib:opentracing-jdbc:0.2.15'
+
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'com.h2database:h2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

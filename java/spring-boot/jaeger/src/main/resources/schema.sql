@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS USER (
+    id   VARCHAR(10) NOT NULL,
+    name VARCHAR(10),
+    PRIMARY KEY(id)
+);
