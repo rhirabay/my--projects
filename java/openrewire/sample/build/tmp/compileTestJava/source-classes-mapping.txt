@@ -1,2 +1,0 @@
-rhirabay/ApplicationTest.java
- rhirabay.ApplicationTest
