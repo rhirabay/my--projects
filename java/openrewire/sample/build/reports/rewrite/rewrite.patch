@@ -1,0 +1,16 @@
+diff --git a/src/main/java/rhirabay/SampleController.java b/src/main/java/rhirabay/SampleController.java
+index add0986..5a2cdba 100644
+--- a/src/main/java/rhirabay/SampleController.java
++++ b/src/main/java/rhirabay/SampleController.java
+@@ -5,8 +5,8 @@ org.openrewrite.java.format.AutoFormat
+ 
+ @RestController
+ public class SampleController {
+-        @GetMapping("/hello")
++    @GetMapping("/hello")
+     public String hello() {
+-      return "hello";
++        return "hello";
+     }
+ }
+
