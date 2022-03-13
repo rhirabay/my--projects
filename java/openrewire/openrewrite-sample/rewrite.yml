@@ -1,6 +1,0 @@
-#type: specs.openrewrite.org/v1beta/recipe
-#name: rhirabay.Sample
-#recipeList:
-#  - rhirabay.java.ChangePackage:
-#      oldPackageName: rhirabay
-#      newPackageName: rhirabay2

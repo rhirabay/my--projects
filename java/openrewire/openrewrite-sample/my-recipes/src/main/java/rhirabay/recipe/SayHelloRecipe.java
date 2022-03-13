@@ -2,6 +2,7 @@ package rhirabay.recipe;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.extern.slf4j.Slf4j;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Recipe;
 import org.openrewrite.internal.lang.NonNull;
@@ -25,13 +26,12 @@ public class SayHelloRecipe extends Recipe {
 
     @Override
     protected JavaIsoVisitor<ExecutionContext> getVisitor() {
-        // getVisitor() should always return a new instance of the visitor to avoid any state leaking between cycles
         return new SayHelloVisitor();
     }
 
     public class SayHelloVisitor extends JavaIsoVisitor<ExecutionContext> {
         private final JavaTemplate helloTemplate =
-                JavaTemplate.builder(this::getCursor, "public String hello() { return \"Hello from #{}!\"; }")
+                JavaTemplate.builder(this::getCursor, "public String hello() { return \"Hello, OpenRewrite!!!\"; }")
                         .build();
 
         @Override
@@ -45,7 +45,7 @@ public class SayHelloRecipe extends Recipe {
                 return classDecl;
             }
 
-            classDecl.withBody(
+            classDecl = classDecl.withBody(
                     classDecl.getBody().withTemplate(helloTemplate, classDecl.getBody().getCoordinates().lastStatement())
             );
 

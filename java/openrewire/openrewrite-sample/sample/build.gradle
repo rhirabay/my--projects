@@ -1,0 +1,38 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.4'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.github.ben-manes.versions' version '0.36.0'
+    id("org.openrewrite.rewrite") version("5.17.0")
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+test {
+    useJUnitPlatform()
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    rewrite(project(':my-recipes'))
+}
+
+rewrite {
+
+    activeRecipe("rhirabay.recipe.SayHelloRecipe")
+}
+
+rewriteDryRun.dependsOn ':my-recipes:build'
+rewriteRun.dependsOn ':my-recipes:build'
