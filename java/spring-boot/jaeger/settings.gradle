@@ -1,4 +1,1 @@
 rootProject.name = 'jaeger'
-
-include ':my-bom'
-project(':my-bom').projectDir = new File(settingsDir, '../my-bom')
