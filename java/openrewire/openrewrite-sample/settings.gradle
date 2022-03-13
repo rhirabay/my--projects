@@ -1,1 +1,4 @@
 rootProject.name = 'openrewrite-sample'
+
+include 'my-recipes'
+include 'sample'
