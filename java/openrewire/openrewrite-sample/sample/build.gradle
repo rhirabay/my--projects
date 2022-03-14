@@ -23,15 +23,22 @@ dependencies {
     annotationProcessor('org.projectlombok:lombok')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    rewrite("org.openrewrite.recipe:rewrite-spring:4.16.0")
     rewrite(project(':my-recipes'))
 }
 
 rewrite {
+//    activeRecipe(
+//            "org.openrewrite.java.format.AutoFormat",
+//            "org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_3"
+//    )
+    activeRecipe("my.SpringBoot2_6")
+//    activeRecipe("rhirabay.recipe.SayHelloRecipe")
 
-    activeRecipe("rhirabay.recipe.SayHelloRecipe")
 }
 
 rewriteDryRun.dependsOn ':my-recipes:build'

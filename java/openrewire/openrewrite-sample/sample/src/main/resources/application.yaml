@@ -1,0 +1,5 @@
+management:
+  metrics:
+    export:
+      dynatrace:
+        group: "sample"
