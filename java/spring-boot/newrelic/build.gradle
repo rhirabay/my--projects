@@ -15,10 +15,15 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	implementation 'com.newrelic.telemetry:micrometer-registry-new-relic:0.8.0'
 	runtimeOnly 'io.micrometer:micrometer-registry-new-relic'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+bootRun {
+	jvmArgs = ["-javaagent:./newrelic/newrelic.jar"]
 }
