@@ -7,3 +7,6 @@
 #    additional-listen-addresses:
 #      - "localhost:6767"
 #    on-collision-prefer-shaded-netty: false
+
+grpc:
+  port: 6565
