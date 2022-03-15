@@ -36,9 +36,11 @@ rewrite {
 //            "org.openrewrite.java.format.AutoFormat",
 //            "org.openrewrite.java.spring.boot2.UpgradeSpringBoot_2_3"
 //    )
-    activeRecipe("my.SpringBoot2_6")
-//    activeRecipe("rhirabay.recipe.SayHelloRecipe")
-
+//    activeRecipe("my.SpringBoot2_6")
+    
+    // rewrite.ymlのnameもしくはrecipeListから設定
+    activeRecipe("rhirabay.recipe.SayHelloRecipe")
+    // activeRecipe("rhirabay.Sample")
 }
 
 rewriteDryRun.dependsOn ':my-recipes:build'

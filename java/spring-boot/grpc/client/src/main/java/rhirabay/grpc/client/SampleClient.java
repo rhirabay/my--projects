@@ -9,11 +9,13 @@ import rhirabay.grpc.sample.GreetRequest;
 @Component
 public class SampleClient {
     private final GreetGrpc.GreetBlockingStub stub;
+    // private final GreetGrpc.GreetFutureStub futureStub;
 
     public SampleClient() {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 6565)
                 .usePlaintext()
                 .build();
+        // this.futureStub = GreetGrpc.newFutureStub(channel);
         this.stub = GreetGrpc.newBlockingStub(channel);
     }
 
