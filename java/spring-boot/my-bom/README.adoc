@@ -1,0 +1,11 @@
+== Usage
+
+[source;groovy]
+.build.gradle
+----
+dependencyManagement {
+	imports {
+		mavenBom("rhirabay.bom:my-bom:+")
+	}
+}
+----
