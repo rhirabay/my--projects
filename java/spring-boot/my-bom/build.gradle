@@ -15,6 +15,10 @@ repositories {
 }
 
 dependencies {
+    constraints {
+        api 'io.mockk:mockk:1.12.3'
+    }
+
     api platform('org.springframework.boot:spring-boot-dependencies:2.6.4')
     api platform('org.springframework.cloud:spring-cloud-dependencies:2021.0.+')
 }
