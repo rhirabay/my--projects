@@ -17,6 +17,10 @@ repositories {
 dependencies {
     constraints {
         api 'io.mockk:mockk:1.12.3'
+
+        // cf. https://github.com/Ninja-Squad/springmockk
+        // https://mvnrepository.com/artifact/com.ninja-squad/springmockk
+        api 'com.ninja-squad:springmockk:3.1.1'
     }
 
     api platform('org.springframework.boot:spring-boot-dependencies:2.6.4')
