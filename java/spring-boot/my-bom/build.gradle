@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     constraints {
+        // cf. https://mockk.io/
         api 'io.mockk:mockk:1.12.3'
 
         // cf. https://github.com/Ninja-Squad/springmockk

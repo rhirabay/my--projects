@@ -34,8 +34,11 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	// https://mvnrepository.com/artifact/io.mockk/mockk
+	// cf. https://mockk.io/
 	testImplementation("io.mockk:mockk")
+	// cf. https://github.com/Ninja-Squad/springmockk
+	testImplementation("com.ninja-squad:springmockk")
+	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 }
 
 tasks.withType<KotlinCompile> {
