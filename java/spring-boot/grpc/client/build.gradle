@@ -26,8 +26,16 @@ dependencies {
 
 	implementation project(':proto')
 
+	// https://mvnrepository.com/artifact/io.github.lognet/grpc-client-spring-boot-starter
+//	implementation 'io.github.lognet:grpc-client-spring-boot-starter:4.6.0'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-configuration-processor'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {

@@ -1,12 +1,2 @@
-#grpc:
-#  port: 6565
-#  netty-server:
-#    keep-alive-time: 30s
-#    max-inbound-message-size: 10MB
-#    primary-listen-address: "localhost:6565"
-#    additional-listen-addresses:
-#      - "localhost:6767"
-#    on-collision-prefer-shaded-netty: false
-
 grpc:
   port: 6565

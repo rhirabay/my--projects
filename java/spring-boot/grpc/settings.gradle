@@ -1,5 +1,6 @@
-rootProject.name = 'grpc'
+rootProject.name = 'grpc-lognet'
 
 include 'server'
+include 'tls-server'
 include 'client'
 include 'proto'
