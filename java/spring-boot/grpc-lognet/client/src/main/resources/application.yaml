@@ -1,0 +1,7 @@
+
+rhirabay:
+  grpc:
+    client:
+      greeting:
+        host: localhost
+        port: 6565
