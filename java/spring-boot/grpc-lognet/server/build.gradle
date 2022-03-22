@@ -26,7 +26,10 @@ dependencies {
 
 	implementation project(':proto')
 
-//	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation "io.micrometer:micrometer-registry-prometheus"
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// cf. https://yidongnan.github.io/grpc-spring-boot-starter/en/server/testing.html
