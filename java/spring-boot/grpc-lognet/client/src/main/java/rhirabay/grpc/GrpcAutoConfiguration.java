@@ -20,22 +20,8 @@ import rhirabay.grpc.sample.GreetGrpc;
 public class GrpcAutoConfiguration {
 
     @Bean
-    @SneakyThrows
     ManagedChannel managedChannel(GrpcProperties grpcProperties) {
         var clientProps = grpcProperties.getClient().get("greeting");
-        log.info("client props: {}", clientProps);
-        var channelBuilder = ManagedChannelBuilder.forAddress(clientProps.getHost(), clientProps.getPort());
-        var certChain = new FileUrlResource("../cert/server.pem");
-        var sslContext = GrpcSslContexts.forClient().trustManager(certChain.getInputStream()).build();
-        return ((NettyChannelBuilder)channelBuilder)
-                .useTransportSecurity()
-                .sslContext(sslContext)
-                .build();
-    }
-
-    @Bean
-    ManagedChannel tlsManagedChannel(GrpcProperties grpcProperties) {
-        var clientProps = grpcProperties.getClient().get("tls-greeting");
         log.info("client props: {}", clientProps);
         return ManagedChannelBuilder.forAddress(clientProps.getHost(), clientProps.getPort())
                 .usePlaintext()
@@ -45,6 +31,20 @@ public class GrpcAutoConfiguration {
     @Bean
     GreetGrpc.GreetBlockingStub greetBlockingStub(ManagedChannel managedChannel) {
         return GreetGrpc.newBlockingStub(managedChannel);
+    }
+
+    @Bean
+    @SneakyThrows
+    ManagedChannel tlsManagedChannel(GrpcProperties grpcProperties) {
+        var clientProps = grpcProperties.getClient().get("tls-greeting");
+        log.info("client props: {}", clientProps);
+        var channelBuilder = ManagedChannelBuilder.forAddress(clientProps.getHost(), clientProps.getPort());
+        var certChain = new FileUrlResource("../cert/server.pem");
+        var sslContext = GrpcSslContexts.forClient().trustManager(certChain.getInputStream()).build();
+        return ((NettyChannelBuilder)channelBuilder)
+                .useTransportSecurity()
+                .sslContext(sslContext)
+                .build();
     }
 
     @Bean
