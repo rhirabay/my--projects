@@ -5,3 +5,6 @@ rhirabay:
       greeting:
         host: localhost
         port: 6565
+      tls-greeting:
+        host: localhost
+        port: 6566

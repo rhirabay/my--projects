@@ -1,5 +1,5 @@
 grpc:
   port: 6566
   security:
-    private-key: "file:../keys/server.key"
-    cert-chain: "file:../keys/server.crt"
+    private-key: "file:../cert/server.key"
+    cert-chain:  "file:../cert/server.pem"
