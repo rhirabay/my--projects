@@ -1,9 +1,50 @@
-== 参考ドキュメント
+== ドキュメント
 
-* test
-** https://yidongnan.github.io/grpc-spring-boot-starter/en/server/testing.html
+* https://github.com/LogNet/grpc-spring-boot-starter
 
 == やりたいこと
 
 * TLS
 * メトリクス
+
+== 証明書の発行方法
+
+cf. https://github.com/grpc/grpc-java/blob/master/testing/src/main/resources/certs/README
+
+----
+Valid test credentials:
+=======================
+
+The ca is self-signed:
+----------------------
+
+$ openssl req -x509 -new -newkey rsa:2048 -nodes -keyout ca.key -out ca.pem \
+  -config ca-openssl.cnf -days 3650 -extensions v3_req
+When prompted for certificate information, everything is default.
+
+client is issued by CA:
+-----------------------
+
+$ openssl genrsa -out client.key.rsa 2048
+$ openssl pkcs8 -topk8 -in client.key.rsa -out client.key -nocrypt
+$ openssl req -new -key client.key -out client.csr
+
+When prompted for certificate information, everything is default except the
+common name which is set to testclient.
+
+$ openssl x509 -req -CA ca.pem -CAkey ca.key -CAcreateserial -in client.csr \
+  -out client.pem -days 3650
+
+server0 is issued by CA:
+------------------------
+
+$ openssl genrsa -out server0.key.rsa 2048
+$ openssl pkcs8 -topk8 -in server0.key.rsa -out server0.key -nocrypt
+$ openssl req -new -key server0.key -out server0.csr
+
+When prompted for certificate information, everything is default except the
+common name which is set to *.test.google.com.au.
+
+$ openssl x509 -req -CA ca.pem -CAkey ca.key -CAcreateserial -in server0.csr \
+  -out server0.pem -days 3650
+----

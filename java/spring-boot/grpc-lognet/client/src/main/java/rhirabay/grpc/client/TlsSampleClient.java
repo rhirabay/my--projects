@@ -1,7 +1,5 @@
 package rhirabay.grpc.client;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import rhirabay.grpc.sample.GreetGrpc;
@@ -9,12 +7,12 @@ import rhirabay.grpc.sample.GreetRequest;
 
 @Component
 @RequiredArgsConstructor
-public class SampleClient {
-    private final GreetGrpc.GreetBlockingStub greetBlockingStub;
+public class TlsSampleClient {
+    private final GreetGrpc.GreetBlockingStub tlsGreetBlockingStub;
 
     public String greeting(String name){
         var request = GreetRequest.newBuilder().setName(name).build();
-        var response = this.greetBlockingStub.greeting(request);
+        var response = this.tlsGreetBlockingStub.greeting(request);
         return response.getMessage();
     }
 }
