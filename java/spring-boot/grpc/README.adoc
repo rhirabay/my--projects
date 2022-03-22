@@ -1,9 +1,0 @@
-== 参考ドキュメント
-
-* test
-** https://yidongnan.github.io/grpc-spring-boot-starter/en/server/testing.html
-
-== やりたいこと
-
-* TLS
-* メトリクス
