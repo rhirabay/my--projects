@@ -1,19 +1,28 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
+// 自動生成されるJavaクラスのpackegeに対応
 option java_package = "rhirabay.grpc.sample";
+// 自動生成されるJavaクラス名に使われる（server, client実装時には意識しないかも）
 option java_outer_classname = "Greeter";
 
+// 定義ファイル自体のpackage
 package greet;
 
+// サービスの定義
 service Greet{
   rpc greeting (GreetRequest) returns (GreetResponse);
 }
 
+// リクエスト定義（この名前でJavaクラスが自動生成される）
 message GreetRequest{
+  // Javaクラスのフィールドに該当（右側の数字はタグ ※一意につければOK）
+  // Javaの型との対応: https://developers.google.com/protocol-buffers/docs/proto3#scalar
   string name = 1;
 }
 
+// レスポンス定義（この名前でJavaクラスが自動生成される）
 message GreetResponse{
+  // Javaクラスのフィールドに該当
   string message = 1;
 }

@@ -1,0 +1,14 @@
+:toc: left
+:icons: font
+
+== no tls
+
+[source;sh]
+.terminal
+----
+grpcurl -import-path ./proto/src/main/proto/ \
+  -proto sample.proto \
+  -plaintext \
+  -d '{"name":"Ryo"}' \
+  localhost:6565 greet.Greet/greeting
+----

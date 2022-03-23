@@ -2,12 +2,21 @@ plugins {
 	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	// cf. https://github.com/LogNet/grpc-spring-boot-starter/blob/master/grpc-spring-boot-starter-gradle-plugin/README.adoc
 	id "io.github.lognet.grpc-spring-boot" version '4.6.0'
 }
 
 group = 'rhirabay'
 version = '0.0.1'
 sourceCompatibility = '11'
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	enabled = true
+}
 
 repositories {
 	mavenCentral()
@@ -24,16 +33,14 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
-	implementation project(':proto')
+//	implementation project(':proto')
+	implementation 'rhirabay:proto:+'
 
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation "io.micrometer:micrometer-registry-prometheus"
-	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-
-	// cf. https://yidongnan.github.io/grpc-spring-boot-starter/en/server/testing.html
-	testImplementation 'io.grpc:grpc-testing:1.45.0'
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
