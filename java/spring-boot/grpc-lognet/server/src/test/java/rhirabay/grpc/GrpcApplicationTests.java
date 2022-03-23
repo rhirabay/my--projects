@@ -2,7 +2,6 @@ package rhirabay.grpc;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.inprocess.InProcessChannelBuilder;
 import org.junit.jupiter.api.Test;
 import org.lognet.springboot.grpc.context.LocalRunningGrpcPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,9 @@ import rhirabay.grpc.sample.GreetRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(
-		classes = GrpcApplication.class)
+		classes = GrpcApplication.class,
+		properties = "grpc.port=0" // ランダムポート
+)
 @ActiveProfiles("test")
 class GrpcApplicationTests {
 	@LocalRunningGrpcPort
@@ -34,5 +35,4 @@ class GrpcApplicationTests {
 		var expected = "Hello, Ryo.";
 		assertThat(actual).isEqualTo(expected);
 	}
-
 }

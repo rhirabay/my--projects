@@ -5,13 +5,13 @@ management:
   metrics:
     export:
       prometheus:
+        # prometheusエンドポイントを有効化
         enabled: true
   endpoints:
     web:
+      # /prometheusでアクセスできるように
       base-path: "/"
       exposure:
         include: "*"
-  server:
-    port: 9991
 server:
-  port: 8081
+  port: 9991
