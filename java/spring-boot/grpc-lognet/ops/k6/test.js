@@ -29,7 +29,7 @@ export default () => {
   });
 
   console.log(JSON.stringify(response.message));
+  client.close();
   sleep(1);
-  client.close()
 };
 

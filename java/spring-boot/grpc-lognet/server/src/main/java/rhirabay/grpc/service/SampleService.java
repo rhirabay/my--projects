@@ -8,7 +8,8 @@ import rhirabay.grpc.sample.GreetRequest;
 import rhirabay.grpc.sample.GreetResponse;
 
 // @GRpcServiceを付与すると、grpcのserviceとして認識される
-@GRpcService(interceptors = SampleInterceptor.class)
+@GRpcService
+//@GRpcService(interceptors = SampleInterceptor.class)
 public class SampleService extends GreetGrpc.GreetImplBase {
     @Override
     @Timed(percentiles = { 0.5, 0.99 })
