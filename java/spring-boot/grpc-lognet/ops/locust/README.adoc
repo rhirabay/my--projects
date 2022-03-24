@@ -1,0 +1,21 @@
+
+
+== 環境構築
+
+----
+$ brew install pyenv
+$ brew install pipenv
+----
+
+== gRPCクライアント生成
+
+----
+$ pipenv shell
+$ python -m grpc_tools.protoc -I ../../proto/src/main/proto --python_out=. --grpc_python_out=. ../../proto/src/main/proto/sample.proto
+----
+
+== Locust起動
+
+----
+$ locust -f locustfile.py
+----
