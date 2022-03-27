@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="https://unpkg.com/react@latest/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/umd/react-dom.production.min.js"></script>
+    <!--JSXのブラウザでの単独実行のために必要-->
+    <script src="https://unpkg.com/babel-standalone@latest/babel.min.js"></script>
+
+    <title>List</title>
+</head>
+<body>
+
+<div id="sample"></div>
+
+</body>
+
+<script type="text/babel">
+    class Fruits extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                items: ['apple', 'banana', 'orange']
+            }
+            this.itemsToListElement = this.itemsToListElement.bind(this)
+        }
+
+        itemsToListElement() {
+            return this.state.items.map(item => <li key={item}>{item}</li>)
+        }
+
+        render() {
+            return <ul>{this.itemsToListElement()}</ul>
+        }
+    }
+    ReactDOM.render(
+        <Fruits/>,
+        document.getElementById('sample')
+    )
+</script>
+</html>
