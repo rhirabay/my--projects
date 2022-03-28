@@ -1,3 +1,16 @@
 spring:
   profiles:
     active: "secure"
+
+management:
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+      newrelic:
+        step: 15s
+#        client-provider-type: "INSIGHTS_AGENT"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
