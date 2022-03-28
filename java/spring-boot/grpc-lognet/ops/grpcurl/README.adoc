@@ -3,8 +3,7 @@
 
 == no tls
 
-[source;sh]
-.terminal
+[source,bash]
 ----
 grpcurl -import-path ./proto/src/main/proto/ \
   -proto sample.proto \
