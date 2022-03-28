@@ -32,5 +32,5 @@ public class GrpcTlsAutoConfiguration {
     GreetGrpc.GreetBlockingStub tlsGreetBlockingStub(ManagedChannel tlsManagedChannel) {
         return GreetGrpc.newBlockingStub(tlsManagedChannel);
     }
-    
+
 }

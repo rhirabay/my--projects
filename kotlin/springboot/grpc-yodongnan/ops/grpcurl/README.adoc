@@ -1,0 +1,11 @@
+:toc: left
+:icons: font
+
+[source,bash]
+----
+grpcurl -import-path ./protos/src/main/proto/ \
+  -proto greet.proto \
+  -plaintext \
+  -d '{"name":"Ryo"}' \
+  localhost:9090 greet.Greet/greeting
+----
