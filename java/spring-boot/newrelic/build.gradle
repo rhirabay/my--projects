@@ -13,10 +13,15 @@ repositories {
 }
 
 dependencies {
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'com.newrelic.telemetry:micrometer-registry-new-relic:0.8.0'
-	runtimeOnly 'io.micrometer:micrometer-registry-new-relic'
+//	runtimeOnly 'io.micrometer:micrometer-registry-new-relic'
+
+	// cf. https://github.com/newrelic/micrometer-registry-newrelic
+	implementation 'com.newrelic.telemetry:micrometer-registry-new-relic:0.8.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
