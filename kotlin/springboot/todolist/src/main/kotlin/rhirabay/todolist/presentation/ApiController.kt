@@ -17,7 +17,7 @@ class ApiController (private val searchTodoUsecase: SearchTodoUsecase,
 
     @GetMapping("/todo/{id}")
     fun todo(@PathVariable id: String): TodoEntity? {
-        var todo = searchTodoUsecase.search(id)
+        val todo = searchTodoUsecase.search(id)
 
         log.info("todo: {}", todo?.id)
 
