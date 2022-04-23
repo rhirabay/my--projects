@@ -15,6 +15,7 @@ function measure() {
     lighthouse \
       ${TEST_URL} \
       --preset="desktop" --quiet --output=html --output=json \
+      --extra-headers=${BIN_PATH}/header.json \
       --chrome-flags="--headless --no-sandbox --ignore-certificate-errors"
 }
 
