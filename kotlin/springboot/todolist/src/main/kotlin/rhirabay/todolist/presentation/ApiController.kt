@@ -6,6 +6,8 @@ import rhirabay.todolist.domain.entity.TodoEntity
 import rhirabay.todolist.presentation.resource.AddTodoRequest
 import rhirabay.todolist.usecase.AddTodoUsecase
 import rhirabay.todolist.usecase.SearchTodoUsecase
+import java.lang.Exception
+import java.lang.RuntimeException
 
 @RestController
 @RequestMapping("/api")
@@ -32,5 +34,18 @@ class ApiController (private val searchTodoUsecase: SearchTodoUsecase,
     @PostMapping("/todo")
     fun add(@RequestBody addTodoRequest: AddTodoRequest) : TodoEntity {
         return addTodoUsecase.add(addTodoRequest.title)
+    }
+
+    @GetMapping("/error")
+    fun error() {
+        try {
+            throw RuntimeException("1", RuntimeException("2"))
+        } catch (ex: Exception) {
+            log.info("stack trace: ${ex.stackTraceToString()
+                .replace("\n", "__LF__")
+                .replace("\r", "")}")
+            log.info("to string: ${ex.toString()}")
+            log.info("message: ${ex.message}")
+        }
     }
 }
