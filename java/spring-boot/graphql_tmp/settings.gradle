@@ -1,4 +1,0 @@
-rootProject.name = 'graphql'
-
-include('spring-tips')
-include('server-for-qiita')

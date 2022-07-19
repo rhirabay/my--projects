@@ -1,9 +1,0 @@
-type Query {
-    todoList: [Todo]
-    todo(id: String): Todo
-}
-
-type Todo {
-    id: ID
-    title: String
-}
