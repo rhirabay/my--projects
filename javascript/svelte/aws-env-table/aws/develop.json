@@ -1,0 +1,16 @@
+{
+  "containerDefinitions": [
+    {
+      "environment": [
+        {
+          "name": "ENV_1",
+          "value": "DEVELOP_VALUE_1"
+        },
+        {
+          "name": "ENV_2",
+          "value": "DEVELOP_VALUE_2"
+        }
+      ]
+    }
+  ]
+}
