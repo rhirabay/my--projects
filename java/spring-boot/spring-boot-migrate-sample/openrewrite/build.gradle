@@ -7,7 +7,7 @@ plugins {
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -30,5 +30,5 @@ tasks.named('test') {
 rewrite {
 //	activeRecipe("org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta")
 	activeRecipe("org.openrewrite.java.spring.boot3.SpringBoot2To3Migration")
-	activeRecipe('sample..UpdateSpringBootPlugin')
+	activeRecipe('custom.SpringBootMigration')
 }
