@@ -1,9 +1,20 @@
 type Query {
     todoList: [Todo]
+    projects: [Project]
     todo(id: String): Todo
 }
 
 type Todo {
     id: ID
     title: String
+}
+
+type Project {
+    id: ID
+    name: String
+    todoList: [Todo]
+}
+
+type Mutation {
+    addTodo(title: String): Todo
 }
