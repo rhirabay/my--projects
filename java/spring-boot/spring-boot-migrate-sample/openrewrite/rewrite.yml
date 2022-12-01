@@ -1,11 +1,19 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: sample.UpdateSpringBootPlugin
+name: custom.SpringBootMigration
 displayName: Update springboot plugin to 3.0 from 2.7
 recipeList:
+  # プラグインの更新
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: org.springframework.boot
       newVersion: "3.0.0"
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
       pluginIdPattern: io.spring.dependency-management
       newVersion: "1.1.0"
+  # Jaraバージョンの更新
+  - org.openrewrite.gradle.ChangeJavaCompatibility:
+      newVersion: "17"
+      compatibilityType: "source"
+  - org.openrewrite.gradle.ChangeJavaCompatibility:
+      newVersion: "17"
+      compatibilityType: "target"

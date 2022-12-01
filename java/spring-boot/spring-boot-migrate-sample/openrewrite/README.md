@@ -35,7 +35,7 @@ rewrite {
     // OpenRewite側に用意されているSpringBoot3への移行用のレシピ
     activeRecipe("org.openrewrite.java.spring.boot3.SpringBoot2To3Migration")
     // 先ほど定義した独自のレシピ
-    activeRecipe('sample.UpdateSpringBootPlugin')
+    activeRecipe('custom.SpringBootMigration')
 }
 ```
 
