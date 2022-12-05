@@ -1,4 +1,4 @@
-# OpenWriteでの移行手順
+# OpenRewriteでの移行手順
 
 ## 1. 定義ファイルを作成
 

@@ -1,0 +1,16 @@
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS
+
+management:
+  endpoint:
+    httpexchanges:
+      enabled: true
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: httpexchanges, health, env, prometheus
+
+sample:
+  password: "password"
