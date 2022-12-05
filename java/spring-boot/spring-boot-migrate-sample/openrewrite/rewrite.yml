@@ -1,7 +1,7 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: custom.SpringBootMigration
-displayName: Update springboot plugin to 3.0 from 2.7
+displayName: springboot migration to 3.0 from 2.7
 recipeList:
   # プラグインの更新
   - org.openrewrite.gradle.plugins.UpgradePluginVersion:
@@ -17,3 +17,8 @@ recipeList:
   - org.openrewrite.gradle.ChangeJavaCompatibility:
       newVersion: "17"
       compatibilityType: "target"
+  # 依存ライブラリの更新（更新に必要なライブラリごとに定義が必要）
+  - org.openrewrite.gradle.ChangeDependencyVersion:
+      groupId: org.mybatis.spring.boot
+      artifactId: mybatis-spring-boot-starter
+      newVersion: 3.0.0

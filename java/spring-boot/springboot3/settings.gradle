@@ -1,1 +1,3 @@
 rootProject.name = 'springboot3'
+
+include 'lib'

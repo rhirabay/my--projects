@@ -1,0 +1,6 @@
+#spring:
+#  redis:
+#    username: sample
+
+server:
+  port: 8081
