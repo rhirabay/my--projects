@@ -37,6 +37,8 @@ dependencies {
 	rewrite("org.openrewrite:rewrite-gradle:7.33.0")
 
 //	implementation 'rhirabay.springboot2.sample:library:1.0.0'
+
+	implementation 'org.apache.httpcomponents:httpclient'
 }
 
 tasks.named('test') {
