@@ -26,14 +26,10 @@ public class RestTemplateTestAutoConfiguration {
     @Bean
     public RestTemplate restTemplate2() {
         PoolingHttpClientConnectionManager connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
-                .setConnPoolPolicy()
                 .build();
-        connectionManager.setDefaultMaxPerRoute(10);
-        connectionManager.setMaxTotal(10);
-        connectionManager.connection
 
         HttpClient httpClient = HttpClientBuilder.create()
-                .setConnectionManager()
+                .setConnectionManager(connectionManager)
                 .build();
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         requestFactory.setHttpClient(httpClient);
