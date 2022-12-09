@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: production
+logging:
+  level:
+    root: ${LOGGING_LEVEL:WARN}
+
+line-bot:
+  channels:
+    tdl:
+      secret: "Please set value in production yaml."
+      token: "Please set value in production yaml."

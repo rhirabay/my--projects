@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloWorldController {
     @RequestMapping("/**")
     public String root(ServerHttpRequest request) {
-        log.info(request.getURI().toString());
+        log.warn("receive request to undefined path. {}", request.getURI().getPath());
         return "This is application for line bot.";
     }
 
