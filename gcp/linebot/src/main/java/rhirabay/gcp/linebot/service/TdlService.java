@@ -54,7 +54,7 @@ public class TdlService {
             delete from `helpful-range-323616.linebot_tdl.tdl_items`
             where channel_id = '%s'
             and item_name = '%s'
-        """.formatted(resource.id(), resource.item());
+        """.formatted(resource.id(), resource.item().substring(1));
 
         QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
         try {

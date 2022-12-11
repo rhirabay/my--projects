@@ -17,4 +17,10 @@ public class LineMessagingClientAutoConfiguration {
         return LineMessagingClient.builder(properties.getToken("tdl"))
                 .build();
     }
+
+    @Bean
+    public LineMessagingClient ryobotLineMessagingClient() {
+        return LineMessagingClient.builder(properties.getToken("ryobot"))
+                .build();
+    }
 }
