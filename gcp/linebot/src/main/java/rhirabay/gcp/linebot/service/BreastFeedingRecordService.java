@@ -8,6 +8,7 @@ import com.linecorp.bot.model.message.flex.component.*;
 import com.linecorp.bot.model.message.flex.container.Bubble;
 import com.linecorp.bot.model.message.flex.container.Carousel;
 import com.linecorp.bot.model.message.flex.unit.FlexLayout;
+import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import rhirabay.gcp.linebot.domain.value.LineChannelId;
