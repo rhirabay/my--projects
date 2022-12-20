@@ -22,7 +22,7 @@ public class TdlService {
                 item_name
             from `helpful-range-323616.linebot_tdl.tdl_items`
             where channel_id = '%s'
-            order by create_at desc
+            order by create_at asc
             LIMIT 1000
             """.formatted(channelId);
         QueryJobConfiguration queryConfig = QueryJobConfiguration.newBuilder(query).build();
