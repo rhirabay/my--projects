@@ -8,8 +8,6 @@ logging:
 line-bot:
   channels:
     tdl:
-      secret: "Please set value in production yaml."
       token: "Please set value in production yaml."
     ryobot:
-      secret: "Please set value in production yaml."
       token: "Please set value in production yaml."
