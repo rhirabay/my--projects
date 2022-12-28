@@ -1,0 +1,6 @@
+cron:
+- description: "日野市明日のゴミ"
+  url: /api/v1/garbage/tomorrow
+  target: beta
+  # JST: 0 21 * * 0-4
+  schedule: every sun,mon,tue,wed,thu 12:00
