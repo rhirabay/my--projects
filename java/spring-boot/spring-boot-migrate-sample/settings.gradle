@@ -1,4 +1,4 @@
 rootProject.name = 'demo'
 
-include 'openrewrite'
+include 'openrewrite2.7'
 include 'lib'

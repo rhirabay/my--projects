@@ -22,3 +22,9 @@ recipeList:
       groupId: org.mybatis.spring.boot
       artifactId: mybatis-spring-boot-starter
       newVersion: 3.0.0
+  # javax → jakartaの更新
+  - org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+  # spring.factoriesの移行
+  - org.openrewrite.java.spring.boot2.MoveAutoConfigurationToImportsFile
+  # プロパティの移行
+  - org.openrewrite.java.spring.boot3.SpringBootProperties_3_0_0
