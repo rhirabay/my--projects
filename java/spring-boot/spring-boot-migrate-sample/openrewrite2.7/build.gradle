@@ -33,7 +33,7 @@ dependencies {
 //	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 
 	//rewrite("org.openrewrite.recipe:rewrite-migrate-java:1.14.1")
-	rewrite("org.openrewrite.recipe:rewrite-spring:4.30.0")
+	rewrite("org.openrewrite.recipe:rewrite-spring:4.31.0")
 	rewrite("org.openrewrite:rewrite-gradle:7.33.0")
 
 //	implementation 'rhirabay.springboot2.sample:library:1.0.0'
@@ -47,6 +47,6 @@ tasks.named('test') {
 
 rewrite {
 //	activeRecipe("org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta")
-	activeRecipe("org.openrewrite.java.spring.boot3.SpringBoot2To3Migration")
+//	activeRecipe("org.openrewrite.java.spring.boot3.SpringBoot2To3Migration")
 	activeRecipe('custom.SpringBootMigration')
 }
