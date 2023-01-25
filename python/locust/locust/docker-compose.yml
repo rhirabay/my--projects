@@ -1,0 +1,22 @@
+version: '2'
+x-locust-service: &locust-service
+  build: .
+services:
+  locust-master:
+    <<: *locust-service
+    ports:
+      - "8089:8089"
+    environment:
+      MODE: master
+  locust-slave-1:
+    <<: *locust-service
+    environment:
+      MODE: slave
+  locust-slave-2:
+    <<: *locust-service
+    environment:
+      MODE: slave
+  locust-slave-3:
+    <<: *locust-service
+    environment:
+      MODE: slave
