@@ -5,5 +5,6 @@ RUN pip3 install locust
 WORKDIR /locust
 COPY ./locustfile.py .
 COPY ./run.sh .
+RUN chmod +x ./run.sh
 
 ENTRYPOINT ["./run.sh"]
