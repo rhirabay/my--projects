@@ -14,7 +14,7 @@ class SampleUser(HttpUser):
         self.client.post("/sample", json={"key": "value"})
 
     # 1秒間の最大実行数を指定
-    # 1に指定しておけば1スレッド1rps以上の性能がでないので、負荷をコントロールしやすい
+    # 1に指定しておけばスレッド数以上の性能がでないので、負荷をコントロールしやすい
     wait_time = constant_throughput(1)
     # （任意）UI上のデフォルトのホストを指定する
     host = 'http://localhost:8080'
