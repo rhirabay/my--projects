@@ -5,7 +5,7 @@ buildscript {
 	}
 	dependencies {
 		// 開発したプラグインのgroup.project name.version
-		classpath 'sample:sample-gradle-plugin:1.0.2'
+		classpath 'sample:sample-gradle-plugin:1.0.4'
 	}
 }
 
@@ -43,6 +43,6 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-hello {
-	message = 'plugin extention'
+bootJar {
+	classifier = 'sample'
 }
