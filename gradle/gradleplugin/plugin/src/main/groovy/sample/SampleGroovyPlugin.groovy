@@ -20,5 +20,6 @@ class SampleGroovyPlugin implements Plugin<Project> {
 
         new ApplyCheckstyle().apply(project)
         new AddDependency().apply(project)
+        new ModSetting().apply(project)
     }
 }
