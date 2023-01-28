@@ -1,8 +1,22 @@
+buildscript {
+	repositories {
+		// プラグインのpublish先を指定（今回はローカルリポジトリ）
+		mavenLocal()
+	}
+	dependencies {
+		// 開発したプラグインのgroup.project name.version
+		classpath 'sample:sample-gradle-plugin:1.0.2'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.2'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
+
+// idで指定した識別子でプラグインを適用
+apply plugin: 'sample.sample-gradle-plugin'
 
 group = 'hirabay'
 version = '0.0.1-SNAPSHOT'
@@ -20,11 +34,15 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+//	compileOnly 'org.projectlombok:lombok'
+//	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+hello {
+	message = 'plugin extention'
 }

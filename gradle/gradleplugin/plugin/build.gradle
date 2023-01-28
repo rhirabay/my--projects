@@ -1,0 +1,47 @@
+plugins {
+    // 開発言語としてgroovyを指定
+    // build.gradleがgroovyで記載されているので、感覚が近いかなと
+    id 'groovy'
+    // プラグイン開発時に必要なプラグイン
+    id 'java-gradle-plugin'
+    // Mavenへpublishするために必要（今回はlocalリポジトリを利用）
+    id 'maven-publish'
+}
+
+group 'sample'
+version '1.0.2'
+sourceCompatibility = 17
+
+gradlePlugin {
+    plugins {
+        mySamplePlugin {
+            // プラグイン利用時の識別子
+            // 「apply plugin: 'xxxxx'」のやつ
+            id = 'sample.sample-gradle-plugin'
+            // プラグインの実装クラスを指定
+            implementationClass = 'sample.SampleGroovyPlugin'
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // プラグイン開発に必要な依存を自動で取り込んでくれる設定です
+    gradleApi()
+    implementation("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
+    // implementation 'org.springframework.boot:spring-boot-starter:2.6.2'
+}
+
+// maven利用のための設定
+publishing {
+    publications {
+        mavenPlugin(MavenPublication) {
+            artifactId = 'sample-gradle-plugin'
+
+            from components.java
+        }
+    }
+}
