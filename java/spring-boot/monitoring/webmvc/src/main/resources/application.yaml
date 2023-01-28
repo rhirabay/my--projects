@@ -1,0 +1,31 @@
+
+management:
+  server:
+    port: 9990
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+  metrics:
+    distribution:
+      percentiles:
+        # ????????????????????50%ile?99%ile?
+        "http.server.requests": 0.5,0.99
+        "http.client.requests": 0.5,0.99
+  observations:
+    http:
+      server:
+        requests:
+          name: "http.server.requests"
+      client:
+        requests:
+          name: "http.client.requests"
+
+server:
+  tomcat:
+    mbeanregistry:
+      # Tomcat????????????
+      enabled: true
+    threads:
+      # ????????????????:200?
+      max: 500
