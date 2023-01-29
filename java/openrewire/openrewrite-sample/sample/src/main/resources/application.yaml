@@ -3,3 +3,7 @@ management:
     export:
       dynatrace:
         group: "sample"
+
+path1:
+  path2:
+    key: value
