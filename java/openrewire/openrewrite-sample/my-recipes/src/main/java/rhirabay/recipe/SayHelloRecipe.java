@@ -19,7 +19,11 @@ public class SayHelloRecipe extends Recipe {
 
     public class SayHelloVisitor extends JavaIsoVisitor<ExecutionContext> {
         private final JavaTemplate helloTemplate =
-                JavaTemplate.builder(this::getCursor, "public String hello() { return \"Hello, OpenRewrite!!!\"; }")
+                JavaTemplate.builder(this::getCursor, """
+                        public String hello() {
+                            return "Hello, OpenRewrite!!!";
+                        }
+                        """)
                         .build();
 
         @Override

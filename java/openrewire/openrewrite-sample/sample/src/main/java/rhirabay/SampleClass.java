@@ -1,5 +1,5 @@
 package rhirabay;
 
-public class SampleController {
+public class SampleClass {
 private String message;
 }

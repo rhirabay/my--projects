@@ -2,9 +2,13 @@
 # 固定
 type: specs.openrewrite.org/v1beta/recipe
 # レシピの名前(任意)
-name: my.SpringBoot2_6
+name: sample.SampleRecipe
 recipeList:
   # 実装クラスとそのproperty
   - org.openrewrite.yaml.ChangePropertyKey:
       oldPropertyKey: management.metrics.export.dynatrace.group
       newPropertyKey: management.metrics.export.dynatrace.v1.group
+  - org.openrewrite.yaml.ChangeValue:
+      oldKeyPath: $.path1.path2.key
+      value: value2
+  - org.openrewrite.java.format.AutoFormat
