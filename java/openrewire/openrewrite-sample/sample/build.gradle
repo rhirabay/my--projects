@@ -29,6 +29,7 @@ dependencies {
 
 //    rewrite("org.openrewrite.recipe:rewrite-spring:4.16.0")
 //    rewrite(project(':my-recipes'))
+    rewrite('sample:openrewrite-sample:0.0.3')
 }
 
 rewrite {
