@@ -1,4 +1,7 @@
+# 固定
 type: specs.openrewrite.org/v1beta/recipe
-name: rhirabay.Sample
+# レシピの識別子。利用側の「recipeList」で指定することになる
+name: sample.SampleRecipe
 recipeList:
-  - rhirabay.recipe.SayHelloRecipe
+  # 定義したクラスの「パッケージ＋クラス名」を指定する
+  - sample.recipe.AddHelloMethod
