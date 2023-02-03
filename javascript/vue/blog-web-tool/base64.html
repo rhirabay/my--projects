@@ -1,0 +1,70 @@
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<div id="app">
+    <buutton class="rounded px-4 py-2 cursor-default static"
+             :class="{
+             'bg-green-500 bg-green-500 text-gray-100 hover:bg-green-400': encMode,
+             'border border-green-500 text-green-500 hover:bg-green-500 hover:text-gray-100': !encMode
+             }" v-on:click="changeEncodeMode">Encode</buutton>
+
+    <buutton class="rounded px-4 py-2 cursor-default static"
+             :class="{
+             'border border-red-500 text-red-500 hover:bg-red-500 hover:text-gray-100': encMode,
+             'bg-red-500 text-gray-100 hover:bg-red-400': !encMode
+             }" v-on:click="changeDecodeMode">Decode</buutton>
+
+    <br/>
+    <p class="underline font-bold">▼{{ encodedMessage }}対象</p>
+    <textarea class="w-full mt-2 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+              rows="6" v-model="target" v-on:keyup="onchange"></textarea>
+    <br/>
+    <p class="underline font-bold">▼{{ encodedMessage }}結果（１回目）</p>
+    <textarea class="w-full mt-2 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+              rows="6" v-model="encoded1"></textarea>
+    <br/>
+    <p class="underline font-bold">▼{{ encodedMessage }}結果（２回目）</p>
+    <textarea class="w-full mt-2 px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+              rows="6" v-model="encoded2"></textarea>
+</div>
+
+<script>
+    const { createApp } = Vue
+
+    createApp({
+        data() {
+            return {
+                target: '',
+                encoded1: '',
+                encoded2: '',
+                encMode: true,
+                encodedMessage: 'エンコード'
+            }
+        },
+        methods: {
+            onchange: function() {
+                try {
+                    if (this.encMode) {
+                        this.encoded1 =  window.btoa(this.target)
+                        this.encoded2 =  window.btoa(this.encoded1)
+                    } else {
+                        this.encoded1 =  window.atob(this.target)
+                        this.encoded2 =  window.atob(this.encoded1)
+                    }
+                } catch (err) {
+                    return ''
+                }
+            },
+            changeDecodeMode: function() {
+                this.encMode = false
+                this.encodedMessage = 'デコード'
+                this.onchange()
+            },
+            changeEncodeMode: function() {
+                this.encMode = true
+                this.encodedMessage = 'エンコード'
+                this.onchange()
+            }
+        }
+    }).mount('#app')
+</script>
