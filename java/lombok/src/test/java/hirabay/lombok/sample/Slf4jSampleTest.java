@@ -1,7 +1,10 @@
 package hirabay.lombok.sample;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class Slf4jSampleTest {
-
+    @Test
+    void test() {
+        new Slf4jSample().sample();
+    }
 }
