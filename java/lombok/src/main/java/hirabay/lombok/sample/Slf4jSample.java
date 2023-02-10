@@ -10,6 +10,6 @@ public class Slf4jSample {
         log.info("message: {}", message);
         // 11:17:31.555 [Test worker] INFO hirabay.lombok.sample.Slf4jSample - message: hello, world.
 
-        log.info("{}, {}.", "Hello", "world");
+        log.info("{}, {}.", "Hello", "world"); // Hello, world.
     }
 }
