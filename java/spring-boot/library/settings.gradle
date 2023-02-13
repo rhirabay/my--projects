@@ -1,1 +1,8 @@
 rootProject.name = 'library'
+
+include 'lib'
+include 'java-lib'
+include 'springboot-lib'
+include 'app'
+
+//project(":lib").projectDir = file("lib/lib")
