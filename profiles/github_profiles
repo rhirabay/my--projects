@@ -1,0 +1,10 @@
+
+if [ $(which ghq) ]; then
+  function ghqcd() {
+    git config --global ghq.root '${HOME}/dev'
+    cd "${HOME}/dev/$(ghq list | fzf)"
+  }
+else
+  echo 'Please install ghq'
+fi
+
