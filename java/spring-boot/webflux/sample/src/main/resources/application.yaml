@@ -1,0 +1,10 @@
+management:
+  server:
+    # （任意）メトリクスを出力するportを変更する
+    # ※エンドポイントさえ知っていれば外から叩けてしまうのでアプリケーションのポートと別にするのがオススメ
+#    port: 9990
+  endpoints:
+    web:
+      exposure:
+        # 有効化したいエンドポイントを記載（ここではprometheusを追加）
+        include: health, prometheus
