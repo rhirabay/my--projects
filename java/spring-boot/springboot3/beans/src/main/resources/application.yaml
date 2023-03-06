@@ -1,0 +1,6 @@
+sample-app:
+  rest-templates:
+    a:
+      root-uri: https://a.com
+    b:
+      root-uri: https://b.com
