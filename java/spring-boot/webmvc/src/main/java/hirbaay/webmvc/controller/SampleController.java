@@ -1,8 +1,8 @@
-package hirbaay.webmvc;
+package hirbaay.webmvc.controller;
 
+import hirbaay.webmvc.domain.SampleModel;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController

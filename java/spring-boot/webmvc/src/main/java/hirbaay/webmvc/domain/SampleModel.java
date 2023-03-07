@@ -1,4 +1,4 @@
-package hirbaay.webmvc;
+package hirbaay.webmvc.domain;
 
 import lombok.Value;
 
