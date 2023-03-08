@@ -2,3 +2,4 @@ rootProject.name = 'springboot3'
 
 include 'lib'
 include 'beans'
+include 'bootstrap'
