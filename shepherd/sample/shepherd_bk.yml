@@ -1,0 +1,16 @@
+id: sample-1
+title: test
+adapter:
+  type: github
+  search_type: repositories
+  search_query: repo:rhirabay/web-tools
+hooks:
+  should_migrate:
+    - test $(basename $(pwd)) = 'web-tools'
+  post_checkout: |
+    ls
+  apply: |
+    mv README.md README.adoc
+    yq --version
+  pr_message: |
+    echo 'pr_message'
