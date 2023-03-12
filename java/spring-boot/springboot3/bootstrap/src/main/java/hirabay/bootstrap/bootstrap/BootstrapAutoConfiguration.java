@@ -19,7 +19,6 @@ public class BootstrapAutoConfiguration {
 
     @PostConstruct
     void postConstruct() {
-        log.info("constructed");
         log.info("sampleProperties: {}", sampleProperties);
     }
 }

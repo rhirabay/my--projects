@@ -1,11 +1,5 @@
 # Bootstrap components
 org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+hirabay.bootstrap.bootstrap.SystemPropertyBootstrapAutoConfiguration,\
 hirabay.bootstrap.bootstrap.BootstrapAutoConfiguration
 
-# Environment PostProcessor
-org.springframework.boot.env.EnvironmentPostProcessor=\
-hirabay.bootstrap.bootstrap.SampleEnvironmentPostProcessor
-
-# Spring Boot BootstrapRegistryInitializers
-org.springframework.boot.BootstrapRegistryInitializer=\
-hirabay.bootstrap.bootstrap.BootstrapConfiguration

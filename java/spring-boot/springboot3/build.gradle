@@ -16,6 +16,13 @@ configurations {
 
 ext {
 	set('jakarta.servlet.version', "5.0")
+	set('springCloudVersion', "2022.0.1")
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
 
 repositories {
@@ -54,6 +61,8 @@ dependencies {
 	// for customization RestTemplate
 	// https://mvnrepository.com/artifact/org.apache.httpcomponents.client5/httpclient5
 	implementation 'org.apache.httpcomponents.client5:httpclient5'
+
+	implementation(project(':bootstrap'))
 }
 
 tasks.named('test') {
