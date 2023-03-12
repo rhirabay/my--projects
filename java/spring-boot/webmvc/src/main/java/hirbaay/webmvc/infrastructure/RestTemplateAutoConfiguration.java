@@ -4,6 +4,7 @@ import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.core5.http.io.SocketConfig;
 import org.apache.hc.core5.util.TimeValue;
+import org.springframework.boot.actuate.metrics.web.client.ObservationRestTemplateCustomizer;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class RestTemplateAutoConfiguration {
         var socketConfig = SocketConfig.custom()
                 // read timeout（例：1000ミリ秒）
                 .setSoTimeout(1_000, TimeUnit.MILLISECONDS)
+                .setSoKeepAlive(false)
                 .build();
         var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
                 // keep alive timeout（例: 59秒）
@@ -42,6 +44,14 @@ public class RestTemplateAutoConfiguration {
                 .requestFactory(() -> requestFactory)
                 .rootUri("http://localhost:8080/rest-template-test")
                 .setConnectTimeout(Duration.ofMillis(500))
+                .build();
+    }
+
+    @Bean
+    RestTemplate restTemplateWithMetrics(ObservationRestTemplateCustomizer observationCustomizer) {
+        return new RestTemplateBuilder()
+                .rootUri("http://localhost:8080/rest-template-test")
+                .additionalCustomizers(observationCustomizer)
                 .build();
     }
 }
