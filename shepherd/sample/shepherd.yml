@@ -1,5 +1,5 @@
 # ブランチ名
-id: sample-1
+id: create_readme
 # PRタイトル
 title: "create README.md"
 adapter:
@@ -15,7 +15,7 @@ hooks:
     - test ! $(ls README.md)
   # 変更内容を記載
   apply:
-    - touch README.md
+    - curl https://raw.githubusercontent.com/rhirabay/my-projects/main/shepherd/scripts/create_readme.sh | bash
   # PRメッセージを生成（echo等で標準出力）
   pr_message: |
     echo 'create README.md'
