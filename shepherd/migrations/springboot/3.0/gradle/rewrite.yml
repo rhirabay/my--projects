@@ -1,5 +1,5 @@
 type: specs.openrewrite.org/v1beta/recipe
-name: spring-boot-migration2.7to3.0
+name: springboot.migration2.7to3.0
 displayName: springboot migration to 3.0 from 2.7
 recipeList:
   # プラグインの更新
