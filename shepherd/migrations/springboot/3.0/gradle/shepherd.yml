@@ -27,32 +27,72 @@ hooks:
       rm rewrite.yml
       curl 'https://raw.githubusercontent.com/rhirabay/my-projects/main/shepherd/migrations/springboot/3.0/gradle/rewrite.yml' -o rewrite.yml
       # プラグイン追加
-      if [ ! $(grep 'org.openrewrite.rewrite' ${build_gradle_file}) ]; then
-        plugin_block_start=$(sed -n '/plugins {/=' ${build_gradle_file})
-        plugin_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
+      grep 'org.openrewrite.rewrite' ${build_gradle_file}
+      if [ $? -ne 0 ]; then
+        plugin_block_start=$(${sed_cmd} -n '/plugins {/=' ${build_gradle_file})
+        plugin_block_end=$(${sed_cmd} -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
         ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('5.32.0')" ${build_gradle_file}
       fi
       # 依存を追加
-      dependencies_block_start=$(sed -n '/dependencies {/=' ${build_gradle_file})
-      dependencies_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$dependencies_block_start') print $0 }' | head -1)
-      if [ ! $(grep 'rewrite-spring' ${build_gradle_file}) ]; then
-        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:4.30.0')" ${build_gradle_file}
+      dependencies_block_start=$(${sed_cmd} -n '/dependencies {/=' ${build_gradle_file})
+      dependencies_block_end=$(${sed_cmd} -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$dependencies_block_start') print $0 }' | head -1)      
+      grep 'rewrite-spring' ${build_gradle_file}
+      if [ $? -ne 0 ]; then
+        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:+')" ${build_gradle_file}
+        dependencies_block_end=$((${dependencies_block_end} + 1))
       fi
-      if [ ! $(grep 'rewrite-gradle' ${build_gradle_file}) ]; then
-        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite:rewrite-gradle:7.33.0')" ${build_gradle_file}
+      grep 'rewrite-gradle' ${build_gradle_file}
+      if [ $? -ne 0 ]; then
+        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite:rewrite-gradle:+')" ${build_gradle_file}
+        dependencies_block_end=$((${dependencies_block_end} + 1))
       fi
       # rewriteブロックを追加
-      if [ ! $(grep 'rewrite {' ${build_gradle_file}) ]; then
+      grep 'rewrite {' ${build_gradle_file}
+      if [ $? -ne 0 ]; then
+        echo '' >> ${build_gradle_file}
         echo 'rewrite {' >> ${build_gradle_file}
         echo '}' >> ${build_gradle_file}
       fi
       rewrite_block_start=$(sed -n '/rewrite {/=' ${build_gradle_file})
       rewrite_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$rewrite_block_start') print $0 }' | head -1)
-      if [ ! $(grep 'spring-boot-migration2.7to3.0' ${build_gradle_file}) ]; then
-        ${sed_cmd} -i -e "${rewrite_block_end}i \ \ \ \ activeRecipe('spring-boot-migration2.7to3.0')" ${build_gradle_file}
+      if [ ! $(grep 'springboot.migration2.7to3.0' ${build_gradle_file}) ]; then
+        ${sed_cmd} -i -e "${rewrite_block_end}i \ \ \ \ activeRecipe('springboot.migration2.7to3.0')" ${build_gradle_file}
       fi
     # Rewrite実行
     - ./gradlew rewriteRun
+    # SpringCloudのversion変更
+    - |
+      # 変数定義
+      build_gradle_file="./build.gradle"
+      spring_cloud_version=2022.0.1
+      sed_cmd=gsed
+      
+      grep -e "set(.springCloudVersion." ${build_gradle_file}
+      if [ $? -eq 0 ]; then
+        # 行を特定
+        spring_cloud_version_line=$(${sed_cmd} -n -e '/set(.springCloudVersion./=' ${build_gradle_file})
+        ${sed_cmd} -i "${spring_cloud_version_line}c \ \ \ \ set('springCloudVersion', '${spring_cloud_version}')" ${build_gradle_file}
+      fi
+    # sleuthをmicrometerに切り替え
+    - |
+      # 変数定義
+      build_gradle_file="./build.gradle"
+      sed_cmd=gsed
+      
+      grep "spring-cloud-starter-sleuth" ${build_gradle_file}
+      if [ $? -eq 0 ]; then
+        ${sed_cmd} -i -e "/spring-cloud-starter-sleuth/a \ \ \ \ implementation\ 'io.micrometer:micrometer-tracing-bridge-brave'" ${build_gradle_file}
+        ${sed_cmd} -i -e "/spring-cloud-starter-sleuth/a \ \ \ \ implementation\ 'io.micrometer:micrometer-tracing'" ${build_gradle_file}
+        ${sed_cmd} -i "/spring-cloud-starter-sleuth/d" ${build_gradle_file}
+      fi
+    # httpclientをhttpclient5に切り替え
+    - |
+      # 変数定義
+      build_gradle_file="./build.gradle"
+      sed_cmd=gsed
+      
+      ${sed_cmd} -i -e "s/org.apache.httpcomponents:httpclient[^\"']*/org.apache.httpcomponents.client5:httpclient5/" ${build_gradle_file}
+
   # PRメッセージを生成（echo等で標準出力）
   pr_message: |
     echo 'this is migration sample.'
