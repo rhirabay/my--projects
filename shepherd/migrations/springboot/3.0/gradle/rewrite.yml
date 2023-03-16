@@ -1,0 +1,29 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: custom.SpringBootMigration
+displayName: springboot migration to 3.0 from 2.7
+recipeList:
+  # プラグインの更新
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: org.springframework.boot
+      newVersion: "3.0.0"
+  - org.openrewrite.gradle.plugins.UpgradePluginVersion:
+      pluginIdPattern: io.spring.dependency-management
+      newVersion: "1.1.0"
+  # Jaraバージョンの更新
+  - org.openrewrite.gradle.ChangeJavaCompatibility:
+      newVersion: "17"
+      compatibilityType: "source"
+  - org.openrewrite.gradle.ChangeJavaCompatibility:
+      newVersion: "17"
+      compatibilityType: "target"
+  # 依存ライブラリの更新（更新に必要なライブラリごとに定義が必要）
+  - org.openrewrite.gradle.ChangeDependencyVersion:
+      groupId: org.mybatis.spring.boot
+      artifactId: mybatis-spring-boot-starter
+      newVersion: 3.0.0
+  # javax → jakartaの更新
+  - org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+  # spring.factoriesの移行
+  - org.openrewrite.java.spring.boot2.MoveAutoConfigurationToImportsFile
+  # プロパティの移行
+  - org.openrewrite.java.spring.boot3.SpringBootProperties_3_0_0
