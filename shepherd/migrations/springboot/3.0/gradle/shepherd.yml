@@ -1,0 +1,26 @@
+id: migrate/springboot-3.0
+title: "migrate springboot to 3.0 from 2.7."
+adapter:
+  type: github
+  search_type: repositories
+  search_query: "repo:rhirabay/springboot-migration-sample-3.0"
+hooks:
+  should_migrate:
+    - find . -name build.gradle | xargs -I{} grep -e "org.springframework.boot.*version.*2\.7\." {}
+  apply:
+    # gradle version upgrade
+    - |
+      # 非推奨な記述を検知
+      ./gradlew help --warning-mode=fail
+      if [ $? -ne 0 ]; then
+        exit 1
+      fi
+      # gradleのversionをupgrade
+      ./gradlew wrapper --gradle-version 7.6.1
+    # prepare OpenRewrite
+    - |
+      # ファイル追加
+      curl ''
+  # PRメッセージを生成（echo等で標準出力）
+  pr_message: |
+    echo 'this is migration sample.'
