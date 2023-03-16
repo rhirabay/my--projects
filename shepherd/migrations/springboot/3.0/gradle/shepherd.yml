@@ -19,8 +19,37 @@ hooks:
       ./gradlew wrapper --gradle-version 7.6.1
     # prepare OpenRewrite
     - |
+      # 変数定義
+      build_gradle_file=./build.gradle
+      sed_cmd=gsed
+      
       # ファイル追加
-      curl ''
+      curl 'https://raw.githubusercontent.com/rhirabay/my-projects/main/shepherd/migrations/springboot/3.0/gradle/rewrite.yml' -o rewrite.yml
+      # プラグイン追加
+      if [ ! $(grep 'org.openrewrite.rewrite' ${build_gradle_file}) ]; then
+        plugin_block_start=$(sed -n '/plugins {/=' ${build_gradle_file})
+        plugin_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
+        ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('5.32.0')" ${build_gradle_file}
+      fi
+      # 依存を追加
+      dependencies_block_start=$(sed -n '/dependencies {/=' ${build_gradle_file})
+      dependencies_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$dependencies_block_start') print $0 }' | head -1)
+      if [ ! $(grep 'rewrite-spring' ${build_gradle_file}) ]; then
+        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:4.30.0')" ${build_gradle_file}
+      fi
+      if [ ! $(grep 'rewrite-gradle' ${build_gradle_file}) ]; then
+        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite:rewrite-gradle:7.33.0')" ${build_gradle_file}
+      fi
+      # rewriteブロックを追加
+      if [ ! $(grep 'rewrite {' ${build_gradle_file}) ]; then
+        echo 'rewrite {' >> ${build_gradle_file}
+        echo '}' >> ${build_gradle_file}
+      fi
+      rewrite_block_start=$(sed -n '/rewrite {/=' ${build_gradle_file})
+      rewrite_block_end=$(sed -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$rewrite_block_start') print $0 }' | head -1)
+      if [ ! $(grep 'spring-boot-migration2.7to3.0' ${build_gradle_file}) ]; then
+        ${sed_cmd} -i -e "${rewrite_block_end}i \ \ \ \ activeRecipe('spring-boot-migration2.7to3.0')" ${build_gradle_file}
+      fi
   # PRメッセージを生成（echo等で標準出力）
   pr_message: |
     echo 'this is migration sample.'
