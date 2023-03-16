@@ -24,6 +24,7 @@ hooks:
       sed_cmd=gsed
       
       # ファイル追加
+      rm rewrite.yml
       curl 'https://raw.githubusercontent.com/rhirabay/my-projects/main/shepherd/migrations/springboot/3.0/gradle/rewrite.yml' -o rewrite.yml
       # プラグイン追加
       if [ ! $(grep 'org.openrewrite.rewrite' ${build_gradle_file}) ]; then
@@ -50,6 +51,8 @@ hooks:
       if [ ! $(grep 'spring-boot-migration2.7to3.0' ${build_gradle_file}) ]; then
         ${sed_cmd} -i -e "${rewrite_block_end}i \ \ \ \ activeRecipe('spring-boot-migration2.7to3.0')" ${build_gradle_file}
       fi
+    # Rewrite実行
+    - ./gradlew rewriteRun
   # PRメッセージを生成（echo等で標準出力）
   pr_message: |
     echo 'this is migration sample.'
