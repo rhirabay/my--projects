@@ -1,6 +1,7 @@
 logging:
   pattern:
     dateformat: yyyy-MM-dd HH:mm:ss.SSS
+    console: "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} [%X{traceId}] [%X{spanId}] - %msg%n"
 
 management:
   endpoint:

@@ -23,6 +23,8 @@ dependencies {
 	api 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }
 
 tasks.named('test') {
@@ -49,3 +51,7 @@ publishing {
 		}
 	}
 }
+
+//tasks.named('compileJava') {
+//	inputs.files(tasks.named('processResources'))
+//}
