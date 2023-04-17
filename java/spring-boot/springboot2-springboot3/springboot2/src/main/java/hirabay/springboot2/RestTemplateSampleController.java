@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Slf4j
 @RestController
@@ -26,6 +28,7 @@ public class RestTemplateSampleController {
         log.info("uri: {}", uri);
         RequestEntity requestEntity = RequestEntity.get(uri)
                 .build();
+        new Date().getTime();
 
         return restTemplate.exchange(requestEntity, String.class).getBody();
     }
