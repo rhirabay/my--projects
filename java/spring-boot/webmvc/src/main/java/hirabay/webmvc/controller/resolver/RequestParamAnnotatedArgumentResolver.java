@@ -1,6 +1,5 @@
 package hirabay.webmvc.controller.resolver;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -11,7 +10,6 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 
 @Slf4j
 @RequiredArgsConstructor
