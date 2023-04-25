@@ -31,7 +31,8 @@ class FT {
 	@DynamicPropertySource
 	static void properties(DynamicPropertyRegistry registry) {
 		registry.add("spring.cassandra.keyspace-name", () -> "sample");
-		registry.add("spring.cassandra.contact-points", () -> "%s:%d".formatted(cassandra.getContactPoint().getHostName(), cassandra.getContactPoint().getPort()));
+		var contactPoint = "%s:%d".formatted(cassandra.getContactPoint().getHostName(), cassandra.getContactPoint().getPort());
+		registry.add("spring.cassandra.contact-points", () -> contactPoint);
 		registry.add("spring.cassandra.local-datacenter", () -> cassandra.getLocalDatacenter());
 	}
 
