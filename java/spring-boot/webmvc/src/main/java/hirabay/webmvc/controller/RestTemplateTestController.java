@@ -1,4 +1,4 @@
-package hirbaay.webmvc.controller;
+package hirabay.webmvc.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;

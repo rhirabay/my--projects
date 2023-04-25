@@ -1,4 +1,4 @@
-package hirbaay.webmvc.infrastructure;
+package hirabay.webmvc.infrastructure;
 
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;

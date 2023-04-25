@@ -1,6 +1,6 @@
-package hirbaay.webmvc.controller;
+package hirabay.webmvc.controller;
 
-import hirbaay.webmvc.domain.SampleModel;
+import hirabay.webmvc.domain.SampleModel;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;

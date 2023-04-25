@@ -1,13 +1,13 @@
-package hirbaay.webmvc;
+package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WebmvcApplication {
+public class StaticApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebmvcApplication.class, args);
+		SpringApplication.run(StaticApplication.class, args);
 	}
 
 }
