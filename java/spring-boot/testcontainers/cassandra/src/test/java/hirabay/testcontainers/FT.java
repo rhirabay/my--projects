@@ -20,11 +20,14 @@ class FT {
 	@Autowired
 	private CassandraOperations cassandraOperations;
 
+
+	// テストコンテナを生成（裏でDockerコンテナが起動する）
 	@Container
 	public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
-			.withInitScript("initial.cql")
+			.withInitScript("initial.cql") // 初期クエリ
 			.withExposedPorts(9042);
 
+	// propertiesを更新
 	@DynamicPropertySource
 	static void properties(DynamicPropertyRegistry registry) {
 		registry.add("spring.cassandra.keyspace-name", () -> "sample");
