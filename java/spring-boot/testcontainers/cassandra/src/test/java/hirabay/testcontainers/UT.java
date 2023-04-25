@@ -32,7 +32,6 @@ public class UT {
     @Test
     void test() {
         assertThat(cassandra.isRunning()).isTrue();
-        log.info("cassandra.getContactPoint(): {}", cassandra.getContactPoint());
 
         CqlSession cqlSession = CqlSession.builder()
                 .addContactPoint(cassandra.getContactPoint())
