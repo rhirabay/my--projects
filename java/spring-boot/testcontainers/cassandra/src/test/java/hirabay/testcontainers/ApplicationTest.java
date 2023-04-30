@@ -1,30 +1,32 @@
 package hirabay.testcontainers;
 
 import hirabay.testcontainers.domain.Sample;
+import hirabay.testcontainers.infrastructure.CassandraClient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-@Slf4j
+import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
 @Testcontainers
 @SpringBootTest
-class FT {
+class ApplicationTest {
     @Autowired
-    private CassandraOperations cassandraOperations;
+    private CassandraClient cassandraClient;
 
 
     // テストコンテナを生成（裏でDockerコンテナが起動する）
     @Container
     public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
-            .withInitScript("initial.cql") // 初期クエリ
-            .withExposedPorts(9042);
+            .withInitScript("initial.cql"); // 初期クエリ
 
     // propertiesを更新
     @DynamicPropertySource
@@ -37,8 +39,11 @@ class FT {
 
     @Test
     void test() {
-        var selected = cassandraOperations.select("SELECT * from sample.t_sample", Sample.class);
-        log.info("selected: {}", selected);
-    }
+        var actual = cassandraClient.findAll();
+        var expected = new Sample();
+        expected.setKey("key1");
+        expected.setValue("value1");
 
+        assertThat(actual).isEqualTo(Collections.singletonList(expected));
+    }
 }
