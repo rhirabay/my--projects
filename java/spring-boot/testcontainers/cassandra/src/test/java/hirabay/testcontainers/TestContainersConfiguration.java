@@ -15,5 +15,4 @@ public class TestContainersConfiguration {
                 .withInitScript("initial.cql") // 初期クエリ
                 .withExposedPorts(9042);
     }
-
 }
