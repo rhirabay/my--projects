@@ -32,8 +32,12 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+bootJar {
+	archivesBaseName = 'sample-app'
+	launchScript()
+}
 // RPMパッケージの中身の設定
-ospackage {
+buildRpm {
 	packageName = 'sample-api'
 	version = '1.0.0'
 	release = "1"
@@ -46,11 +50,18 @@ ospackage {
 	// RPMパッケージに含めるファイルを指定します
 	from("build/libs") {
 		// baseディレクトリ以下どのディレクトリに配置するか指定します
-//		into "./"
+		into "app/"
 		// サーバに展開する時のuser/group/権限を設定
 		user = "root"
 		permissionGroup = "root"
 		fileMode = 0444
+	}
+
+	from("rpm/systemctl") {
+		into "/etc/systemd/system"
+		user = "root"
+		permissionGroup = "root"
+		fileMode = 0755
 	}
 }
 // RPMパッケージを作成する「buildRpm」タスク実行前に必ずbuildを実行する（jarファイルがあることを担保）
