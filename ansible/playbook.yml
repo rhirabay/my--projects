@@ -5,5 +5,17 @@
     docker_container:
       name: my_nginx
       image: nginx
+      ports: "80:80"
       volumes:
       - ./sample.txt:/tmp/sample.txt
+  - name: curl
+    ansible.builtin.uri:
+      url: http://localhost:80
+      method: GET
+      return_content: yes
+    register: api_response
+  - name: Check that the API response is successful
+    ansible.builtin.assert:
+      that:
+        - api_response.status == 200
+      fail_msg: "The API request was not successful"
