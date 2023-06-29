@@ -1,0 +1,54 @@
+plugins {
+    id 'java-platform'
+    id 'maven-publish'
+}
+
+group = 'rhirabay.bom'
+version = '0.0.1'
+
+javaPlatform {
+    allowDependencies()
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    versionMap = [
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter': [
+                    '3.0': '3.0.+'
+            ],
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter-test': [
+                    '3.0': '3.0.+'
+            ],
+    ]
+    bomVersionMap = [
+            'org.springframework.boot:spring-boot-dependencies': [
+                    '3.0': '3.0.+'
+            ],
+            'org.springframework.cloud:spring-cloud-dependencies': [
+                    '3.0': '2022.0.+'
+            ],
+    ]
+}
+
+dependencies {
+    constraints {
+        for (lib in versionMap.keySet()) {
+            api "${lib}:${versionMap[lib][springBootVersion]}"
+        }
+    }
+
+    for (bom in bomVersionMap.keySet()) {
+        api platform("${bom}:${bomVersionMap[bom][springBootVersion]}")
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.javaPlatform
+        }
+    }
+}
