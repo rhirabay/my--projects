@@ -1,0 +1,36 @@
+plugins {
+    id 'java-platform'
+    id 'maven-publish'
+}
+
+group = 'rhirabay.bom'
+version = '0.0.1'
+
+javaPlatform {
+    allowDependencies()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // constraintsでくくるとbom利用者側でversion指定がいらなくなる
+    // ライブラリを使用していない場合は何も起きない（勝手にライブラリが追加されたりしない）
+    constraints {
+        api 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
+        api 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2'
+    }
+
+    // bomの中にbomを含めることも可能
+    api platform('org.springframework.boot:spring-boot-dependencies:3.0.8')
+    api platform('org.springframework.cloud:spring-cloud-dependencies:2022.0.3')
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.javaPlatform
+        }
+    }
+}

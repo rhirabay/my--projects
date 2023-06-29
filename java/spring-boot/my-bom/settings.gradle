@@ -1,1 +1,5 @@
 rootProject.name = 'my-bom'
+
+include 'my-bom'
+include 'sample1'
+include 'sample2'
