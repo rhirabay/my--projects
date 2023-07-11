@@ -1,9 +1,10 @@
 plugins {
+    // bom生成に必要なプラグイン
     id 'java-platform'
     id 'maven-publish'
 }
 
-group = 'rhirabay.bom'
+group = 'hirabay.bom'
 version = '0.0.1'
 
 javaPlatform {
@@ -30,6 +31,9 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            group = 'hirabay.bom' // 未指定の場合、プロジェクトのgroupを使用
+            artifactId = 'sample-bom' // 未指定の場合、プロジェクト名を使用
+            version = '0.0.1'  // 未指定の場合、プロジェクトのversionを使用
             from components.javaPlatform
         }
     }
