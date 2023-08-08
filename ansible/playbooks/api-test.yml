@@ -1,0 +1,29 @@
+# ansible-playbook playbooks/api-test.yml
+---
+- hosts: localhost
+  tasks:
+    - name: curl
+      ansible.builtin.uri:
+        url: http://localhost:8080/ansible/ok
+        method: GET
+        return_content: yes
+      register: api_response
+    - name: Check that the API response is successful
+      ansible.builtin.assert:
+        that:
+          - api_response.status == 200
+          - api_response.json.message == 'dummy'
+        fail_msg: "The API request was not successful"
+    - name: curl
+      ansible.builtin.uri:
+        url: http://localhost:8080/ansible/ng
+        method: GET
+        return_content: yes
+      register: api_response
+      failed_when: false
+    - name: Check that the API response is successful
+      ansible.builtin.assert:
+        that:
+          - api_response.status == 200
+          - api_response.json.message == 'dummy'
+        fail_msg: "The API request was not successful"
