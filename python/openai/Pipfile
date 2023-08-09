@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+openai = "*"
+langchain = "*"
+python-dotenv = "*"
+pyyaml = "*"
+jq = "*"
+chromadb = "*"
+tiktoken = "*"
+
+[dev-packages]
+jupyter = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.4"
+
+[scripts]
+jupyter = "jupyter notebook"
+trial = "python src/trial.py"
