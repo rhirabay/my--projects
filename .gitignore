@@ -21,3 +21,6 @@ gradle-app.setting
 /keys/serial*
 
 node_modules/
+
+.env
+.data/
