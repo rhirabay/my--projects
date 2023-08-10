@@ -11,6 +11,9 @@ pyyaml = "*"
 jq = "*"
 chromadb = "*"
 tiktoken = "*"
+streamlit = "*"
+streamlit-chat = "*"
+llama-index = "*"
 
 [dev-packages]
 jupyter = "*"
@@ -22,3 +25,5 @@ python_full_version = "3.11.4"
 [scripts]
 jupyter = "jupyter notebook"
 trial = "python src/trial.py"
+html = "python src/html_assistant.py"
+chat = "python3 -m streamlit run src/chat.py"

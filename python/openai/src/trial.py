@@ -26,7 +26,7 @@ from langchain.vectorstores import Chroma
 from langchain.document_loaders import TextLoader
 
 # ----- json読み込み -----
-loader = TextLoader('/Users/rhirabay/dev/github.com/rhirabay/my-projects/python/openai/swagger.json')
+loader = TextLoader('./swagger.json')
 data = loader.load()
 print(data)
 
@@ -41,7 +41,12 @@ vectorstore = Chroma.from_documents(data, embedding=embeddings, persist_director
 vectorstore.persist()
 
 # 学習させる
-pdf_qa = ConversationalRetrievalChain.from_llm(llm, vectorstore.as_retriever(), chain_type='refine', return_source_documents=True)
+pdf_qa = ConversationalRetrievalChain.from_llm(
+    llm, vectorstore.as_retriever(),
+    chain_type='refine',
+    return_source_documents=True,
+    verbose=True
+)
 
 print('ok')
 
