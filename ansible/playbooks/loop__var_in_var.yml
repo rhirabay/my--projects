@@ -1,5 +1,5 @@
 
-# ansible-playbook playbooks/loop__var_in_var.yml -i inventories/docker.yml
+# ansible-playbook playbooks/loop__var_in_var.yml
 ---
 - hosts: localhost
   vars:
