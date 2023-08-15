@@ -1,0 +1,35 @@
+
+# ansible-playbook playbooks/loop__var_in_var.yml -i inventories/docker.yml
+---
+- hosts: localhost
+  vars:
+    var_pkg_name_1: pkg_name_1
+    var_pkg_version_1: pkg_version_1
+    var_pkg_name_2: pkg_name_2
+    var_pkg_version_2: pkg_version_2
+    var_pkg_name_3: pkg_name_3
+    var_pkg_version_3: pkg_version_3
+    packages:
+      - name: var_pkg_name_1
+        version: var_pkg_version_1
+      - name: var_pkg_name_2
+        version: var_pkg_version_2
+      - name: var_pkg_name_3
+        version: var_pkg_version_3
+  tasks:
+    - name: Loop and var in var trial
+      ansible.builtin.debug:
+        msg: "name: {{ lookup('vars', item['name']) }}, version: {{ lookup('vars', item['version']) }}"
+      loop: "{{ packages }}"
+
+# ----- 実行結果 -----
+#   TASK [Loop and var in var trial] ****************************************************************************************************************************************************
+#   ok: [localhost] => (item={'name': 'var_pkg_name_1', 'version': 'var_pkg_version_1'}) => {
+#       "msg": "name: pkg_name_1, version: pkg_version_1"
+#   }
+#   ok: [localhost] => (item={'name': 'var_pkg_name_2', 'version': 'var_pkg_version_2'}) => {
+#       "msg": "name: pkg_name_2, version: pkg_version_2"
+#   }
+#   ok: [localhost] => (item={'name': 'var_pkg_name_3', 'version': 'var_pkg_version_3'}) => {
+#       "msg": "name: pkg_name_3, version: pkg_version_3"
+#   }
