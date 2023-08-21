@@ -1,0 +1,10 @@
+# ansible-playbook playbooks/inventories-test.yml -i inventories/hosts.yml
+---
+- hosts: all
+  gather_facts: no
+  tasks:
+    - name: test
+      debug:
+        msg:
+          - "docker_var: {{ docker_var }}"
+          - "all_var: {{ all_var }}"
