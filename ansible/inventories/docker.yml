@@ -1,5 +1,0 @@
-docker:
-  hosts:
-    localhost:
-      ansible_connection: docker
-      ansible_host: ansible-test
