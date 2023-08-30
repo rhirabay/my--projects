@@ -1,0 +1,51 @@
+08:51:54.318 [main]  INFO  com.intuit.karate - Karate version: 1.4.0
+08:51:54.779 [main]  INFO  c.intuit.karate.core.FeatureRuntime - found scenario at line: 5
+08:51:56.323 [main]  DEBUG com.intuit.karate - request:
+1 > GET http://localhost:8080/sample
+1 > Host: localhost:8080
+1 > Connection: Keep-Alive
+1 > User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+1 > Accept-Encoding: gzip,deflate
+
+
+08:51:56.505 [main]  ERROR com.intuit.karate - org.apache.http.conn.HttpHostConnectException: Connect to localhost:8080 [localhost/127.0.0.1] failed: Connection refused, http call failed after 460 milliseconds for url: http://localhost:8080/sample
+08:51:56.506 [main]  ERROR com.intuit.karate - src/test/java/hirabay/karate/features/sample.feature:7
+When method get
+http call failed after 460 milliseconds for url: http://localhost:8080/sample
+org.apache.http.conn.HttpHostConnectException: Connect to localhost:8080 [localhost/127.0.0.1] failed: Connection refused
+src/test/java/hirabay/karate/features/sample.feature:7
+08:51:56.912 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-posthog.html" found in template karate-feature.html, line 15, col 15. Please use the complete syntax of fragment expressions instead ("~{karate-posthog.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:51:57.161 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-feature.html, line 31, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:51:57.226 [main]  WARN  o.t.s.p.StandardIncludeTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated attribute {th:include,data-th-include} found in template karate-feature.html, line 74, col 16. Please use {th:insert,data-th-insert} instead, this deprecated attribute will be removed in future versions of Thymeleaf.
+08:51:57.227 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-step.html" found in template karate-feature.html, line 74, col 16. Please use the complete syntax of fragment expressions instead ("~{karate-step.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:51:57.385 [main]  INFO  com.intuit.karate.Suite - <<fail>> feature 1 of 1 (0 remaining) src/test/java/hirabay/karate/features/sample.feature
+08:51:57.548 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-tags.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-tags.html, line 27, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:51:57.619 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-summary.html] Deprecated unwrapped fragment expression "karate-posthog.html" found in template karate-summary.html, line 13, col 15. Please use the complete syntax of fragment expressions instead ("~{karate-posthog.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:51:57.640 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-summary.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-summary.html, line 28, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:23.304 [main]  INFO  com.intuit.karate - Karate version: 1.4.0
+08:52:23.807 [main]  INFO  com.intuit.karate.Suite - backed up existing 'target/karate-reports' dir to: target/karate-reports_1681689143800
+08:52:25.358 [main]  DEBUG com.intuit.karate - request:
+1 > GET http://localhost:8080/sample
+1 > Host: localhost:8080
+1 > Connection: Keep-Alive
+1 > User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.6)
+1 > Accept-Encoding: gzip,deflate
+
+
+08:52:25.536 [main]  DEBUG com.intuit.karate - response time in milliseconds: 174
+1 < 200
+1 < Content-Type: application/json
+1 < Transfer-Encoding: chunked
+1 < Date: Sun, 16 Apr 2023 23:52:25 GMT
+1 < Keep-Alive: timeout=60
+1 < Connection: keep-alive
+{"name":"anonymous"}
+
+08:52:25.951 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-posthog.html" found in template karate-feature.html, line 15, col 15. Please use the complete syntax of fragment expressions instead ("~{karate-posthog.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:26.195 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-feature.html, line 31, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:26.261 [main]  WARN  o.t.s.p.StandardIncludeTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated attribute {th:include,data-th-include} found in template karate-feature.html, line 74, col 16. Please use {th:insert,data-th-insert} instead, this deprecated attribute will be removed in future versions of Thymeleaf.
+08:52:26.262 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-feature.html] Deprecated unwrapped fragment expression "karate-step.html" found in template karate-feature.html, line 74, col 16. Please use the complete syntax of fragment expressions instead ("~{karate-step.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:26.423 [main]  INFO  com.intuit.karate.Suite - <<pass>> feature 1 of 1 (0 remaining) src/test/java/hirabay/karate/features/sample.feature
+08:52:26.573 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-tags.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-tags.html, line 27, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:26.638 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-summary.html] Deprecated unwrapped fragment expression "karate-posthog.html" found in template karate-summary.html, line 13, col 15. Please use the complete syntax of fragment expressions instead ("~{karate-posthog.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.
+08:52:26.658 [main]  WARN  o.t.s.p.AbstractStandardFragmentInsertionTagProcessor - [THYMELEAF][main][karate-summary.html] Deprecated unwrapped fragment expression "karate-leftnav.html" found in template karate-summary.html, line 28, col 14. Please use the complete syntax of fragment expressions instead ("~{karate-leftnav.html}"). The old, unwrapped syntax for fragment expressions will be removed in future versions of Thymeleaf.

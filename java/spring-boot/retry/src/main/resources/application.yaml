@@ -1,0 +1,5 @@
+
+hirabay:
+  retry:
+    backoff: 10
+    attempt: 10

@@ -1,0 +1,5 @@
+# Bootstrap components
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+hirabay.bootstrap.bootstrap.SystemPropertyBootstrapAutoConfiguration,\
+hirabay.bootstrap.bootstrap.BootstrapAutoConfiguration
+

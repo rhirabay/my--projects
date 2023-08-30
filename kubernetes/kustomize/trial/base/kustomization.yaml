@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+
+#patchesStrategicMerge:
+#  - deployment-patch-nginx.yaml
+
+configMapGenerator:
+  - name: application-config
+    # 環境変数で配布したい場合は「envs」
+    envs:
+      - application.properties
+
+# suffixを付与したくない場合
+generatorOptions:
+  disableNameSuffixHash: true

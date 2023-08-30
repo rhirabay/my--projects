@@ -1,0 +1,83 @@
+import java.text.SimpleDateFormat
+
+plugins {
+    id 'java-platform'
+    id 'maven-publish'
+}
+
+group = 'hirabay.bom'
+
+javaPlatform {
+    allowDependencies()
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    // ライブラリのversionをmap形式で定義（keyはSpringBootのminor version）
+    versionMap = [
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter': [
+                    '2.7': '2.2.+',
+                    '3.0': '3.0.+'
+            ],
+            'org.mybatis.spring.boot:mybatis-spring-boot-starter-test': [
+                    '2.7': '2.2.+',
+                    '3.0': '3.0.+'
+            ],
+    ]
+    // bomのversionをmap形式で定義（keyはSpringBootのminor version）
+    bomVersionMap = [
+            'org.springframework.boot:spring-boot-dependencies': [
+                    '2.7': '2.7.+',
+                    '3.0': '3.0.+'
+            ],
+            'org.springframework.cloud:spring-cloud-dependencies': [
+                    '2.7': '2021.0.+',
+                    '3.0': '2022.0.+'
+            ],
+    ]
+}
+
+dependencies {
+    constraints {
+        // mapからライブラリを展開
+        // SpringBootに依存しないライブラリを利用する場合を考慮し、
+        // 「*」を指定するとminor versionに関係なく組み込み可能にしておく
+        for (lib in versionMap.keySet()) {
+            if (versionMap[lib]['*'] != null) {
+                api "${lib}:${versionMap[lib]['*']}"
+            } else if (versionMap[lib][springBootVersion] != null) {
+                api "${lib}:${versionMap[lib][springBootVersion]}"
+            }
+        }
+    }
+
+    // mapからbomを展開
+    // SpringBootに依存しないbomを利用する場合を考慮し、
+    // 「*」を指定するとminor versionに関係なく組み込み可能にしておく
+    for (bom in bomVersionMap.keySet()) {
+        if (bomVersionMap[bom]['*'] != null) {
+            api platform("${bom}:${bomVersionMap[bom]['*']}")
+        } else if (bomVersionMap[bom][springBootVersion] != null) {
+            api platform("${bom}:${bomVersionMap[bom][springBootVersion]}")
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            group = 'hirabay.bom'
+            artifactId = 'sample-bom'
+
+            // versionを日時を使って自動で生成
+            def date = new Date()
+            def format = new SimpleDateFormat("yyyyMMddHHmmss")
+            version = "${springBootVersion}.${format.format(date)}"
+
+            from components.javaPlatform
+        }
+    }
+}

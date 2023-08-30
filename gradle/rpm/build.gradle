@@ -1,0 +1,73 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.1.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	// RPMパッケージ作成に必要なプラグイン
+	id 'nebula.ospackage' version '9.1.1'
+}
+
+group = 'hirabay.springboot'
+// 配布されるjarファイルにversion情報はいらないはず
+//version = '0.0.1'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+bootJar {
+	archivesBaseName = 'sample-app'
+	launchScript()
+}
+// RPMパッケージの中身の設定
+buildRpm {
+	packageName = 'sample-api'
+	version = '1.0.0'
+	release = "1"
+	os = LINUX
+	arch = "x86_64"
+
+	// RPMパッケージ配布時のbaseディレクトリを指定します
+	into "/opt/sample"
+
+	// RPMパッケージに含めるファイルを指定します
+	from("build/libs") {
+		// baseディレクトリ以下どのディレクトリに配置するか指定します
+		into "app/"
+		// サーバに展開する時のuser/group/権限を設定
+		user = "root"
+		permissionGroup = "root"
+		fileMode = 0444
+	}
+
+	from("rpm/systemctl") {
+		into "/etc/systemd/system"
+		user = "root"
+		permissionGroup = "root"
+		fileMode = 0755
+	}
+}
+// RPMパッケージを作成する「buildRpm」タスク実行前に必ずbuildを実行する（jarファイルがあることを担保）
+buildRpm.dependsOn build
+
+// jarファイルの生成は無効化
+jar {
+	enabled = false
+}
