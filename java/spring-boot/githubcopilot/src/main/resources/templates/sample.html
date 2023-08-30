@@ -1,0 +1,23 @@
+<!-- thymeleafに変換 -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple JSP Example</title>
+</head>
+<body>
+<!-- 宣言部分 -->
+<div th:with="fruits=${{'Apple', 'Banana', 'Cherry', 'Date'}}">
+    <div th:with="favoriteFruit='Apple'">
+        <!-- 条件分岐 -->
+        <p th:if="${favoriteFruit} == 'Apple'">Your favorite fruit is Apple.</p>
+        <p th:unless="${favoriteFruit} == 'Apple'">Your favorite fruit is not Apple.</p>
+
+        <!-- ループ -->
+        <ul>
+            <li th:each="fruit : ${fruits}" th:text="${fruit}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
