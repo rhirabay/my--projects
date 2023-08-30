@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+openai = "*"
+langchain = "*"
+python-dotenv = "*"
+pyyaml = "*"
+jq = "*"
+chromadb = "*"
+tiktoken = "*"
+streamlit = "*"
+streamlit-chat = "*"
+llama-index = "*"
+unstructured = "*"
+
+[dev-packages]
+jupyter = "*"
+
+[requires]
+python_version = "3.11"
+python_full_version = "3.11.4"
+
+[scripts]
+jupyter = "jupyter notebook"
+trial = "python src/trial.py"
+html = "python src/html_assistant.py"
+chat = "python3 -m streamlit run src/chat.py"

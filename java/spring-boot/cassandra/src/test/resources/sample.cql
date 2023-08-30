@@ -1,0 +1,1 @@
+CREATE TABLE t_sample (key text PRIMARY KEY, value text);

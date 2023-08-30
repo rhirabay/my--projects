@@ -1,0 +1,8 @@
+secretGenerator:
+#  - name: foo-secret
+#    files:
+#      - group.sample
+  - name: example-secret
+    env:
+      - name: SECRET_VALUE
+        value: $(echo 'sample')

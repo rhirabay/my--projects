@@ -1,0 +1,41 @@
+plugins {
+	id 'java-library'
+	// uploadに必要なプラグイン
+	id 'maven-publish'
+}
+
+group = 'hirabay'
+version = '0.0.1'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+	api 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+// アップロードに必要な設定
+publishing {
+	publications {
+		maven(MavenPublication) {
+			groupId = 'java.library.sample'
+			artifactId = 'java-library-sample'
+			version = '1.0.0'
+
+			from components.java
+		}
+	}
+}

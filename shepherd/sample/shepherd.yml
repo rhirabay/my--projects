@@ -1,0 +1,21 @@
+# ブランチ名
+id: create_readme
+# PRタイトル
+title: "create README.md"
+adapter:
+  # github固定
+  type: github
+  # repositories or code
+  search_type: repositories
+  # 検索クエリ
+  search_query: "org:rhirabay"
+hooks:
+  # 変更対象かどうかの判定コマンド
+  should_migrate:
+    - test ! $(ls README.md)
+  # 変更内容を記載
+  apply:
+    - curl https://raw.githubusercontent.com/rhirabay/my-projects/main/shepherd/scripts/create_readme.sh | bash
+  # PRメッセージを生成（echo等で標準出力）
+  pr_message: |
+    echo 'create README.md'

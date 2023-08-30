@@ -1,0 +1,37 @@
+server:
+  port: 8888
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        sample-send:
+          destination: test
+        sample1-receive-in-0:
+          destination: test
+      rabbit:
+        bindings:
+          sample-send:
+            producer:
+              batching-enabled: false
+          sample-receive:
+            consumer:
+              maxConcurrency: 1
+logging:
+  level:
+    root: info
+
+management:
+  server:
+    # （任意）メトリクスを出力するportを変更する
+    # ※エンドポイントさえ知っていれば外から叩けてしまうのでアプリケーションのポートと別にするのがオススメ
+#    port: 9990
+  endpoints:
+    web:
+      exposure:
+        # 有効化したいエンドポイントを記載（ここではprometheusを追加）
+        include: health, prometheus
+  tracing:
+    baggage:
+      remote-fields:
+        - sample-baggage

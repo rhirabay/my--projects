@@ -1,0 +1,25 @@
+{
+  "name": "shepherd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "shpd-help": "shepherd --help",
+    "shpd:reset": "shepherd reset sample",
+    "shpd:checkout": "shepherd checkout sample",
+    "shpd:apply": "shepherd apply sample",
+    "shpd:commit": "shepherd commit sample",
+    "shpd:push": "shepherd push sample",
+    "shpd:pr": "shepherd pr sample",
+    "shpd-all": "run-s shpd:*",
+    "shpd-version": "shepherd version"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nerdwallet/shepherd": "^1.16.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

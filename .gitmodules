@@ -1,0 +1,4 @@
+[submodule "java/spring-boot/library/lib"]
+	path = java/spring-boot/library/lib
+	url = https://github.com/rhirabay/java-library-sample.git
+	branch = main

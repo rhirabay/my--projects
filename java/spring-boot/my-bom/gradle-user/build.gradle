@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+//	id 'org.springframework.boot' version '3.1.1'
+
+	// BOMの利用が便利になるプラグイン
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'rhirabay.bom-user'
+version = '0.0.1'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "hirabay.bom:sample-bom:0.0.1"
+	}
+}
+
+dependencies {
+	// BOMに含まれるライブラリであれば、versionを記載しなくて良い
+
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter'
+	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+
+	testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

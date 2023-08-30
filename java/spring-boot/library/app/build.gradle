@@ -1,0 +1,38 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.2'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'hirabay'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+//	implementation 'java.library.sample:java-library-sample:1.0.0'
+	implementation 'springboot.library.sample:springboot-library-sample:1.0.0'
+
+	implementation files("${project.rootDir}/libs/java-library-sample-1.0.0.jar")
+
+//	implementation project(':lib')
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

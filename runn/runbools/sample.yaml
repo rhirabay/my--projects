@@ -1,0 +1,15 @@
+desc: this is sample runbook.
+debug: true
+runners:
+  req: http://localhost:8080
+steps:
+  getSample:
+    desc: GETサンプル
+    req:
+      /sample:
+        post:
+          body:
+            application/json:
+              name: ryo
+              id: 1
+    test: steps.getSample.res.status == 200
