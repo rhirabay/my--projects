@@ -1,0 +1,30 @@
+<!-- thymeleafに変換 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simple JSP Example</title>
+</head>
+<body>
+<%
+    // 宣言部分
+    String[] fruits = {"Apple", "Banana", "Cherry", "Date"};
+    String favoriteFruit = "Apple";
+%>
+
+<!-- 条件分岐 -->
+<% if(favoriteFruit.equals("Apple")) { %>
+<p>Your favorite fruit is Apple.</p>
+<% } else { %>
+<p>Your favorite fruit is not Apple.</p>
+<% } %>
+
+<!-- ループ -->
+<ul>
+    <% for(String fruit : fruits) { %>
+    <li><%= fruit %></li>
+    <% } %>
+</ul>
+</body>
+</html>
