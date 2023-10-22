@@ -1,0 +1,7 @@
+---
+- name: Sample Playbook
+  hosts: web # 実行するグループを指定する
+  tasks:
+    - name: Display message
+      ansible.builtin.debug:
+        msg: "ansible sample" # 以後、理由がない限りdebugで動作を確認
