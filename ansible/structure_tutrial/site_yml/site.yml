@@ -1,0 +1,7 @@
+---
+- name: Sample Playbook
+  hosts: localhost # ローカルで動作させる
+  tasks:
+    - name: Display message
+      ansible.builtin.debug:
+        msg: "ansible sample" # 以後、理由がない限りdebugで動作を確認

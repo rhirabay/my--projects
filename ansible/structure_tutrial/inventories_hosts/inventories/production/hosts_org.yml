@@ -1,0 +1,20 @@
+web: # Webサーバを集約したグループ
+  children:
+    active: # Webサーバの稼働系を集約したグループ
+      hosts:
+        web01.xxx.yyyy.co.jp:
+        web02.xxx.yyyy.co.jp:
+    standby: # Webサーバの待機系を集約したグループ
+      hosts:
+        web03.xxx.yyyy.co.jp:
+        web04.xxx.yyyy.co.jp:
+api: # APIサーバを集約したグループ
+  children:
+    active: # APIサーバの稼働系を集約したグループ
+      hosts:
+        api01.xxx.yyyy.co.jp:
+        api02.xxx.yyyy.co.jp:
+    standby: # APIサーバの待機系を集約したグループ
+      hosts:
+        api03.xxx.yyyy.co.jp:
+        api04.xxx.yyyy.co.jp:
