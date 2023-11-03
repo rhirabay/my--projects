@@ -2,7 +2,7 @@ server:
   port: 8081
   tomcat:
     threads:
-      max: 1000
+      max: 500
 
 spring:
   pulsar:
@@ -15,4 +15,14 @@ spring:
     compose:
       enabled: false
 
+management:
+  server:
+    port: 9990
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+      base-path: /
 
+restclient:
+  base-url: "http://localhost:8081"
