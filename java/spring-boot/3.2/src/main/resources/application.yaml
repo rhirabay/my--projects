@@ -7,7 +7,15 @@ server:
 spring:
   pulsar:
     client:
+      # 接続先を指定
       service-url: "pulsar://localhost:6650"
+      # 認証情報を指定
+      # 参考：https://docs.spring.io/spring-pulsar/reference/reference/pulsar.html#client-authentication）
+      authentication:
+        plugin-class-name: org.apache.pulsar.client.impl.auth.AuthenticationBasic
+        param:
+          userId: superuser
+          password: admin
   threads:
     virtual:
       enabled: true
