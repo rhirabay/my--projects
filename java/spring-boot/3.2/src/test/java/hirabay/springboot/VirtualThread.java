@@ -16,11 +16,7 @@ public class VirtualThread {
     @Test
     void virtual_thread() {
         Thread.startVirtualThread(() -> {
-            log.info("Hello world.");
-            // バーチャルスレッド上で動いていることを確認する
             log.info("isVirtual: {}", Thread.currentThread().isVirtual());
-            // バーチャルスレッドのスレッドローカル変数
-
         });
     }
 }
