@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" layout:decorate="~{common/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+  <meta charset="UTF-8">
+  <title>Form</title>
+</head>
+<body>
+  <form th:action="@{/form}" method="post" th:object="${form}">
+    <input type="text" th:field="*{name}" />
+    <th:block>
+      <input  type="text" th:each="hobby, stat: *{hobbies}" th:field="*{hobbies[__${stat.index}__]}">
+    </th:block>
+    <input type="submit" value="submit" />
+  </form>
+</body>
+</html>
