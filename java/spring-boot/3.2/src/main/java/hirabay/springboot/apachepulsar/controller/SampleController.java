@@ -1,5 +1,6 @@
 package hirabay.springboot.apachepulsar.controller;
 
+import io.micrometer.core.annotation.Counted;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.pulsar.core.PulsarTemplate;
@@ -11,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class SampleController {
     private final PulsarTemplate<String> pulsarTemplate;
 
+    @Counted
     @GetMapping("/**")
     public Object any() {
         return "Hello world.";
     }
 
-    @GetMapping("/send")
+    @GetMapping("/pulsar/send")
     @SneakyThrows
     public Object sendMessage() {
         return this.pulsarTemplate.send("someTopic", "Hello");
