@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" layout:decorate="~{common/layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+>
 <head>
     <meta charset="UTF-8">
     <title>Sample</title>
 </head>
 <body>
 <h2>This is sample page.</h2>
+
+<!--<div th:with="list = ${T(java.util.List).of('a', 'b', 'c')}">-->
+    <ul>
+        <li th:each="item : ${T(java.util.List).of('a', 'b', 'c')}" th:text="${item}"></li>
+    </ul>
+<!--</div>-->
 </body>
 </html>

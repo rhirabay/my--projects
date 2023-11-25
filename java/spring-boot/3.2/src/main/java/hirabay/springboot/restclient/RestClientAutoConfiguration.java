@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -66,6 +67,11 @@ public class RestClientAutoConfiguration {
     RestClient defaultRestClient(RestClient.Builder builder) {
         return builder
                 .baseUrl(baseUrl)
+                .build();
+    }
+
+    private void test() {
+        HttpServiceProxyFactory.builder()
                 .build();
     }
 }

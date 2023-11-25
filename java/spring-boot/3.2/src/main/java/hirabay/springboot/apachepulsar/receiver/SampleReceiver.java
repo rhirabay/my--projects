@@ -5,7 +5,7 @@ import org.springframework.pulsar.annotation.PulsarListener;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//@Component
 public class SampleReceiver {
     // トピック名は送信側と合わせる
     @PulsarListener(topics = "someTopic")

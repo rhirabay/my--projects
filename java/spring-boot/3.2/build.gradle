@@ -41,7 +41,7 @@ dependencies {
 	implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	// docker compose連携
-	implementation 'org.springframework.boot:spring-boot-docker-compose'
+//	implementation 'org.springframework.boot:spring-boot-docker-compose'
 
 	// httpclient5
 	implementation 'org.apache.httpcomponents.client5:httpclient5'
