@@ -8,7 +8,7 @@
   <title>Form</title>
 </head>
 <body>
-  <form th:action="@{/form}" method="post" th:object="${form}">
+  <form th:action="@{/form}" method="post" th:object="${form}" target="_blank">
     <input type="text" th:field="*{name}" />
     <th:block>
       <input  type="text" th:each="hobby, stat: *{hobbies}" th:field="*{hobbies[__${stat.index}__]}">

@@ -1,3 +1,5 @@
+spring.application.name: springboot-sample
+
 server:
   port: 8081
   tomcat:
