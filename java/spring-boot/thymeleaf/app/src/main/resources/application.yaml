@@ -1,1 +1,7 @@
-
+spring:
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          no-store: true
+          cache-private: true
