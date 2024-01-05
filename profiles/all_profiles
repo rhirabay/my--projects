@@ -1,0 +1,5 @@
+basedir=$( dirname $0 )
+
+source $basedir/charset_profiles
+source $basedir/github_profiles
+source $basedir/kubernetes_profiles
