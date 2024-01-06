@@ -1,0 +1,18 @@
+version: '3'
+services:
+  vt-app:
+    container_name: vt-app
+    build: .
+    ports:
+      - "8081:8080"
+    environment:
+      - VIRTUAL_THREAD=true
+      - TOMCAT_THREAD=1000
+  non-vt-app:
+    container_name: non-vt-app
+    build: .
+    ports:
+      - "8082:8080"
+    environment:
+      - VIRTUAL_THREAD=false
+      - TOMCAT_THREAD=1000

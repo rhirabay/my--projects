@@ -1,0 +1,9 @@
+spring:
+  threads:
+    virtual:
+      enabled: ${VIRTUAL_THREAD:true}
+server:
+  tomcat:
+    threads:
+      max: ${TOMCAT_THREAD:200}
+  port: ${PORT:8080}
