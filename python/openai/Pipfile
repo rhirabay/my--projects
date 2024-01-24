@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-openai = "*"
+openai = "==1.8.0"
 langchain = "*"
 python-dotenv = "*"
 pyyaml = "*"
