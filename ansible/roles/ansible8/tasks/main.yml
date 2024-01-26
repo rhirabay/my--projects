@@ -1,0 +1,17 @@
+- name: task with a module result (always untrusted by Ansible)
+  ansible.builtin.shell: echo "hi mom"
+  register: untrusted_result
+
+- name: assert that
+  ansible.builtin.assert:
+    that: '"hi mom" is in {{ untrusted_result.stdout }}'
+
+- name: Failed when
+  failed_when: "'mom' not in {{ untrusted_result.stdout }}"
+  ansible.builtin.debug:
+    msg: "Failed when test"
+
+- name: When
+  ansible.builtin.debug:
+    msg: "when test"
+  when:  '"hi" is in {{untrusted_result.stdout}}'

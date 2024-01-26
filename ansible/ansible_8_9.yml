@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  gather_facts: false
+  ignore_errors: true
+  roles:
+    - ansible8
+    - ansible9
