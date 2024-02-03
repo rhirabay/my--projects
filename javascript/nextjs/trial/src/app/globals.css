@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+
+    .markdown {
+        @apply w-full;
+
+        & ul {
+            @apply list-disc ml-4;
+        }
+
+        & table {
+            @apply table-auto border-collapse border border-gray-200;
+        }
+
+        & thead th {
+            @apply px-4 py-2 border border-gray-200 bg-gray-800 text-white;
+        }
+
+        & tbody tr:nth-child(odd) {
+            @apply bg-gray-50;
+        }
+
+        & tbody tr td {
+            @apply px-4 py-2 border border-gray-200;
+        }
+
+        & pre {
+            @apply w-full mt-4 p-4 bg-gray-100 rounded-md border border-gray-200 overflow-x-auto shadow-md;
+
+            & code {
+                @apply w-full;
+            }
+        }
+
+        & h1 {
+            @apply text-4xl font-bold text-gray-800 mb-4;
+        }
+
+        & h2 {
+            @apply text-3xl font-bold text-gray-800 mb-3;
+        }
+
+        & h3 {
+            @apply text-2xl font-bold text-gray-800 mb-3;
+        }
+
+        & h4 {
+            @apply text-xl font-bold text-gray-800 mb-2;
+        }
+
+        & h5 {
+            @apply text-lg font-bold text-gray-800 mb-2;
+        }
+
+        & h6 {
+            @apply text-base font-bold text-gray-800 mb-2;
+        }
+    }
+}
