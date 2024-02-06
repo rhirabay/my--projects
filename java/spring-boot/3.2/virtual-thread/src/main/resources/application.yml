@@ -6,4 +6,26 @@ server:
   tomcat:
     threads:
       max: ${TOMCAT_THREAD:200}
+    mbeanregistry:
+      enabled: true
   port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health
+      base-path: /
+  server:
+    port: 9990
+  metrics:
+    distribution:
+      percentiles:
+        # 取得するパーセンタイルの設定（この例だと50%ileと99%ile）
+        "http.server.requests": 0.5,0.99
+  observations:
+    http:
+      server:
+        requests:
+          # （任意）メトリクス名を指定
+          name: "http.server.requests"

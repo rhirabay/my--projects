@@ -1,7 +1,8 @@
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY build/libs/app.jar ./
+COPY build/libs/app.jar /app/app.jar
+RUN chmod +x /app/app.jar
 
-ENTRYPOINT ["./app.jar"]
+ENTRYPOINT ["/app/app.jar"]
