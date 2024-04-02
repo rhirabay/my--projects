@@ -1,12 +1,15 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.10'
+	id 'org.springframework.boot' version '2.7.18'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'hirbaay'
+group = 'hirabay'
 version = '0.0.1'
-sourceCompatibility = '17'
+
+java {
+	sourceCompatibility = '8'
+}
 
 configurations {
 	compileOnly {
@@ -20,14 +23,15 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'io.micrometer:micrometer-registry-prometheus'
-
-	implementation 'org.apache.httpcomponents.client5:httpclient5'
-
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	runtimeOnly 'com.h2database:h2'
+
+	// https://mvnrepository.com/artifact/org.seasar.framework/s2-framework
+	implementation 'org.seasar.framework:s2-framework:+'
+
 }
 
 tasks.named('test') {
