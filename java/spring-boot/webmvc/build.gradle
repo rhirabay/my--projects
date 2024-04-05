@@ -24,6 +24,8 @@ dependencies {
 	implementation 'io.micrometer:micrometer-registry-prometheus'
 
 	implementation 'org.apache.httpcomponents.client5:httpclient5'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
+//	implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
