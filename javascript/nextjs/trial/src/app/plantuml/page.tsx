@@ -1,12 +1,9 @@
 "use server"
 
 import React from "react";
-import Push from 'push.js'
 import fs from 'fs'
 import path from 'path'
-const { execSync } = require('child_process');
-
-var plantuml = require('node-plantuml');
+const plantuml = require('plantuml');
 
 const uml = `
 @startuml
@@ -48,22 +45,10 @@ export default async function Page() {
     // uuidを生成
     const uuid = Math.random().toString(36).slice(-8);
     // umlをファイルに保存
-    fs.writeFileSync(`${uuid}.puml`, uml);
-    // コマンドを実行（puml generate file.puml -o file.png）
-    execSync(`puml generate ${uuid}.puml -o ${uuid}.png`, (error: any, stdout: any, stderr: any) => {
-        if (error) {
-            console.error(`exec error: ${error}`);
-            return;
-        }
-    });
-
-    const imagePath = path.resolve(`./${uuid}.png`);
-    const imageBuffer = fs.readFileSync(imagePath);
-    const imageBase64 = imageBuffer.toString('base64');
-
-    // ファイルを削除
-    fs.unlinkSync(`${uuid}.puml`);
-    fs.unlinkSync(`${uuid}.png`);
+    const svg = await plantuml(uml)
+    fs.writeFileSync('image.svg', svg);
+    // svgをbase64に変換
+    const imageBase64 = fs.readFileSync(path.resolve('image.svg'), 'base64');
 
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 w-11/12">
