@@ -1,42 +1,45 @@
-# 環境変数の読み込み
-from dotenv import load_dotenv
-load_dotenv()
-
-from scipy import spatial
+import sqlalchemy as sa
+import pandas as pd
 import numpy as np
+from scipy import spatial
+
+engine = sa.create_engine(
+    sa.engine.url.URL.create(
+        drivername="postgresql", # or postgresql
+        username="postgres",  # e.g. "my-database-user"
+        password='password',  # e.g. "my-database-password"
+        host='localhost',  # e.g. "127.0.0.1"
+        port=5432,  # e.g. 3306
+        database='mydb',  # e.g. "my-database-name"
+    )
+)
+
+sql_query="""
+select * from embeddings where 1 = 2;
+"""
+df = pd.read_sql(sql=sql_query, con=engine)
+print('df: ')
+print(df.empty)
+# dfがからかどうかチェックする
+
+df['embedding'] = df['embedding'].apply(eval).apply(np.array)
+print(df)
+
+# ***********************************:
+# *   利用
+# ***********************************:
 
 # models
 EMBEDDING_MODEL = "text-embedding-ada-002"
 GPT_MODEL = "gpt-3.5-turbo"
 
-
 query = 'ディラン・モレノの経歴は？'
-
-
-import pandas as pd
-
-
-basedir = __file__.replace('register.py', '')
-dataFile = basedir + '.data/sample.csv'
-
-docsFile = basedir + '.docs/diran_moreno.txt'
-
 
 import openai
 client = openai.OpenAI()
 
-# openaiのEmbeddingを実行してdateFrameに格納（dateFrame生成も）
-
-
 def get_embedding(_doc_content):
     return client.embeddings.create(input=[_doc_content], model=EMBEDDING_MODEL).data[0].embedding
-
-
-# CSVからベクトルデータを読み込み
-df = pd.read_csv(dataFile)
-# embeddingを配列に変換
-df['embedding'] = df['embedding'].apply(eval).apply(np.array)
-
 
 # search function
 def strings_ranked_by_relatedness(
@@ -64,7 +67,6 @@ def strings_ranked_by_relatedness(
 # examples
 text_list, _ = strings_ranked_by_relatedness(query, df, top_n=5)
 
-
 # 所定のtoken数（文字数で代用）まで文字列を結合
 ref_doc = ''
 for text in text_list:
@@ -72,7 +74,6 @@ for text in text_list:
         ref_doc += text
     else:
         break
-
 
 messages = [
     {"role": "system", "content": "ユーザの質問に対して、簡潔に日本語で回答してください。"},

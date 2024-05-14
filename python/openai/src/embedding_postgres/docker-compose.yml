@@ -1,0 +1,19 @@
+# postgresを起動
+version: "2"
+services:
+  postgres:
+    container_name: mypj-postgres
+    image: postgres:15-alpine
+    environment:
+      PGUSER: postgres
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - openai_postgres_embedding_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  openai_postgres_embedding_data:
+    external: true
