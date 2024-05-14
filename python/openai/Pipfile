@@ -17,6 +17,10 @@ llama-index = "*"
 unstructured = "*"
 scipy = "*"
 numpy = "*"
+langchain-chroma = "*"
+langchain-openai = "*"
+sentence-transformers = "*"
+psycopg2 = "*"
 
 [dev-packages]
 jupyter = "*"
