@@ -31,7 +31,7 @@ print(df)
 
 # models
 EMBEDDING_MODEL = "text-embedding-ada-002"
-GPT_MODEL = "gpt-3.5-turbo"
+GPT_MODEL = "gpt-4o"
 
 query = 'ディラン・モレノの経歴は？'
 

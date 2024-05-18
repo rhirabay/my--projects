@@ -1,0 +1,19 @@
+version: "2"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15-alpine
+    environment:
+      PGUSER: postgres
+      POSTGRES_DB: sampledb
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    #volumes:
+    #  - sqlalchemy_postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+#volumes:
+#  # docker volume create sqlalchemy_postgres
+#  sqlalchemy_postgres:
+#    external: true
