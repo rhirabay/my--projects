@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-openai = "==1.8.0"
+openai = "==1.35.13"
 langchain = "*"
 python-dotenv = "*"
 pyyaml = "*"
@@ -21,6 +21,7 @@ langchain-chroma = "*"
 langchain-openai = "*"
 sentence-transformers = "*"
 psycopg2 = "*"
+langchain-community = "*"
 
 [dev-packages]
 jupyter = "*"
