@@ -6,7 +6,7 @@ from openai import OpenAI
 client = OpenAI()
 
 completion = client.chat.completions.create(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": "あなたのタスクは、ユーザが指示する要件にしたがってJavaコードを生成することです"},
         {"role": "user", "content": "SpringBootでHelloWorldを作成してください。ビルドツールはgradleで"}
