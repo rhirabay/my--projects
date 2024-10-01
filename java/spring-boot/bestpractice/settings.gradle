@@ -1,4 +1,5 @@
 rootProject.name = 'bestpractice'
 
+include('dependencies')
 include('api:mybatis')
 //include('web')
