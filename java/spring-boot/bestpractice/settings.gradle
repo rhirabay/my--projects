@@ -1,0 +1,4 @@
+rootProject.name = 'bestpractice'
+
+include('api:mybatis')
+//include('web')
