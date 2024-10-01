@@ -1,0 +1,55 @@
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2' apply false
+	id 'io.spring.dependency-management' version '1.1.6' apply false
+	// NullAway向け
+	id "net.ltgt.errorprone" version '4.0.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// NullAway
+	errorprone 'com.google.errorprone:error_prone_core:2.+'
+	errorprone 'com.uber.nullaway:nullaway:0.+'
+}
+
+import net.ltgt.gradle.errorprone.CheckSeverity
+subprojects {
+	apply plugin: "java"
+	apply plugin: "net.ltgt.errorprone"
+
+	repositories {
+		mavenCentral()
+	}
+
+	dependencies {
+		// NullAway
+		errorprone 'com.google.errorprone:error_prone_core:2.+'
+		errorprone 'com.uber.nullaway:nullaway:0.+'
+	}
+
+	tasks {
+		compileTestJava {
+			options.errorprone {
+				enabled = false
+			}
+		}
+		compileJava {
+			options.errorprone {
+				disableAllChecks = true
+				check('NullAway', CheckSeverity.ERROR)
+				// NullAwayの検査対象のパッケージを指定
+				option("NullAway:AnnotatedPackages", "hirabay")
+				// エラーから除外したいだけならこちら
+				// option("NullAway:ExcludedClasses", "")
+				// @Nullableをつけるつもりがないクラスはこちら
+				// option("NullAway:UnannotatedClasses", "")
+			}
+			options.compilerArgs << '-Xmaxwarns' << '9999'
+		}
+	}
+}
