@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+scrape_configs:
+  - job_name: 'vt'
+    scrape_interval: 5s
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets:
+          - 'vt-app:9990'
+  - job_name: 'non-vt'
+    scrape_interval: 5s
+    metrics_path: '/prometheus'
+    static_configs:
+      - targets:
+          - 'non-vt-app:9990'

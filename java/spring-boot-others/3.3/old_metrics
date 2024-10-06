@@ -1,0 +1,78 @@
+application_ready_time_seconds{main_application_class="hirabay.springboot.SpringbootApplication"} 0.979
+application_started_time_seconds{main_application_class="hirabay.springboot.SpringbootApplication"} 0.943
+disk_free_bytes{path="/Users/rhirabay/dev/github.com/rhirabay/my-projects/java/spring-boot/3.3/."} 7.01627613184E11
+disk_total_bytes{path="/Users/rhirabay/dev/github.com/rhirabay/my-projects/java/spring-boot/3.3/."} 9.9466258432E11
+executor_active_threads{name="applicationTaskExecutor"} 0.0
+executor_completed_tasks_total{name="applicationTaskExecutor"} 0.0
+executor_pool_core_threads{name="applicationTaskExecutor"} 8.0
+executor_pool_max_threads{name="applicationTaskExecutor"} 2.147483647E9
+executor_pool_size_threads{name="applicationTaskExecutor"} 0.0
+executor_queue_remaining_tasks{name="applicationTaskExecutor"} 2.147483647E9
+executor_queued_tasks{name="applicationTaskExecutor"} 0.0
+jvm_buffer_count_buffers{id="direct"} 1.0
+jvm_buffer_count_buffers{id="mapped - 'non-volatile memory'"} 0.0
+jvm_buffer_count_buffers{id="mapped"} 0.0
+jvm_buffer_memory_used_bytes{id="direct"} 8192.0
+jvm_buffer_memory_used_bytes{id="mapped - 'non-volatile memory'"} 0.0
+jvm_buffer_memory_used_bytes{id="mapped"} 0.0
+jvm_buffer_total_capacity_bytes{id="direct"} 8192.0
+jvm_buffer_total_capacity_bytes{id="mapped - 'non-volatile memory'"} 0.0
+jvm_buffer_total_capacity_bytes{id="mapped"} 0.0
+jvm_classes_loaded_classes 8238.0
+jvm_classes_unloaded_classes_total 0.0
+jvm_compilation_time_ms_total{compiler="HotSpot 64-Bit Tiered Compilers"} 485.0
+jvm_gc_live_data_size_bytes 0.0
+jvm_gc_max_data_size_bytes 8.589934592E9
+jvm_gc_memory_allocated_bytes_total 0.0
+jvm_gc_memory_promoted_bytes_total 0.0
+jvm_gc_overhead 0.0
+jvm_info{runtime="OpenJDK Runtime Environment",vendor="Eclipse Adoptium",version="21+35-LTS"} 1
+jvm_memory_committed_bytes{area="heap",id="G1 Eden Space"} 6.291456E7
+jvm_memory_committed_bytes{area="heap",id="G1 Old Gen"} 1.2582912E7
+jvm_memory_committed_bytes{area="heap",id="G1 Survivor Space"} 8388608.0
+jvm_memory_committed_bytes{area="nonheap",id="CodeCache"} 9895936.0
+jvm_memory_committed_bytes{area="nonheap",id="Compressed Class Space"} 5832704.0
+jvm_memory_committed_bytes{area="nonheap",id="Metaspace"} 4.456448E7
+jvm_memory_max_bytes{area="heap",id="G1 Eden Space"} -1.0
+jvm_memory_max_bytes{area="heap",id="G1 Old Gen"} 8.589934592E9
+jvm_memory_max_bytes{area="heap",id="G1 Survivor Space"} -1.0
+jvm_memory_max_bytes{area="nonheap",id="CodeCache"} 5.0331648E7
+jvm_memory_max_bytes{area="nonheap",id="Compressed Class Space"} 1.073741824E9
+jvm_memory_max_bytes{area="nonheap",id="Metaspace"} -1.0
+jvm_memory_usage_after_gc{area="heap",pool="long-lived"} 0.0
+jvm_memory_used_bytes{area="heap",id="G1 Eden Space"} 4.194304E7
+jvm_memory_used_bytes{area="heap",id="G1 Old Gen"} 1.0685896E7
+jvm_memory_used_bytes{area="heap",id="G1 Survivor Space"} 4782144.0
+jvm_memory_used_bytes{area="nonheap",id="CodeCache"} 8309376.0
+jvm_memory_used_bytes{area="nonheap",id="Compressed Class Space"} 5563040.0
+jvm_memory_used_bytes{area="nonheap",id="Metaspace"} 4.3906288E7
+jvm_threads_daemon_threads 29.0
+jvm_threads_live_threads 36.0
+jvm_threads_peak_threads 36.0
+jvm_threads_started_threads_total 39.0
+jvm_threads_states_threads{state="blocked"} 0.0
+jvm_threads_states_threads{state="new"} 0.0
+jvm_threads_states_threads{state="runnable"} 9.0
+jvm_threads_states_threads{state="terminated"} 0.0
+jvm_threads_states_threads{state="timed-waiting"} 5.0
+jvm_threads_states_threads{state="waiting"} 22.0
+logback_events_total{level="debug"} 0.0
+logback_events_total{level="error"} 0.0
+logback_events_total{level="info"} 12.0
+logback_events_total{level="trace"} 0.0
+logback_events_total{level="warn"} 0.0
+process_cpu_time_ns_total 2.104609E9
+process_cpu_usage 0.0
+process_files_max_files 10240.0
+process_files_open_files 60.0
+process_start_time_seconds 1.71420001892E9
+process_uptime_seconds 105.079
+system_cpu_count 10.0
+system_cpu_usage 0.0
+system_load_average_1m 2.08544921875
+tomcat_sessions_active_current_sessions 0.0
+tomcat_sessions_active_max_sessions 0.0
+tomcat_sessions_alive_max_seconds 0.0
+tomcat_sessions_created_sessions_total 0.0
+tomcat_sessions_expired_sessions_total 0.0
+tomcat_sessions_rejected_sessions_total 0.0

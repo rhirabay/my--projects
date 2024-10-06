@@ -1,0 +1,18 @@
+version: '3'
+services:
+  pulsar:
+    image: apachepulsar/pulsar:3.1.0
+    command: bin/pulsar standalone
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    volumes:
+      - ./pulsar/conf/standalone.conf:/pulsar/conf/standalone.conf
+      - ./pulsar/.htpasswd:/pulsar/.htpasswd
+  # prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+    - "9090:9090"
+    volumes:
+    - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
