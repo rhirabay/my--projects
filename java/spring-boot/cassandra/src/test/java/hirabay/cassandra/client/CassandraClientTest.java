@@ -2,29 +2,27 @@ package hirabay.cassandra.client;
 
 import com.datastax.oss.driver.api.core.CqlSession;
 import hirabay.cassandra.domain.Sample;
-import org.cassandraunit.CQLDataLoader;
-import org.cassandraunit.dataset.cql.ClassPathCQLDataSet;
-import org.cassandraunit.utils.EmbeddedCassandraServerHelper;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.cassandra.core.CassandraTemplate;
+import org.testcontainers.containers.CassandraContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
+@Testcontainers
 class CassandraClientTest {
-//    private CassandraTemplate template;
-//    private static CqlSession session;
-//
+    @Container
+    public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
+            .withInitScript("initial.cql")
+            .withExposedPorts(9042);
+
     @Test
     void test() throws Exception {
-        System.out.println("start cassandra");
-        EmbeddedCassandraServerHelper.startEmbeddedCassandra();
-        System.out.println("get cassandra session");
-        var session = EmbeddedCassandraServerHelper.getSession();
-        System.out.println("load cql");
-        new CQLDataLoader(session).load(new ClassPathCQLDataSet("sample.cql", "sample"));
-
-        var template = new CassandraTemplate(session);
-        var actual = template.select("SELECT * FROM t_sample", Sample.class);
+        CqlSession cqlSession = CqlSession.builder()
+                .addContactPoint(cassandra.getContactPoint())
+                .withLocalDatacenter(cassandra.getLocalDatacenter())
+                .build();
+        var template = new CassandraTemplate(cqlSession);
+        var actual = template.select("SELECT * FROM sample.t_sample", Sample.class);
 
         System.out.println(actual);
     }

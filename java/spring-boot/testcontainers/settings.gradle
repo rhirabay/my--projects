@@ -1,4 +1,0 @@
-rootProject.name = 'testcontainers'
-
-include 'cassandra'
-include 'redis'

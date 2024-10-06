@@ -1,5 +1,0 @@
-custom-props:
-  sample-api:
-    root-uri: <URL>
-    username: <ユーザ名>
-    password: <パスワード>

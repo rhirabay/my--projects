@@ -2,16 +2,15 @@ grpc:
   port: 6565
 
 management:
-  metrics:
-    export:
-      prometheus:
-        # prometheusエンドポイントを有効化
-        enabled: true
   endpoints:
     web:
       # /prometheusでアクセスできるように
       base-path: "/"
       exposure:
         include: "*"
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 server:
   port: 9991

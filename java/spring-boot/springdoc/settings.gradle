@@ -1,5 +1,0 @@
-rootProject.name = 'springdoc'
-
-include ':springboot3:webmvc'
-include ':springboot3:webflux'
-//include ':springboot2:webmvc'

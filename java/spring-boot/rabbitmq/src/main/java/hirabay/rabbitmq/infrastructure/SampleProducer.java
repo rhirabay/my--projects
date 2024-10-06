@@ -19,7 +19,7 @@ public class SampleProducer {
 
     public void send(SampleMessage message) {
         Baggage baggage = tracer.getBaggage("sample-baggage");
-        baggage.set("test");
+        //baggage.set("test");
 
         var result = streamBridge.send("sample-send", message);
         if (result) {

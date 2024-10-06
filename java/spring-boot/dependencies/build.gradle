@@ -1,0 +1,51 @@
+plugins {
+    id 'java-platform'
+    id 'maven-publish'
+}
+
+group = 'rhirabay.bom'
+version = '0.0.1'
+
+javaPlatform {
+    allowDependencies()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // ライブライのバージョンの固定
+    constraints {
+        // cf. https://mockk.io/
+        api 'io.mockk:mockk:1.12.3'
+
+        // cf. https://github.com/Ninja-Squad/springmockk
+        // https://mvnrepository.com/artifact/com.ninja-squad/springmockk
+        api 'com.ninja-squad:springmockk:3.1.1'
+
+        // cf. https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/#requirements
+        def mybatisVersion = '3.0.3'
+        api "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+        api "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${mybatisVersion}"
+
+        // UserAgent parser
+        api 'com.github.ua-parser:uap-java:1.6.1'
+
+        def springdocVersion = '2.6.0'
+        api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
+        api "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocVersion}"
+    }
+
+    // BOM
+    api platform('org.springframework.boot:spring-boot-dependencies:3.3.4')
+    api platform('org.springframework.cloud:spring-cloud-dependencies:2023.0.+')
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.javaPlatform
+        }
+    }
+}
