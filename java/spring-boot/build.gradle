@@ -1,0 +1,38 @@
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+repositories {
+	mavenCentral()
+}
+
+subprojects {
+	if (project.name != 'dependencies') {
+		apply plugin: "java"
+		apply plugin: 'org.springframework.boot'
+		apply plugin: 'io.spring.dependency-management'
+
+		repositories {
+			mavenCentral()
+		}
+
+		dependencies {
+			// dependenciesの反映
+			implementation enforcedPlatform(project(':dependencies'))
+			testImplementation enforcedPlatform(project(':dependencies'))
+			annotationProcessor enforcedPlatform(project(':dependencies'))
+			testAnnotationProcessor enforcedPlatform(project(':dependencies'))
+
+			runtimeOnly("org.springframework.boot:spring-boot-properties-migrator")
+		}
+
+		tasks.withType(JavaCompile) {
+			options.compilerArgs << '-Xlint:deprecation'
+			options.compilerArgs << '-Werror'
+		}
+	}
+
+}
