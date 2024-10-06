@@ -3,6 +3,7 @@ package hirabay.webmvc.controller;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import hirabay.webmvc.controller.resolver.ParamName;
 import lombok.Data;
+import lombok.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +14,7 @@ public class RequestParamSampleController {
         return model;
     }
 
-    @Data
+    @Value
     public static class SampleModel {
         @JsonProperty("a")
         @ParamName("a")

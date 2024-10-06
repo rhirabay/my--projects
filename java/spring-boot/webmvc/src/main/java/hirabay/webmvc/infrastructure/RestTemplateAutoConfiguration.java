@@ -1,5 +1,6 @@
 package hirabay.webmvc.infrastructure;
 
+import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
 import org.apache.hc.core5.http.io.SocketConfig;
@@ -23,9 +24,12 @@ public class RestTemplateAutoConfiguration {
                 .setSoTimeout(1_000, TimeUnit.MILLISECONDS)
                 .setSoKeepAlive(false)
                 .build();
-        var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
+        var connectionConfig = ConnectionConfig.custom()
                 // keep alive timeout（例: 59秒）
-                .setConnectionTimeToLive(TimeValue.ofSeconds(59))
+                .setTimeToLive(TimeValue.ofSeconds(59))
+                .build();
+        var connectionManager = PoolingHttpClientConnectionManagerBuilder.create()
+                .setDefaultConnectionConfig(connectionConfig)
                 // 全ルート合算の最大接続数
                 .setMaxConnTotal(100)
                 // ルート（基本的にはドメイン）ごとの最大接続数

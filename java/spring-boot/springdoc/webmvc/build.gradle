@@ -5,7 +5,8 @@ plugins {
 }
 
 group = 'hirabay'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
+
 java {
 	sourceCompatibility = '17'
 }
@@ -15,9 +16,15 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// springdocの依存を追加する
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui'
 }
 
 tasks.named('test') {

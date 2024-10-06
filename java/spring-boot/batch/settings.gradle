@@ -1,4 +1,0 @@
-rootProject.name = 'batch'
-
-include 'springboot2'
-include 'springboot3'

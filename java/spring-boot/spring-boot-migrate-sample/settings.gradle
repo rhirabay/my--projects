@@ -1,5 +1,0 @@
-rootProject.name = 'springboot-migrate-sample'
-
-include 'openrewrite2.7'
-include 'springboot3.0'
-include 'lib'

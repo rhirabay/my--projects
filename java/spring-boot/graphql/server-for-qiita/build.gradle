@@ -1,12 +1,14 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.0'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
 	id 'java'
 }
 
 group = 'rhirabay'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+version = '0.0.1'
+java {
+	sourceCompatibility = '17'
+}
 
 repositories {
 	mavenCentral()

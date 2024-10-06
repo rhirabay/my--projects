@@ -1,49 +1,37 @@
 package rhirabay.redis.infrastructure;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import redis.embedded.RedisServer;
+import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Testcontainers
 class RedisClientTest {
-    private static RedisServer redisServer = null;
+    // テストコンテナを生成（裏でDockerコンテナが起動する）
+    @Container
+    public static GenericContainer redis = new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
+            .withExposedPorts(6379);
 
     private RedisClient redisClient;
 
     @BeforeEach
-    void init() {
-        // 組み込みRedisに接続するRedisTemplateを生成する
-        var connFactory = new LettuceConnectionFactory("localhost", 6379);
-        connFactory.afterPropertiesSet();
+    void setup() {
+        var redisConfiguration = new RedisStandaloneConfiguration(redis.getHost(), redis.getMappedPort(6379));
+        var jedisConnectionFactory = new JedisConnectionFactory(redisConfiguration);
+        jedisConnectionFactory.afterPropertiesSet();
 
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connFactory);
+        redisTemplate.setConnectionFactory(jedisConnectionFactory);
         redisTemplate.afterPropertiesSet();
 
         redisClient = new RedisClient(redisTemplate);
-    }
-
-    @BeforeAll
-    public static void setup() {
-        if (redisServer == null) {
-            // 組み込みRedisを起動する
-            redisServer = new RedisServer(6379);
-            redisServer.start();
-        }
-    }
-
-    @AfterAll
-    public static void teardown() {
-        if (redisServer != null) {
-            // 組み込みRedisを停止する
-            redisServer.stop();
-            redisServer = null;
-        }
     }
 
     @Test

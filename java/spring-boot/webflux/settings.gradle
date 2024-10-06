@@ -1,4 +1,0 @@
-rootProject.name = 'webflux'
-
-include 'junit5'
-include 'sample'
