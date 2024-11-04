@@ -3,7 +3,8 @@ version: "2"
 services:
   postgres:
     container_name: mypj-postgres
-    image: postgres:15-alpine
+    #image: postgres:15-alpine
+    image: pgvector/pgvector:pg15
     environment:
       PGUSER: postgres
       POSTGRES_DB: mydb
