@@ -53,7 +53,7 @@ def run_assistant(assistant_id: str) -> str:
             thread_id=thread.id,
             run_id=run.id
         )
-        print(f'run.status: {run.status}')
+        # print(f'run.status: {run.status}')
 
         if run.status == 'in_progress' or run.status == 'queued':
             """
