@@ -16,7 +16,6 @@ embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
 ##################################
 
 from langchain_core.documents import Document
-from langchain_postgres import PGVector
 from langchain_postgres.vectorstores import PGVector
 
 # See docker command above to launch a postgres instance with pgvector enabled.
@@ -37,6 +36,6 @@ docs = [
     ) for (idx, document) in enumerate(raw_document.split("\n")) if len(document) > 0
 ]
 
-vector_store.delete(ids=["3"])
-vector_store.search()
+# vector_store.delete(ids=["3"])
+# vector_store.search()
 vector_store.add_documents(docs, ids=[doc.metadata["id"] for doc in docs])
