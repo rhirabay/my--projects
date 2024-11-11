@@ -1,0 +1,20 @@
+# postgresを起動
+version: "2"
+services:
+  postgres:
+    #image: postgres:15-alpine
+    image: pgvector/pgvector:pg15
+    environment:
+      PGUSER: postgres
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - rhirabay_assistants_embedding_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  # docker volume create rhirabay_assistants_embedding_data
+  rhirabay_assistants_embedding_data:
+    external: true
