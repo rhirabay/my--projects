@@ -39,13 +39,13 @@ $ openssl x509 -req -CA ca.pem -CAkey ca.key -CAcreateserial -in client.csr \
 server0 is issued by CA:
 ------------------------
 
-$ openssl genrsa -out server0.key.rsa 2048
-$ openssl pkcs8 -topk8 -in server0.key.rsa -out server0.key -nocrypt
-$ openssl req -new -key server0.key -out server0.csr
+$ openssl genrsa -out server.key.rsa 2048
+$ openssl pkcs8 -topk8 -in server.key.rsa -out server0.key -nocrypt
+$ openssl req -new -key server.key -out server.csr
 
 When prompted for certificate information, everything is default except the
 common name which is set to *.test.google.com.au.
 
-$ openssl x509 -req -CA ca.pem -CAkey ca.key -CAcreateserial -in server0.csr \
-  -out server0.pem -days 3650
+$ openssl x509 -req -CA ca.pem -CAkey ca.key -CAcreateserial -in server.csr \
+  -out server.pem -days 3650
 ----

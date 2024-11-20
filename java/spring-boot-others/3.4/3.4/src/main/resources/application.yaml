@@ -1,6 +1,45 @@
+
 server:
+#  port: 443
   port: 8081
+#    enabled: true
+#    key-store: classpath:ssl/keystore.p12
+#    key-store-password: sample
+#    key-store-type: PKCS12
+#    key-alias: sample
+spring:
+  ssl:
+    bundle:
+      jks:
+        server:
+          key:
+            alias: "sample"
+          keystore:
+            location: classpath:ssl/keystore.p12
+            password: "sample"
+            type: "PKCS12"
+
+
 sample:
   sub:
     value: "invalid"
   value: "main"
+management:
+  endpoint:
+    info:
+      access: read-only
+#      enabled: true
+  server:
+    port: 9990
+    ssl:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: info,health,scheduledtasks
+  info:
+    ssl:
+      enabled: true
+  health:
+    ssl:
+      certificate-validity-warning-threshold: 3700d

@@ -16,6 +16,15 @@ class WriteMemoFunction(FunctionBase):
             "parameters": {
                 "type": "object",
                 "properties": {
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": textwrap.dedent("""
+                            メモを検索する時に役立つタグ
+                            """)
+                        }
+                    },
                     "memo": {
                         "type": "string",
                         "description": textwrap.dedent("""
@@ -24,7 +33,7 @@ class WriteMemoFunction(FunctionBase):
                         """)
                     }
                 },
-                "required": ["memo"]
+                "required": ["memo", "tags"]
             }
         }
 
