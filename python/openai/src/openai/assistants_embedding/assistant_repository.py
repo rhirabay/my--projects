@@ -1,6 +1,7 @@
 import json
 import sys, os, time
 import textwrap
+from typing_extensions import Literal
 
 from openai import OpenAI
 
@@ -31,35 +32,41 @@ class AssistantRepository:
 
     def add_message(self,
                     message: str,
-                    thread_id: str):
+                    thread_id: str,
+                    role: Literal["user", "assistant"] = "user"):
         """
         指定されたスレッドにメッセージを追加する
         """
         self.client.beta.threads.messages.create(
             thread_id=thread_id,
-            role="user",
+            role=role,
             content=message
         )
 
-    def search_knowledge(self, message) -> str:
+    def search_knowledge(self, message: str, thread_id: str) -> str:
         knowledge_list = self.knowledge_repository.search(message, min_similarity=0)
         if len(knowledge_list) == 0:
             return ""
 
         knowledge = '\n\n'.join(knowledge_list)
 
-        return textwrap.dedent(f"""
-        [参考情報]
-        必要に応じて以下の情報を参考にしてください
+        message_with_knowledge = textwrap.dedent(f"""
+        私は会話メモを管理するアシスタントです。
+        以下の会話メモを見つけたので、回答の参考にしてください。
+        この会話メモはユーザは把握していないので参考にした情報は自然にユーザに提供すること
+        
+        [会話メモ]
         
         {knowledge}
         """)
+        self.add_message(message=f'{message_with_knowledge}', thread_id=thread_id, role="assistant")
 
     def add_message_with_knowledge(self,
                                    message: str,
                                    thread_id: str):
-        knowledge = self.search_knowledge(message)
-        self.add_message(message=f'{message}\n\n{knowledge}', thread_id=thread_id)
+        self.add_message(message=f'{message}', thread_id=thread_id)
+        self.search_knowledge(message=message, thread_id=thread_id)
+        # self.add_message(message=f"{knowledge}", thread_id=thread_id, role="assistant")
 
     def run(self,
             thread_id: str,
