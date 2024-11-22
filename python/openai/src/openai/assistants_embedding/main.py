@@ -13,7 +13,7 @@ dotenv.load_dotenv(env_file)
 
 client = OpenAI()
 functions = [
-    WriteMemoFunction()
+    # WriteMemoFunction()
 ]
 assistant_prompt = textwrap.dedent("""
 あなたは優秀なITエンジニアです。

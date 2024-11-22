@@ -11,7 +11,10 @@ class WriteMemoFunction(FunctionBase):
         return {
             "name": "write_memo",
             "description": textwrap.dedent("""
-            ユーザから「覚えて」というリクエストを受け取った際に内容を記録しておくための機能。
+            ユーザから記憶しておく依頼を受け取った際に内容を記録しておくための機能。
+            会話履歴からのみ情報を整理し、簡潔に記載すること（背景や目的、結果、関連情報など）。
+            例１）XXXの場合、YYYを利用すること
+            例２）XXXに関する情報は、YYYを参照すること
             """),
             "parameters": {
                 "type": "object",
@@ -28,8 +31,7 @@ class WriteMemoFunction(FunctionBase):
                     "memo": {
                         "type": "string",
                         "description": textwrap.dedent("""
-                        記録する内容。
-                        どのような条件で、どのようなアウトプットが求められるのか会話の流れも考慮して詳述にまとめること。
+                        メモ本体。
                         """)
                     }
                 },
