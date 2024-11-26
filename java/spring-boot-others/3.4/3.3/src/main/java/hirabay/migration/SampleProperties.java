@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 @Data
-@Validated // check Bean Validation of Configuration Properties
+//@Validated // check Bean Validation of Configuration Properties
 @Component
 @ConfigurationProperties(prefix = "sample")
 public class SampleProperties {
