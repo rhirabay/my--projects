@@ -28,3 +28,9 @@ grep -rl "@ConfigurationProperties" . | grep ".java$" | while read -r file; do
         gsed -i 's/@Validated/@Validated \/\/ TODO: check Bean Validation of Configuration Properties/g' "${file}"
     fi
 done
+
+# 「import org.testcontainers.containers.CassandraContainer;」を「import org.testcontainers.cassandra.CassandraContainer;」に変更
+grep -rl "import org.testcontainers.containers.CassandraContainer;" . | grep ".java$" | while read -r file; do
+    echo "Found in: $file"
+    gsed -i 's/import org.testcontainers.containers.CassandraContainer;/import org.testcontainers.cassandra.CassandraContainer;/g' "${file}"
+done
