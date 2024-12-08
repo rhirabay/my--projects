@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Testcontainers
 public class UT {
     @Container
-    public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
+    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
             .withInitScript("initial.cql")
             .withExposedPorts(9042);
 

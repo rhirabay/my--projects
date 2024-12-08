@@ -37,3 +37,12 @@ grep -rl "import org.testcontainers.containers.CassandraContainer;" . | grep ".j
     echo "    after: import org.testcontainers.cassandra.CassandraContainer;"
     gsed -i 's/import org.testcontainers.containers.CassandraContainer;/import org.testcontainers.cassandra.CassandraContainer;/g' "${file}"
 done
+
+# CassandraContainer<>をCassandraContainerの型引数なしに変更
+grep -rl "CassandraContainer<" . | grep ".java$" | while read -r file; do
+    echo "migration CassandraContainer generics type"
+    echo "  file: $file"
+    echo "    before: CassandraContainer<[^>]*>"
+    echo "    after: CassandraContainer"
+    gsed -i -r 's/CassandraContainer<[^>]*>/CassandraContainer/g' "${file}"
+done

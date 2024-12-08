@@ -7,6 +7,6 @@ import org.testcontainers.junit.jupiter.Container;
 public interface CassandraTestContainers {
     @Container
     @ServiceConnection
-    CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
+    CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
             .withInitScript("initial.cql"); // 初期クエリ
 }

@@ -10,8 +10,8 @@ public class TestContainersConfiguration {
 
     @Bean
     @ServiceConnection
-    public CassandraContainer<?> cassandraContainer() {
-        return new CassandraContainer<>("cassandra:3.11.2")
+    public CassandraContainer cassandraContainer() {
+        return new CassandraContainer("cassandra:3.11.2")
                 .withInitScript("initial.cql") // 初期クエリ
                 .withExposedPorts(9042);
     }

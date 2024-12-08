@@ -11,7 +11,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 class CassandraClientTest {
     @Container
-    public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
+    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
             .withInitScript("initial.cql")
             .withExposedPorts(9042);
 

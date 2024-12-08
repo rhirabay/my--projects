@@ -29,7 +29,7 @@ class ApplicationTest {
     // テストコンテナを生成（裏でDockerコンテナが起動する）
 //    @Container
 //    @ServiceConnection
-//    public static CassandraContainer<?> cassandra = new CassandraContainer<>("cassandra:3.11.2")
+//    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
 //            .withInitScript("initial.cql"); // 初期クエリ
 
     // propertiesを更新
