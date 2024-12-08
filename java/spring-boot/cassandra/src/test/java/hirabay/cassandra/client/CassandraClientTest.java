@@ -4,7 +4,7 @@ import com.datastax.oss.driver.api.core.CqlSession;
 import hirabay.cassandra.domain.Sample;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.cassandra.core.CassandraTemplate;
-import org.testcontainers.containers.CassandraContainer;
+import org.testcontainers.cassandra.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 

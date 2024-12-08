@@ -9,9 +9,18 @@ repositories {
 	mavenCentral()
 }
 
+def libProject = [
+        ':thymeleaf:template',
+		':grpc-lognet:proto'
+]
+
 subprojects {
 	if (project.name != 'dependencies') {
-		apply plugin: "java"
+		if ([libProject].contains(project.name)) {
+			apply plugin: 'java-library'
+		} else {
+			apply plugin: 'java'
+		}
 		apply plugin: 'org.springframework.boot'
 		apply plugin: 'io.spring.dependency-management'
 

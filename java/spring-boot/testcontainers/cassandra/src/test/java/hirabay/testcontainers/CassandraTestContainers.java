@@ -1,7 +1,7 @@
 package hirabay.testcontainers;
 
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.testcontainers.containers.CassandraContainer;
+import org.testcontainers.cassandra.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 public interface CassandraTestContainers {

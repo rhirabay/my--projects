@@ -47,7 +47,7 @@ public class RestTemplateAutoConfiguration {
         return new RestTemplateBuilder()
                 .requestFactory(() -> requestFactory)
                 .rootUri("http://localhost:8080/rest-template-test")
-                .setConnectTimeout(Duration.ofMillis(500))
+                .connectTimeout(Duration.ofMillis(500))
                 .build();
     }
 
