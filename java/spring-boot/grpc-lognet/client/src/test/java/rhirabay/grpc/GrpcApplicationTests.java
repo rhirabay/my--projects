@@ -1,5 +1,6 @@
 package rhirabay.grpc;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
@@ -17,9 +18,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = {GrpcApplication.class, SampleClientTestConfiguration.class},
 		webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
 		properties = {
-		"grpc.port=6565",
-		"rhirabay.grpc.client.greeting.host=localhost",
-		"rhirabay.grpc.client.greeting.port=${grpc.port}",
+			"grpc.port=6565",
+			"rhirabay.grpc.client.greeting.host=localhost",
+			"rhirabay.grpc.client.greeting.port=${grpc.port}",
 		}
 )
 @AutoConfigureWebTestClient
@@ -28,13 +29,8 @@ class GrpcApplicationTests {
 	@Autowired
 	private WebTestClient webTestClient;
 
-	@MockitoBean
-	private Function<String, String> serviceImpl;
-
 	@Test
 	void test() {
-		when(serviceImpl.apply(any())).thenReturn("dummy message");
-
 		webTestClient.get()
 				.uri("/greeting")
 				.exchange()
