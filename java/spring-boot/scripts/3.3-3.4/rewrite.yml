@@ -1,0 +1,45 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: springboot.migration
+displayName: Migrate to Spring Boot 3.3
+description: Migrate to Spring Boot 3.3
+
+tags:
+  - spring
+  - boot
+recipeList:
+  - org.openrewrite.java.boot3.ReplaceMockBeanAndSpyBean
+
+# cf. https://github.com/openrewrite/rewrite-spring/blob/main/src/main/resources/META-INF/rewrite/replace-mock-and-spybean.yml
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: org.openrewrite.java.boot3.ReplaceMockBeanAndSpyBean
+displayName: Replace `@MockBean` and `@SpyBean`
+description: Replaces `@MockBean` and `@SpyBean` annotations with `@MockitoBean` and `@MockitoSpyBean`.
+recipeList:
+  - org.openrewrite.java.ChangeAnnotationAttributeName:
+      annotationType: org.springframework.boot.test.mock.mockito.MockBean
+      oldAttributeName: answer
+      newAttributeName: answers
+  - org.openrewrite.java.RemoveAnnotationAttribute:
+      annotationType: org.springframework.boot.test.mock.mockito.MockBean
+      attributeName: classes
+  - org.openrewrite.java.RemoveAnnotationAttribute:
+      annotationType: org.springframework.boot.test.mock.mockito.MockBean
+      attributeName: value
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.boot.test.mock.mockito.MockBean
+      newFullyQualifiedTypeName: org.springframework.test.context.bean.override.mockito.MockitoBean
+
+  - org.openrewrite.java.RemoveAnnotationAttribute:
+      annotationType: org.springframework.boot.test.mock.mockito.SpyBean
+      attributeName: classes
+  - org.openrewrite.java.RemoveAnnotationAttribute:
+      annotationType: org.springframework.boot.test.mock.mockito.SpyBean
+      attributeName: value
+  - org.openrewrite.java.RemoveAnnotationAttribute:
+      annotationType: org.springframework.boot.test.mock.mockito.SpyBean
+      attributeName: proxyTargetAware
+  - org.openrewrite.java.ChangeType:
+      oldFullyQualifiedTypeName: org.springframework.boot.test.mock.mockito.SpyBean
+      newFullyQualifiedTypeName: org.springframework.test.context.bean.override.mockito.MockitoSpyBean
