@@ -1,7 +1,5 @@
 package rhirabay.grpc.client;
 
-
-import io.grpc.HandlerRegistry;
 import io.grpc.Server;
 import io.grpc.inprocess.InProcessChannelBuilder;
 import io.grpc.inprocess.InProcessServerBuilder;
