@@ -1,11 +1,10 @@
 package hirabay.cassandra.client;
 
 import hirabay.cassandra.domain.Sample;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.cassandra.core.CassandraTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 @RequiredArgsConstructor
