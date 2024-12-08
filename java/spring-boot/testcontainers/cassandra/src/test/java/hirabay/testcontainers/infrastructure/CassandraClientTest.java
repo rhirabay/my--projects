@@ -1,7 +1,10 @@
 package hirabay.testcontainers.infrastructure;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.datastax.oss.driver.api.core.CqlSession;
 import hirabay.testcontainers.domain.Sample;
+import java.util.Collections;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,26 +13,23 @@ import org.testcontainers.cassandra.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 @Slf4j
 @Testcontainers
 class CassandraClientTest {
     @Container
-    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
-            .withInitScript("initial.cql");
+    public static CassandraContainer cassandra =
+            new CassandraContainer("cassandra:3.11.2").withInitScript("initial.cql");
 
     private CassandraClient cassandraClient;
 
     @BeforeEach
     void setup() {
         // 起動したコンテナの情報を元にsessionを生成
-        CqlSession cqlSession = CqlSession.builder()
-                .addContactPoint(cassandra.getContactPoint())
-                .withLocalDatacenter(cassandra.getLocalDatacenter())
-                .build();
+        CqlSession cqlSession =
+                CqlSession.builder()
+                        .addContactPoint(cassandra.getContactPoint())
+                        .withLocalDatacenter(cassandra.getLocalDatacenter())
+                        .build();
 
         var template = new CassandraTemplate(cqlSession);
         cassandraClient = new CassandraClient(template);

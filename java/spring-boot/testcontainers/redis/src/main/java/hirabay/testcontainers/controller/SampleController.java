@@ -17,10 +17,7 @@ public class SampleController {
     }
 
     @GetMapping("/set/{key}/{value}")
-    public void set(
-            @PathVariable String key,
-            @PathVariable String value
-    ) {
+    public void set(@PathVariable String key, @PathVariable String value) {
         redisClient.set(key, value);
     }
 }

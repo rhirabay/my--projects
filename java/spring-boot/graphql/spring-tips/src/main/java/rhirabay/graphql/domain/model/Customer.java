@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 
 @Value
 public class Customer {
-    @Id
-    Integer id;
+    @Id Integer id;
     String name;
 }

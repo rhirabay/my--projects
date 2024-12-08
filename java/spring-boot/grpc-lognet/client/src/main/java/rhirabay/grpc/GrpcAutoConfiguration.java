@@ -10,9 +10,7 @@ import rhirabay.grpc.sample.GreetGrpc;
 public class GrpcAutoConfiguration {
     @Bean
     ManagedChannel managedChannel() {
-        return ManagedChannelBuilder.forAddress("localhost", 6565)
-                .usePlaintext()
-                .build();
+        return ManagedChannelBuilder.forAddress("localhost", 6565).usePlaintext().build();
     }
 
     @Bean

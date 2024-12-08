@@ -1,12 +1,11 @@
 package rhirabay.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
 @Data
 @Entity
@@ -14,7 +13,6 @@ import jakarta.persistence.Id;
 @AllArgsConstructor
 @Builder
 public class User {
-    @Id
-    private String id;
+    @Id private String id;
     private String name;
 }

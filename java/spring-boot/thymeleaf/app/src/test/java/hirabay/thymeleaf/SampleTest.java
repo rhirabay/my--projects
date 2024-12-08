@@ -9,16 +9,13 @@ public class SampleTest {
     @Value
     @Builder
     public static class SampleModel {
-        @NonNull
-        String name;
+        @NonNull String name;
         int age;
     }
 
     @Test
     void test() {
-        var model = SampleModel.builder()
-                .name("hirabay")
-                .build();
+        var model = SampleModel.builder().name("hirabay").build();
 
         System.out.println(model);
     }

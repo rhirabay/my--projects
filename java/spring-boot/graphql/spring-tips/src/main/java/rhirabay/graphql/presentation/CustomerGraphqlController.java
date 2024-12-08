@@ -1,5 +1,6 @@
 package rhirabay.graphql.presentation;
 
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -11,8 +12,6 @@ import reactor.core.publisher.Mono;
 import rhirabay.graphql.domain.model.Customer;
 import rhirabay.graphql.domain.model.Order;
 import rhirabay.graphql.domain.repository.CustomerRepository;
-
-import java.util.stream.Stream;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,14 +31,16 @@ public class CustomerGraphqlController {
 
     @SchemaMapping(typeName = "Customer")
     Flux<Order> orders(Customer customer) {
-        return Flux.fromStream(Stream.iterate(1, i -> ++i)
-                .limit((long)(Math.random() * 10))
-                .map(i -> {
-                    var order = new Order();
-                    order.setId(i);
-                    order.setCustomerId(customer.getId());
-                    return order;
-                }));
+        return Flux.fromStream(
+                Stream.iterate(1, i -> ++i)
+                        .limit((long) (Math.random() * 10))
+                        .map(
+                                i -> {
+                                    var order = new Order();
+                                    order.setId(i);
+                                    order.setCustomerId(customer.getId());
+                                    return order;
+                                }));
     }
 
     @MutationMapping

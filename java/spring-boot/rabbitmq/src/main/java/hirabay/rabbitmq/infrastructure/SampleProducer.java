@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -19,7 +17,7 @@ public class SampleProducer {
 
     public void send(SampleMessage message) {
         Baggage baggage = tracer.getBaggage("sample-baggage");
-        //baggage.set("test");
+        // baggage.set("test");
 
         var result = streamBridge.send("sample-send", message);
         if (result) {

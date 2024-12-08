@@ -13,21 +13,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class BatchApplication {
 
-	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(BatchApplication.class);
+    public static void main(String[] args) {
+        ConfigurableApplicationContext context = SpringApplication.run(BatchApplication.class);
 
-		JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
-		Job job = (Job) context.getBean("helloWorldJob");
-		log.info("Starting the batch job");
-		try {
-			JobExecution execution = jobLauncher.run(job, new JobParameters());
-			log.info("Job Status : {}", execution.getStatus());
-			log.info("Job completed");
-		} catch (Exception ex) {
-			log.info("Job failed", ex);
-		}
-	}
-
-
-
+        JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
+        Job job = (Job) context.getBean("helloWorldJob");
+        log.info("Starting the batch job");
+        try {
+            JobExecution execution = jobLauncher.run(job, new JobParameters());
+            log.info("Job Status : {}", execution.getStatus());
+            log.info("Job completed");
+        } catch (Exception ex) {
+            log.info("Job failed", ex);
+        }
+    }
 }

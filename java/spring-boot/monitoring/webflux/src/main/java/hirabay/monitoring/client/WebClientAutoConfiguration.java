@@ -1,6 +1,5 @@
 package hirabay.monitoring.client;
 
-import io.netty.channel.ChannelOption;
 import org.springframework.boot.actuate.metrics.web.reactive.client.ObservationWebClientCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,16 +12,17 @@ import reactor.netty.resources.ConnectionProvider;
 public class WebClientAutoConfiguration {
     @Bean
     public WebClient myWebClient(ObservationWebClientCustomizer observationWebClientCustomizer) {
-        var connectionProvider = ConnectionProvider.builder("sample")
-                .maxConnections(100) // コネクションプール数
-                .metrics(true) // コネクション数のメトリクスを有効化
-                .build();
+        var connectionProvider =
+                ConnectionProvider.builder("sample")
+                        .maxConnections(100) // コネクションプール数
+                        .metrics(true) // コネクション数のメトリクスを有効化
+                        .build();
 
         var httpClient = HttpClient.create(connectionProvider);
 
         return WebClient.builder()
                 .clientConnector(new ReactorClientHttpConnector(httpClient))
-                .apply(observationWebClientCustomizer::customize)  // http clientのメトリクスを収集
+                .apply(observationWebClientCustomizer::customize) // http clientのメトリクスを収集
                 .build();
     }
 }

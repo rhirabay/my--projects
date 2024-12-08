@@ -15,9 +15,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @RequestMapping("/objectMapper")
 public class ObjectMapperController {
-    private RestTemplate restTemplate = new RestTemplateBuilder()
-            .rootUri("http://localhost:8080")
-            .build();
+    private RestTemplate restTemplate =
+            new RestTemplateBuilder().rootUri("http://localhost:8080").build();
 
     @GetMapping("/client")
     public ClientResponse client() {
@@ -47,8 +46,7 @@ public class ObjectMapperController {
 
     @Value
     public static class Message {
-        @JsonValue
-        private String value;
+        @JsonValue private String value;
 
         public static Message of(String value) {
             return new Message(value);

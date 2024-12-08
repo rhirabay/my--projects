@@ -1,5 +1,6 @@
 package hirabay.webmvc.controller.resolver;
 
+import java.lang.reflect.Field;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -8,8 +9,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import java.lang.reflect.Field;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,8 +26,8 @@ public class RequestParamAnnotatedArgumentResolver implements HandlerMethodArgum
             MethodParameter parameter,
             ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
-            WebDataBinderFactory binderFactory
-    ) throws Exception {
+            WebDataBinderFactory binderFactory)
+            throws Exception {
         var clazz = parameter.getParameterType();
         var constructor = clazz.getConstructor();
         var resolvedArgument = constructor.newInstance();

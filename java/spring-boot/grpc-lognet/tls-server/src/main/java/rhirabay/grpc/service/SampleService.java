@@ -10,9 +10,8 @@ import rhirabay.grpc.sample.GreetResponse;
 public class SampleService extends GreetGrpc.GreetImplBase {
     @Override
     public void greeting(GreetRequest request, StreamObserver<GreetResponse> responseObserver) {
-        GreetResponse response = GreetResponse.newBuilder()
-                .setMessage("Hello, " + request.getName() + ".")
-                .build();
+        GreetResponse response =
+                GreetResponse.newBuilder().setMessage("Hello, " + request.getName() + ".").build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
