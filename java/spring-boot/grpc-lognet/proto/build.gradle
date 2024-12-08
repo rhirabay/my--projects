@@ -42,3 +42,7 @@ publishing {
         }
     }
 }
+
+//rewrite {
+//    activeRecipe('springboot.migration')
+//}

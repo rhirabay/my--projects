@@ -1,15 +1,15 @@
 package hirabay.webflux;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import hirabay.webflux.infrastructure.SampleApiClient;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.SneakyThrows;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,21 +26,22 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
+@WireMockTest
 public class ErrorResponseMappingTest {
-    private static MockWebServer mockServer;
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private WebClient webClient;
     private WebClient webClientWithErrorHandler;
 
     @BeforeEach
-    void beforeEach() {
+    void beforeEach(WireMockRuntimeInfo wmRuntimeInfo) {
+        int port = wmRuntimeInfo.getHttpPort();
         this.webClient = WebClient.builder()
-                .baseUrl("http://localhost:" + mockServer.getPort())
+                .baseUrl("http://localhost:" + port)
                 .build();
 
         this.webClientWithErrorHandler = WebClient.builder()
-                .baseUrl("http://localhost:" + mockServer.getPort())
+                .baseUrl("http://localhost:" + port)
                 .filter(ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
                     if (clientResponse.statusCode().is4xxClientError() ||
                             clientResponse.statusCode().is5xxServerError()) {
@@ -54,30 +55,17 @@ public class ErrorResponseMappingTest {
                 .build();
     }
 
-    @BeforeAll
-    static void startMock() throws IOException {
-        mockServer = new MockWebServer();
-        mockServer.start();
-    }
-
-    @AfterAll
-    static void shutdownMock() throws IOException {
-        mockServer.shutdown();
-    }
-
     @Test
     @SneakyThrows
     void test() {
+
         // Mockサーバのレスポンスを設定する
         var responseBody = new SampleResponse();
         responseBody.setMessage("Hello, world.");
-
-        var mockedResponse = new MockResponse()
-                .setResponseCode(500)
-                .setBody(objectMapper.writeValueAsString(responseBody))
-                .addHeader("Content-Type", "application/json");
-        mockServer.enqueue(mockedResponse);
-        mockServer.enqueue(mockedResponse);
+        WireMock.stubFor(WireMock.get("/sample")
+                .willReturn(WireMock.serverError()
+                        .withHeader("Content-Type", "application/json")
+                        .withBody(objectMapper.writeValueAsString(responseBody))));
 
         // リクエスト送信
         var actual = this.webClient.get()
