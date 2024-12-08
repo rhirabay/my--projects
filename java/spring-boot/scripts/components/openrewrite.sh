@@ -16,9 +16,18 @@ function checkEnvironment() {
       echo "OPENREWRITE_REWRITE_SPRING_LIB_VERSION is not set."
       exit 1
     fi
+    if [ -z "${sed_cmd}" ]; then
+      sed_cmd=sed
+      if [ $(uname) = 'Darwin' ]; then
+        which gsed
+        if [ $? -ne 0 ]; then echo 'Please install gsed.'; exit 1; fi
+        sed_cmd=gsed
+      fi
+    fi
 }
 
 function cleanOpenRewrite() {
+  build_gradle_files=($(find . -name build.gradle))
   for build_gradle_file in ${build_gradle_files[@]}; do
     # rewrite.yml削除
     rm $(dirname ${build_gradle_file})/rewrite.yml
@@ -41,6 +50,7 @@ function cleanOpenRewrite() {
 }
 
 function setupOpenRewrite() {
+    build_gradle_files=($(find . -name build.gradle))
     for build_gradle_file in ${build_gradle_files[@]}; do
       # pluginブロックがない場合はスキップ
       grep "^plugins" ${build_gradle_file}
