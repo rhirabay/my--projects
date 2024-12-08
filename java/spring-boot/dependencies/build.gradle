@@ -22,7 +22,8 @@ dependencies {
 
         // cf. https://github.com/Ninja-Squad/springmockk
         // https://mvnrepository.com/artifact/com.ninja-squad/springmockk
-        api 'com.ninja-squad:springmockk:3.1.1'
+        // https://github.com/Ninja-Squad/springmockk/releases
+        api 'com.ninja-squad:springmockk:4.0.2'
 
         // cf. https://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/#requirements
         def mybatisVersion = '3.0.3'
@@ -30,6 +31,7 @@ dependencies {
         api "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:${mybatisVersion}"
 
         // UserAgent parser
+        // https://mvnrepository.com/artifact/com.github.ua-parser/uap-java
         api 'com.github.ua-parser:uap-java:1.6.1'
 
         def springdocVersion = '2.6.0'
@@ -38,8 +40,8 @@ dependencies {
     }
 
     // BOM
-    api platform('org.springframework.boot:spring-boot-dependencies:3.3.4')
-    api platform('org.springframework.cloud:spring-cloud-dependencies:2023.0.+')
+    api platform('org.springframework.boot:spring-boot-dependencies:3.4.0')
+    api platform('org.springframework.cloud:spring-cloud-dependencies:2024.0.0')
 }
 
 publishing {
