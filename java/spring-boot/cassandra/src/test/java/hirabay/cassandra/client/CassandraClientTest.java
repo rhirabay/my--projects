@@ -11,16 +11,18 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 class CassandraClientTest {
     @Container
-    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
-            .withInitScript("initial.cql")
-            .withExposedPorts(9042);
+    public static CassandraContainer cassandra =
+            new CassandraContainer("cassandra:3.11.2")
+                    .withInitScript("initial.cql")
+                    .withExposedPorts(9042);
 
     @Test
     void test() throws Exception {
-        CqlSession cqlSession = CqlSession.builder()
-                .addContactPoint(cassandra.getContactPoint())
-                .withLocalDatacenter(cassandra.getLocalDatacenter())
-                .build();
+        CqlSession cqlSession =
+                CqlSession.builder()
+                        .addContactPoint(cassandra.getContactPoint())
+                        .withLocalDatacenter(cassandra.getLocalDatacenter())
+                        .build();
         var template = new CassandraTemplate(cqlSession);
         var actual = template.select("SELECT * FROM sample.t_sample", Sample.class);
 
