@@ -31,6 +31,9 @@ done
 
 # 「import org.testcontainers.containers.CassandraContainer;」を「import org.testcontainers.cassandra.CassandraContainer;」に変更
 grep -rl "import org.testcontainers.containers.CassandraContainer;" . | grep ".java$" | while read -r file; do
-    echo "Found in: $file"
+    echo "migration CassandraContainer"
+    echo "  file: $file"
+    echo "    before: import org.testcontainers.containers.CassandraContainer;"
+    echo "    after: import org.testcontainers.cassandra.CassandraContainer;"
     gsed -i 's/import org.testcontainers.containers.CassandraContainer;/import org.testcontainers.cassandra.CassandraContainer;/g' "${file}"
 done
