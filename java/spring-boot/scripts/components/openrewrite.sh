@@ -30,21 +30,21 @@ function cleanOpenRewrite() {
   build_gradle_files=($(find . -name build.gradle))
   for build_gradle_file in ${build_gradle_files[@]}; do
     # rewrite.yml削除
-    rm $(dirname ${build_gradle_file})/rewrite.yml
+    rm $(dirname ${build_gradle_file})/rewrite.yml 2>/dev/null 1>/dev/null
     # 依存ライブラリ削除
     dependencies_block_start=$(${sed_cmd} -n '/^dependencies {/=' ${build_gradle_file})
     dependencies_block_end=$(${sed_cmd} -n '/^}/=' ${build_gradle_file} | awk '{ if ($0 >= '${dependencies_block_start}') print $0 }' | head -1)
-    ${sed_cmd} -i "${dependencies_block_start},${dependencies_block_end}{/[ ]*rewrite/d;}" ${build_gradle_file}
+    ${sed_cmd} -i "${dependencies_block_start},${dependencies_block_end}{/[ ]*rewrite/d;}" ${build_gradle_file} > /dev/null
     # プラグイン削除
     plugin_block_start=$(${sed_cmd} -n '/^plugins {/=' ${build_gradle_file})
     plugin_block_end=$(${sed_cmd} -n '/^}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
-    ${sed_cmd} -i "${plugin_block_start},${plugin_block_end}{/.*rewrite/d;}" ${build_gradle_file}
+    ${sed_cmd} -i "${plugin_block_start},${plugin_block_end}{/.*rewrite/d;}" ${build_gradle_file} > /dev/null
     # rewriteブロック削除
-    grep "^rewrite" ${build_gradle_file}
+    grep "^rewrite" ${build_gradle_file} > /dev/null
     if [ $? -eq 0 ]; then
       rewrite_block_start=$(${sed_cmd} -n '/^rewrite {/=' ${build_gradle_file})
       rewrite_block_end=$(${sed_cmd} -n '/^}/=' ${build_gradle_file} | awk '{ if ($0 >= '$rewrite_block_start') print $0 }' | head -1)
-      ${sed_cmd} -i "${rewrite_block_start},${rewrite_block_end}d" ${build_gradle_file}
+      ${sed_cmd} -i "${rewrite_block_start},${rewrite_block_end}d" ${build_gradle_file} > /dev/null
     fi
   done
 }
@@ -53,12 +53,12 @@ function setupOpenRewrite() {
     build_gradle_files=($(find . -name build.gradle))
     for build_gradle_file in ${build_gradle_files[@]}; do
       # pluginブロックがない場合はスキップ
-      grep "^plugins" ${build_gradle_file}
+      grep "^plugins" ${build_gradle_file} > /dev/null
       if [ $? -ne 0 ]; then
         continue
       fi
       # dependenciesブロックがない場合はスキップ
-      grep "^dependencies" ${build_gradle_file}
+      grep "^dependencies" ${build_gradle_file} > /dev/null
       if [ $? -ne 0 ]; then
         continue
       fi
@@ -68,12 +68,11 @@ function setupOpenRewrite() {
       # プラグイン追加
       plugin_block_start=$(${sed_cmd} -n '/^plugins {/=' ${build_gradle_file})
       plugin_block_end=$(${sed_cmd} -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
-      ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('${OPENREWRITE_PLUGIN_VERSION}')" ${build_gradle_file}
+      ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('${OPENREWRITE_PLUGIN_VERSION}')" ${build_gradle_file} > /dev/null
       # 依存を追加
       dependencies_block_start=$(${sed_cmd} -n '/^dependencies {/=' ${build_gradle_file})
       dependencies_block_end=$(${sed_cmd} -n '/^}/=' ${build_gradle_file} | awk '{ if ($0 >= '${dependencies_block_start}') print $0 }' | head -1)
-      grep 'rewrite-spring' ${build_gradle_file}
-      ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:${OPENREWRITE_REWRITE_SPRING_LIB_VERSION}')" ${build_gradle_file}
+      ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:${OPENREWRITE_REWRITE_SPRING_LIB_VERSION}')" ${build_gradle_file} > /dev/null
       dependencies_block_end=$((${dependencies_block_end} + 1))
 
       # rewriteブロックを追加
