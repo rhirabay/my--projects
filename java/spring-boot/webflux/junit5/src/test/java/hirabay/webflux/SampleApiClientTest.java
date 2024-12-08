@@ -1,44 +1,28 @@
 package hirabay.webflux;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import hirabay.webflux.infrastructure.SampleApiClient;
 import lombok.SneakyThrows;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.test.StepVerifier;
 
-import java.io.IOException;
-
-
+@WireMockTest
 public class SampleApiClientTest {
-    private static MockWebServer mockServer;
     private ObjectMapper objectMapper = new ObjectMapper();
-
     private SampleApiClient sampleApiClient;
 
     @BeforeEach
-    void beforeEach() {
+    void beforeEach(WireMockRuntimeInfo wmRuntimeInfo) {
         var webClient = WebClient.builder()
-                .baseUrl("http://localhost:" + mockServer.getPort())
+                .baseUrl(wmRuntimeInfo.getHttpBaseUrl())
                 .build();
 
         sampleApiClient = new SampleApiClient(webClient);
-    }
-
-    @BeforeAll
-    static void startMock() throws IOException {
-        mockServer = new MockWebServer();
-        mockServer.start();
-    }
-
-    @AfterAll
-    static void shutdownMock() throws IOException {
-        mockServer.shutdown();
     }
 
     @Test
@@ -47,10 +31,10 @@ public class SampleApiClientTest {
         // Mockサーバのレスポンスを設定する
         var responseBody = new SampleApiClient.SampleResponse();
         responseBody.setMessage("Hello, world.");
-        var mockedResponse = new MockResponse()
-                .setBody(objectMapper.writeValueAsString(responseBody))
-                .addHeader("Content-Type", "application/json");
-        mockServer.enqueue(mockedResponse);
+        WireMock.stubFor(WireMock.get("/sample")
+                .willReturn(WireMock.aResponse()
+                        .withBody(objectMapper.writeValueAsString(responseBody))
+                        .withHeader("Content-Type", "application/json")));
 
         // リクエスト送信
         var actual = sampleApiClient.sample();

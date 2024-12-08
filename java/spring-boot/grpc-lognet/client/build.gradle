@@ -26,10 +26,8 @@ dependencies {
 //	implementation 'io.github.lognet:grpc-client-spring-boot-starter:4.6.0'
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-configuration-processor'
-
-	// https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
-	implementation 'jakarta.validation:jakarta.validation-api'
 
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

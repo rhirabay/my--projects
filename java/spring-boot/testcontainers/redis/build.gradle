@@ -42,3 +42,4 @@ tasks.named('test') {
 bootRun {
     classpath += configurations.bootRunOnly
 }
+
