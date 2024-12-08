@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 
 @Data
 public class Order {
-    @Id
-    private Integer id;
+    @Id private Integer id;
     private Integer customerId;
 }

@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GithubcopilotApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(GithubcopilotApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(GithubcopilotApplication.class, args);
+    }
 }

@@ -12,7 +12,8 @@ public class SampleApiClient {
     private final WebClient webClient;
 
     public Mono<String> sample() {
-        return webClient.get()
+        return webClient
+                .get()
                 .uri("/sample")
                 .retrieve()
                 .bodyToMono(SampleResponse.class)

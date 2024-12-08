@@ -11,9 +11,7 @@ public class SampleClient {
     private final GreetGrpc.GreetBlockingStub greetBlockingStub;
 
     public String greeting(String name) {
-        var request = GreetRequest.newBuilder()
-                .setName(name)
-                .build();
+        var request = GreetRequest.newBuilder().setName(name).build();
         var response = this.greetBlockingStub.greeting(request);
         return response.getMessage();
     }

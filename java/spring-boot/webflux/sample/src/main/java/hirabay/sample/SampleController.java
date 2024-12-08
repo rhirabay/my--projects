@@ -15,8 +15,7 @@ public class SampleController {
     public String sample(
             @CookieValue(value = "key", required = false) String cookie,
             @RequestHeader(value = "header-key", required = false) String header,
-            @RequestHeader(value = "user-agent", required = false) String userAgent
-    ) {
+            @RequestHeader(value = "user-agent", required = false) String userAgent) {
         log.info("cookie: {}, header: {}, userAgent: {}", cookie, header, userAgent);
         return "sample";
     }

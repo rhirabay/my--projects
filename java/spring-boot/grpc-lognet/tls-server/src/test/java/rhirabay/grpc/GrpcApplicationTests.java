@@ -1,8 +1,9 @@
 package rhirabay.grpc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.inprocess.InProcessChannelBuilder;
 import org.junit.jupiter.api.Test;
 import org.lognet.springboot.grpc.context.LocalRunningGrpcPort;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,29 +11,21 @@ import org.springframework.test.context.ActiveProfiles;
 import rhirabay.grpc.sample.GreetGrpc;
 import rhirabay.grpc.sample.GreetRequest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@SpringBootTest(
-		classes = GrpcApplication.class)
+@SpringBootTest(classes = GrpcApplication.class)
 @ActiveProfiles("test")
 class GrpcApplicationTests {
-	@LocalRunningGrpcPort
-	private int runningPort;
+    @LocalRunningGrpcPort private int runningPort;
 
-	@Test
-	void test() {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", runningPort)
-				.usePlaintext()
-				.build();
+    @Test
+    void test() {
+        ManagedChannel channel =
+                ManagedChannelBuilder.forAddress("localhost", runningPort).usePlaintext().build();
 
-		var stub = GreetGrpc.newBlockingStub(channel);
+        var stub = GreetGrpc.newBlockingStub(channel);
 
-		var request = GreetRequest.newBuilder()
-				.setName("Ryo")
-				.build();
-		var actual = stub.greeting(request).getMessage();
-		var expected = "Hello, Ryo.";
-		assertThat(actual).isEqualTo(expected);
-	}
-
+        var request = GreetRequest.newBuilder().setName("Ryo").build();
+        var actual = stub.greeting(request).getMessage();
+        var expected = "Hello, Ryo.";
+        assertThat(actual).isEqualTo(expected);
+    }
 }

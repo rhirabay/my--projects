@@ -13,13 +13,12 @@ public class Application {
     }
 
     /**
-     * You have to register RestTemplate as a bean so that the interceptors get injected. If you create a RestTemplate instance with a new keyword, the instrumentation does NOT work.
-     * cf. https://docs.spring.io/spring-cloud-sleuth/docs/current-SNAPSHOT/reference/html/integrations.html#sleuth-http-client-integration
+     * You have to register RestTemplate as a bean so that the interceptors get injected. If you
+     * create a RestTemplate instance with a new keyword, the instrumentation does NOT work. cf.
+     * https://docs.spring.io/spring-cloud-sleuth/docs/current-SNAPSHOT/reference/html/integrations.html#sleuth-http-client-integration
      */
     @Bean
     public RestTemplate restTemplate() {
-        return new RestTemplateBuilder()
-                .rootUri("http://localhost:8080")
-                .build();
+        return new RestTemplateBuilder().rootUri("http://localhost:8080").build();
     }
 }

@@ -1,6 +1,7 @@
 package hirabay.webmvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
@@ -8,8 +9,6 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
-
-import java.util.HashMap;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -20,9 +19,11 @@ public class RequestParamArgumentResolver implements HandlerMethodArgumentResolv
     // このメソッドの戻り値がtrueの場合だけ、resolveArgumentが実行される
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-//        parameter.getParameterAnnotation(<クラス>.class)
+        //        parameter.getParameterAnnotation(<クラス>.class)
         var supportsParameter = parameter.getParameterType().getPackageName().startsWith("hirabay");
-        log.info("parameter.getParameterType().getPackageName(): {}", parameter.getParameterType().getPackageName());
+        log.info(
+                "parameter.getParameterType().getPackageName(): {}",
+                parameter.getParameterType().getPackageName());
         log.info("supportsParameter: {}", supportsParameter);
         return supportsParameter;
     }
@@ -33,8 +34,8 @@ public class RequestParamArgumentResolver implements HandlerMethodArgumentResolv
             MethodParameter parameter,
             ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
-            WebDataBinderFactory binderFactory
-    ) throws Exception {
+            WebDataBinderFactory binderFactory)
+            throws Exception {
         var clazz = parameter.getParameterType();
         var paramIterator = webRequest.getParameterNames();
         var paramMap = new HashMap<String, String>();

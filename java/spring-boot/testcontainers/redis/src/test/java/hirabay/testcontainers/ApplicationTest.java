@@ -1,5 +1,7 @@
 package hirabay.testcontainers;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import hirabay.testcontainers.infrastructure.RedisClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,16 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-
 @Testcontainers
 @SpringBootTest
 class ApplicationTest {
-    @Autowired
-    private RedisClient redisClient;
-
+    @Autowired private RedisClient redisClient;
 
     // テストコンテナを生成（裏でDockerコンテナが起動する）
     @Container
-    public static  GenericContainer redis = new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
-            .withExposedPorts(6379);
+    public static GenericContainer redis =
+            new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
+                    .withExposedPorts(6379);
 
     // propertiesを更新
     @DynamicPropertySource

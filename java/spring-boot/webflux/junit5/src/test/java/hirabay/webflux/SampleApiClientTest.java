@@ -18,9 +18,7 @@ public class SampleApiClientTest {
 
     @BeforeEach
     void beforeEach(WireMockRuntimeInfo wmRuntimeInfo) {
-        var webClient = WebClient.builder()
-                .baseUrl(wmRuntimeInfo.getHttpBaseUrl())
-                .build();
+        var webClient = WebClient.builder().baseUrl(wmRuntimeInfo.getHttpBaseUrl()).build();
 
         sampleApiClient = new SampleApiClient(webClient);
     }
@@ -31,16 +29,16 @@ public class SampleApiClientTest {
         // Mockサーバのレスポンスを設定する
         var responseBody = new SampleApiClient.SampleResponse();
         responseBody.setMessage("Hello, world.");
-        WireMock.stubFor(WireMock.get("/sample")
-                .willReturn(WireMock.aResponse()
-                        .withBody(objectMapper.writeValueAsString(responseBody))
-                        .withHeader("Content-Type", "application/json")));
+        WireMock.stubFor(
+                WireMock.get("/sample")
+                        .willReturn(
+                                WireMock.aResponse()
+                                        .withBody(objectMapper.writeValueAsString(responseBody))
+                                        .withHeader("Content-Type", "application/json")));
 
         // リクエスト送信
         var actual = sampleApiClient.sample();
 
-        StepVerifier.create(actual)
-                .expectNext("Hello, world.")
-                .verifyComplete();
+        StepVerifier.create(actual).expectNext("Hello, world.").verifyComplete();
     }
 }

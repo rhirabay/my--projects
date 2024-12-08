@@ -17,9 +17,7 @@ public class SampleController {
     }
 
     @GetMapping("/sample/resolver")
-    public String resolver(
-            SampleModel sampleModel
-    ) {
+    public String resolver(SampleModel sampleModel) {
         return sampleModel.getKey();
     }
 }

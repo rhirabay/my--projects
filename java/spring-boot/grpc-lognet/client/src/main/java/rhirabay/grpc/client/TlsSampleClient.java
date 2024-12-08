@@ -10,7 +10,7 @@ import rhirabay.grpc.sample.GreetRequest;
 public class TlsSampleClient {
     private final GreetGrpc.GreetBlockingStub tlsGreetBlockingStub;
 
-    public String greeting(String name){
+    public String greeting(String name) {
         var request = GreetRequest.newBuilder().setName(name).build();
         var response = this.tlsGreetBlockingStub.greeting(request);
         return response.getMessage();

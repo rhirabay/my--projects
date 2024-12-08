@@ -16,21 +16,24 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @SpringBootTest
 class FT {
-    @Autowired
-    private CassandraOperations cassandraOperations;
-
+    @Autowired private CassandraOperations cassandraOperations;
 
     // テストコンテナを生成（裏でDockerコンテナが起動する）
     @Container
-    public static CassandraContainer cassandra = new CassandraContainer("cassandra:3.11.2")
-            .withInitScript("initial.cql") // 初期クエリ
-            .withExposedPorts(9042);
+    public static CassandraContainer cassandra =
+            new CassandraContainer("cassandra:3.11.2")
+                    .withInitScript("initial.cql") // 初期クエリ
+                    .withExposedPorts(9042);
 
     // propertiesを更新
     @DynamicPropertySource
     static void properties(DynamicPropertyRegistry registry) {
         registry.add("spring.cassandra.keyspace-name", () -> "sample");
-        var contactPoint = "%s:%d".formatted(cassandra.getContactPoint().getHostName(), cassandra.getContactPoint().getPort());
+        var contactPoint =
+                "%s:%d"
+                        .formatted(
+                                cassandra.getContactPoint().getHostName(),
+                                cassandra.getContactPoint().getPort());
         registry.add("spring.cassandra.contact-points", () -> contactPoint);
         registry.add("spring.cassandra.local-datacenter", () -> cassandra.getLocalDatacenter());
     }
@@ -40,5 +43,4 @@ class FT {
         var selected = cassandraOperations.select("SELECT * from sample.t_sample", Sample.class);
         log.info("selected: {}", selected);
     }
-
 }

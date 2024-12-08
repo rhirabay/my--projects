@@ -2,13 +2,12 @@ package hirabay.monitoring.controller;
 
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.concurrent.TimeUnit;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,8 +35,7 @@ public class SampleController {
             // メトリクス名
             value = "timed.metrics",
             // パーセンタイルを計測したい場合に指定（例では50%ileと99%ileを指定）
-            percentiles = {0.5, 0.99}
-    )
+            percentiles = {0.5, 0.99})
     @GetMapping("/timed")
     public String timed() {
         return "timed";
@@ -45,8 +43,7 @@ public class SampleController {
 
     @Counted(
             // メトリクス名
-            value = "counted.metrics"
-    )
+            value = "counted.metrics")
     @GetMapping("/counted")
     public String counted() {
         return "counted";

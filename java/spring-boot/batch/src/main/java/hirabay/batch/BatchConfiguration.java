@@ -8,9 +8,7 @@ import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.job.builder.JobBuilder;
-import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.launch.support.TaskExecutorJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.builder.StepBuilder;
@@ -22,7 +20,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Slf4j
 @Configuration
-@EnableBatchProcessing(dataSourceRef = "metaDataSource", transactionManagerRef = "metaTransactionManager")
+@EnableBatchProcessing(
+        dataSourceRef = "metaDataSource",
+        transactionManagerRef = "metaTransactionManager")
 @RequiredArgsConstructor
 public class BatchConfiguration {
 
@@ -32,14 +32,16 @@ public class BatchConfiguration {
     }
 
     @Bean
-    public Step helloWorldStep(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+    public Step helloWorldStep(
+            JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new StepBuilder("helloWorldStep", jobRepository)
                 .tasklet(helloWorldTasklet(), transactionManager)
                 .build();
     }
 
     @Bean
-    public Job helloWorldJob(JobRepository jobRepository, PlatformTransactionManager transactionManager) {
+    public Job helloWorldJob(
+            JobRepository jobRepository, PlatformTransactionManager transactionManager) {
         return new JobBuilder("helloWorldJob", jobRepository)
                 .incrementer(new RunIdIncrementer())
                 .flow(helloWorldStep(jobRepository, transactionManager))
@@ -50,7 +52,8 @@ public class BatchConfiguration {
     @StepScope
     public static class HelloWorldTasklet implements Tasklet {
         @Override
-        public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+        public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
+                throws Exception {
             log.info("Hello world");
 
             return RepeatStatus.FINISHED;

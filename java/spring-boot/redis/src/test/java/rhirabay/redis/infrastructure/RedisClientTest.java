@@ -1,5 +1,7 @@
 package rhirabay.redis.infrastructure;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
@@ -10,20 +12,20 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @Testcontainers
 class RedisClientTest {
     // テストコンテナを生成（裏でDockerコンテナが起動する）
     @Container
-    public static GenericContainer redis = new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
-            .withExposedPorts(6379);
+    public static GenericContainer redis =
+            new GenericContainer(DockerImageName.parse("redis:5.0.3-alpine"))
+                    .withExposedPorts(6379);
 
     private RedisClient redisClient;
 
     @BeforeEach
     void setup() {
-        var redisConfiguration = new RedisStandaloneConfiguration(redis.getHost(), redis.getMappedPort(6379));
+        var redisConfiguration =
+                new RedisStandaloneConfiguration(redis.getHost(), redis.getMappedPort(6379));
         var jedisConnectionFactory = new JedisConnectionFactory(redisConfiguration);
         jedisConnectionFactory.afterPropertiesSet();
 

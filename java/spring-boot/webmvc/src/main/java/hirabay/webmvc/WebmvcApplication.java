@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WebmvcApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(WebmvcApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(WebmvcApplication.class, args);
+    }
 }

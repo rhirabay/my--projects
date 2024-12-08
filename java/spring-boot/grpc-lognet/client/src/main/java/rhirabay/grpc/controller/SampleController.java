@@ -14,12 +14,14 @@ public class SampleController {
     private final TlsSampleClient tlsSampleClient;
 
     @GetMapping("/greeting")
-    public String greeting(@RequestParam(defaultValue = "anonymous", required = false) String name) {
+    public String greeting(
+            @RequestParam(defaultValue = "anonymous", required = false) String name) {
         return sampleClient.greeting(name);
     }
 
     @GetMapping("/tls-greeting")
-    public String tlsGreeting(@RequestParam(defaultValue = "anonymous", required = false) String name) {
+    public String tlsGreeting(
+            @RequestParam(defaultValue = "anonymous", required = false) String name) {
         return tlsSampleClient.greeting(name);
     }
 }

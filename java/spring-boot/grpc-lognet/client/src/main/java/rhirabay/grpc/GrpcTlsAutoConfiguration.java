@@ -21,8 +21,9 @@ public class GrpcTlsAutoConfiguration {
     ManagedChannel tlsManagedChannel(GrpcProperties grpcProperties) {
         var channelBuilder = ManagedChannelBuilder.forAddress("localhost", 6566);
         var certChain = new FileUrlResource("../cert/server.pem");
-        var sslContext = GrpcSslContexts.forClient().trustManager(certChain.getInputStream()).build();
-        return ((NettyChannelBuilder)channelBuilder)
+        var sslContext =
+                GrpcSslContexts.forClient().trustManager(certChain.getInputStream()).build();
+        return ((NettyChannelBuilder) channelBuilder)
                 .useTransportSecurity()
                 .sslContext(sslContext)
                 .build();
@@ -32,5 +33,4 @@ public class GrpcTlsAutoConfiguration {
     GreetGrpc.GreetBlockingStub tlsGreetBlockingStub(ManagedChannel tlsManagedChannel) {
         return GreetGrpc.newBlockingStub(tlsManagedChannel);
     }
-
 }

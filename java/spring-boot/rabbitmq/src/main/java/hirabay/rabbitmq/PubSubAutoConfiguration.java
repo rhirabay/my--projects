@@ -3,12 +3,11 @@ package hirabay.rabbitmq;
 import hirabay.rabbitmq.domain.SampleMessage;
 import io.micrometer.tracing.Baggage;
 import io.micrometer.tracing.brave.bridge.BraveTracer;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.function.Consumer;
 
 @Slf4j
 @Configuration

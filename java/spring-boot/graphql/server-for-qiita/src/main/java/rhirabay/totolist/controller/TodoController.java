@@ -1,5 +1,9 @@
 package rhirabay.totolist.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
@@ -11,29 +15,22 @@ import reactor.core.publisher.Mono;
 import rhirabay.totolist.model.Project;
 import rhirabay.totolist.model.Todo;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
 @Slf4j
 @Controller
 public class TodoController {
-    private static List<Todo> TODO_LIST = new ArrayList<>(Arrays.asList(
-            new Todo("1", "project1-task1"),
-            new Todo("2", "project1-task2"),
-            new Todo("3", "project1-task3"),
-            new Todo("4", "project2-task1"),
-            new Todo("5", "project2-task2"),
-            new Todo("6", "project2-task3")
-    ));
+    private static List<Todo> TODO_LIST =
+            new ArrayList<>(
+                    Arrays.asList(
+                            new Todo("1", "project1-task1"),
+                            new Todo("2", "project1-task2"),
+                            new Todo("3", "project1-task3"),
+                            new Todo("4", "project2-task1"),
+                            new Todo("5", "project2-task2"),
+                            new Todo("6", "project2-task3")));
 
     @QueryMapping
     Todo todo(@Argument String id) {
-        return TODO_LIST.stream()
-                .filter(todo -> todo.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+        return TODO_LIST.stream().filter(todo -> todo.getId().equals(id)).findFirst().orElse(null);
     }
 
     @QueryMapping
@@ -41,10 +38,8 @@ public class TodoController {
         return Flux.fromStream(TODO_LIST.stream());
     }
 
-    private static List<Project> PROJECT_LIST = Arrays.asList(
-            new Project("1", "project1"),
-            new Project("2", "project2")
-    );
+    private static List<Project> PROJECT_LIST =
+            Arrays.asList(new Project("1", "project1"), new Project("2", "project2"));
 
     @QueryMapping
     Flux<Project> projects() {
@@ -54,9 +49,7 @@ public class TodoController {
     @SchemaMapping(typeName = "Project")
     Flux<Todo> todoList(Project project) {
         return Flux.fromStream(
-                TODO_LIST.stream()
-                        .filter(todo -> todo.getTitle().startsWith(project.getName()))
-        );
+                TODO_LIST.stream().filter(todo -> todo.getTitle().startsWith(project.getName())));
     }
 
     @MutationMapping

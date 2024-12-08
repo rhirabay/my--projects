@@ -1,14 +1,12 @@
 package hirabay.sample;
 
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
-
-import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,9 +30,12 @@ public class WebClientController {
                 .baseUrl("http://localhost:8080")
                 .build()
                 .get()
-                .uri(uriBuilder -> uriBuilder.path("/api/sample")
-                        .queryParam("uuid", UUID.randomUUID().toString())
-                        .build())
+                .uri(
+                        uriBuilder ->
+                                uriBuilder
+                                        .path("/api/sample")
+                                        .queryParam("uuid", UUID.randomUUID().toString())
+                                        .build())
                 .retrieve()
                 .bodyToMono(String.class);
     }
@@ -52,9 +53,11 @@ public class WebClientController {
 
     @GetMapping("/webclient/ok2")
     public Mono<String> ok2() {
-        var uri = UriComponentsBuilder.fromPath("/api/sample")
-                .queryParam("uuid", "{uuid}")
-                .build().toUriString();
+        var uri =
+                UriComponentsBuilder.fromPath("/api/sample")
+                        .queryParam("uuid", "{uuid}")
+                        .build()
+                        .toUriString();
 
         return webClientBuilder
                 .baseUrl("http://localhost:8080")

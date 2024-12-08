@@ -16,9 +16,7 @@ public class SampleController {
     @GetMapping("/**")
     public String sample() {
         log.info("sample request received.");
-        var sampleMessage = SampleMessage.builder()
-                .greeting("Hello")
-                .build();
+        var sampleMessage = SampleMessage.builder().greeting("Hello").build();
         sampleProducer.send(sampleMessage);
 
         return "queued";

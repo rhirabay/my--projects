@@ -12,7 +12,7 @@ public class SampleArgumentResolver implements HandlerMethodArgumentResolver {
     // このメソッドの戻り値がtrueの場合だけ、resolveArgumentが実行される
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-//        parameter.getParameterAnnotation(<クラス>.class)
+        //        parameter.getParameterAnnotation(<クラス>.class)
         return parameter.getParameterType().equals(SampleModel.class);
     }
 
@@ -22,8 +22,8 @@ public class SampleArgumentResolver implements HandlerMethodArgumentResolver {
             MethodParameter parameter,
             ModelAndViewContainer mavContainer,
             NativeWebRequest webRequest,
-            WebDataBinderFactory binderFactory
-    ) throws Exception {
+            WebDataBinderFactory binderFactory)
+            throws Exception {
         var name = webRequest.getHeader("key");
         // 引数で受け取りたいクラスを返す
         return new SampleModel(name);

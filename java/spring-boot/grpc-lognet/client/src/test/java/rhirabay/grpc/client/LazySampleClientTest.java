@@ -1,5 +1,9 @@
 package rhirabay.grpc.client;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,16 +12,10 @@ import org.mockito.MockitoAnnotations;
 import rhirabay.grpc.sample.GreetGrpc;
 import rhirabay.grpc.sample.GreetResponse;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 class LazySampleClientTest {
-    @InjectMocks
-    SampleClient sampleClient;
+    @InjectMocks SampleClient sampleClient;
 
-    @Mock
-    GreetGrpc.GreetBlockingStub greetBlockingStub;
+    @Mock GreetGrpc.GreetBlockingStub greetBlockingStub;
 
     @BeforeEach
     void init() {
@@ -26,9 +24,7 @@ class LazySampleClientTest {
 
     @Test
     void test() {
-        var mockedResponse = GreetResponse.newBuilder()
-                .setMessage("Hello.")
-                .build();
+        var mockedResponse = GreetResponse.newBuilder().setMessage("Hello.").build();
         when(greetBlockingStub.greeting(any())).thenReturn(mockedResponse);
         var actual = sampleClient.greeting("ryo");
         var expected = "Hello.";
