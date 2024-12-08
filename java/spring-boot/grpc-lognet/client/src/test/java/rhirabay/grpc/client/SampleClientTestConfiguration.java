@@ -22,7 +22,7 @@ public class SampleClientTestConfiguration {
      */
     @Bean
     Function<String, String> serviceImpl() {
-        return str -> str;
+        return str -> "dummy message";
     }
 
     @GRpcService
