@@ -1,5 +1,12 @@
 #!/bin/bash
 
+export sed_cmd=sed
+if [ $(uname) = 'Darwin' ]; then
+    which gsed
+    if [ $? -ne 0 ]; then echo 'Please install gsed.'; exit 1; fi
+    export sed_cmd=gsed
+fi
+
 # スクリプトのディレクトリを取得
 SCRIPT_DIR=$(dirname "$0")
 COMPONENTS_DIR="${SCRIPT_DIR}/../components"

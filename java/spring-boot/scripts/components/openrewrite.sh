@@ -17,11 +17,11 @@ function checkEnvironment() {
       exit 1
     fi
     if [ -z "${sed_cmd}" ]; then
-      sed_cmd=sed
+      export sed_cmd=sed
       if [ $(uname) = 'Darwin' ]; then
         which gsed
         if [ $? -ne 0 ]; then echo 'Please install gsed.'; exit 1; fi
-        sed_cmd=gsed
+        export sed_cmd=gsed
       fi
     fi
 }
@@ -66,20 +66,15 @@ function setupOpenRewrite() {
       # ファイル追加
       cp ${REWRITE_YML_FILE} $(dirname ${build_gradle_file})/rewrite.yml
       # プラグイン追加
-      grep 'org.openrewrite.rewrite' ${build_gradle_file}
-      if [ $? -ne 0 ]; then
-        plugin_block_start=$(${sed_cmd} -n '/^plugins {/=' ${build_gradle_file})
-        plugin_block_end=$(${sed_cmd} -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
-        ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('${OPENREWRITE_PLUGIN_VERSION}')" ${build_gradle_file}
-      fi
+      plugin_block_start=$(${sed_cmd} -n '/^plugins {/=' ${build_gradle_file})
+      plugin_block_end=$(${sed_cmd} -n '/}/=' ${build_gradle_file} | awk '{ if ($0 >= '$plugin_block_start') print $0 }' | head -1)
+      ${sed_cmd} -i -e "${plugin_block_end}i \ \ \ \ id('org.openrewrite.rewrite') version('${OPENREWRITE_PLUGIN_VERSION}')" ${build_gradle_file}
       # 依存を追加
       dependencies_block_start=$(${sed_cmd} -n '/^dependencies {/=' ${build_gradle_file})
       dependencies_block_end=$(${sed_cmd} -n '/^}/=' ${build_gradle_file} | awk '{ if ($0 >= '${dependencies_block_start}') print $0 }' | head -1)
       grep 'rewrite-spring' ${build_gradle_file}
-      if [ $? -ne 0 ]; then
-        ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:${OPENREWRITE_REWRITE_SPRING_LIB_VERSION}')" ${build_gradle_file}
-        dependencies_block_end=$((${dependencies_block_end} + 1))
-      fi
+      ${sed_cmd} -i -e "${dependencies_block_end}i \ \ \ \ rewrite('org.openrewrite.recipe:rewrite-spring:${OPENREWRITE_REWRITE_SPRING_LIB_VERSION}')" ${build_gradle_file}
+      dependencies_block_end=$((${dependencies_block_end} + 1))
 
       # rewriteブロックを追加
       echo '' >> ${build_gradle_file}
