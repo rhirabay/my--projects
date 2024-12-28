@@ -12,10 +12,10 @@ import java.util.function.Function;
 public class PutProjectContentFunction implements Function<PutProjectContentFunction.Request, PutProjectContentFunction.Response> {
 
     public record Request(
-            @Description("package名")
-            String packageName,
-            @Description("class名（.javaは不要）")
-            String className,
+            @Description("ディレクトリ")
+            String directory,
+            @Description("ファイル名（要：拡張子）")
+            String filename,
             @Description("クラスの実装内容")
             String content
     ) {
