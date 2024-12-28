@@ -38,7 +38,7 @@ public class CliAutoConfiguration {
 
             var codingResult = new Engineer.CodingResultList();
             for (var plan : planList) {
-                var result = engineer.coding(plan.getTask(), plan.getAssignee(), design, codingResult);
+                var result = engineer.coding(plan.getInstruction(), plan.getAssignee(), design, codingResult);
                 codingResult = Engineer.CodingResultList.merge(codingResult, result);
                 System.out.println("コーディング結果: \n" + codingResult + "\n");
             }

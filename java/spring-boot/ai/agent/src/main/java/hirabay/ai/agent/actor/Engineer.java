@@ -62,15 +62,15 @@ public class Engineer {
                   fields: string[], // フィールド名（公開されているフィールドのみ）
                 }]
                 
-                [実装済みクラス]
-                %s
-                
                 [実装指示]
                 %s
                 
-                [プロジェクト]
+                [プロジェクト全体（実装指示外の内容を含みます）]
                 %s
-                """.formatted(prompt, codingResultList.toString(), request, project);
+                
+                [実装済みクラス]
+                %s
+                """.formatted(prompt, request, project, codingResultList.toString());
 
         return openAiChatClient.chat(customizedPrompt, CodingResultList.class, Set.of(PutProjectContentFunction.class));
     }
