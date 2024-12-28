@@ -61,7 +61,12 @@ public class OpenAiChatClient {
                 .call()
                 .content();
 
-        return objectMapper.readValue(response, responseType);
+        try {
+            return objectMapper.readValue(response, responseType);
+        } catch (Exception ex) {
+            System.out.println("failed to parse json.\n" + response);
+            throw ex;
+        }
     }
 
     @SneakyThrows
