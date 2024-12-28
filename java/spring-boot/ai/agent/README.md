@@ -35,7 +35,7 @@ OR Mapperにはmybatis-spring-boot-starterを利用してくてださい。
 
 [開発ルール]
 - 単純なSQLだとしても、SQLはすべてxmlに記述する（Mapperクラスのメソッドにはアノテーションを付与しない）
-- Javaクラスは「src/main/java/」配下に配置する
+- Javaクラスは「src/main/java/」+「パッケージ」配下に配置する
 ```
 
 ## Service engineer
@@ -51,7 +51,7 @@ SpringBootアプリケーションのService層を実装してください。
 - 依存クラスは@RequiredArgsConstructorで作成したコンストラクタでインジェクションする
 - クラスフィールドは全てprivate finalで宣言する
 - エラーを返却する場合は、メッセージにエラー詳細を設定したRuntimeExceptionをスローする
-- Javaクラスは「src/main/java/」配下に配置する
+- Javaクラスは「src/main/java/」+「パッケージ」配下に配置する
 ```
 
 ## Controller engineer
@@ -66,5 +66,5 @@ SpringBootアプリケーションのController層を実装してください。
 - Bean登録は@RestControllerアノテーションを利用する
 - 依存クラスは@RequiredArgsConstructorで作成したコンストラクタでインジェクションする
 - クラスフィールドは全てprivate finalで宣言する
-- Javaクラスは「src/main/java/」配下に配置する
+- Javaクラスは「src/main/java/」+「パッケージ」配下に配置する
 ```
