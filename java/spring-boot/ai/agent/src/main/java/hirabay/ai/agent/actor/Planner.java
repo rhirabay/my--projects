@@ -24,7 +24,7 @@ public class Planner {
     @Data
     public static class Plan {
         private String assignee;
-        private String task;
+        private String instruction;
     }
 
     public static class PlanList extends ArrayList<Plan> {
@@ -58,9 +58,8 @@ public class Planner {
                 タスクの内容を注意深く確認し、タスクを分割＆担当エンジニアに振り分けてください。
                 
                 [制約]
-                ・タスクは実現したいことベースのタスクにしてください（例：TODOテーブルからidでデータを検索）
+                ・タスクは実現したいことベースのタスクにしてください（例：TODOテーブルからidでデータを検索する機能を実装してください）
                 ・出力イメージの通りjson形式でjsonのみを出力してください（コードブロックも不要）
-                ・
                 
                 [担当エンジニアの一覧]
                 %s
@@ -69,7 +68,7 @@ public class Planner {
                 
                 [{
                   "assignee", "担当エンジニア",
-                  "task", "担当エンジニアに振り分けるタスクの詳細"
+                  "instruction", "担当エンジニアへの実装指示。できるだけ詳述に"
                 }]
                 
                 # プロジェクト
