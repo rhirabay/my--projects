@@ -40,8 +40,9 @@ dependencies {
     }
 
     // BOM
-    api platform('org.springframework.boot:spring-boot-dependencies:3.4.0')
+    api platform('org.springframework.boot:spring-boot-dependencies:3.4.1')
     api platform('org.springframework.cloud:spring-cloud-dependencies:2024.0.0')
+    api platform('org.springframework.ai:spring-ai-bom:1.0.0-M4')
 }
 
 publishing {

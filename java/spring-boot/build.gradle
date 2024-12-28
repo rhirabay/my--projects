@@ -27,6 +27,7 @@ subprojects {
 		apply plugin:  'com.diffplug.spotless'
 
 		repositories {
+			maven { url 'https://repo.spring.io/milestone' }
 			mavenCentral()
 		}
 

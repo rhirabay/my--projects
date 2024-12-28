@@ -1,0 +1,32 @@
+@startuml
+
+actor User
+participant Manager as "Manager(main code)"
+collections Prompts
+participant Planner
+participant Engineer
+
+== 初期化 ==
+
+Manager -> Prompts : 取得
+Manager -> Engineer : 初期化
+Engineer --> Manager : Map{name: Engineer}
+
+== トランザクション ==
+User -> Manager : 指示
+
+Manager -> Planner : 計画実行
+Planner --> Manager: タスクリスト（内容、ステータス）
+
+loop タスクリスト（while all task is done）
+  Manager -> Manager : 適切なEngineerを選択
+  Manager -> Engineer : 実装指示
+  Engineer --> Manager : フィアルパス＆コード
+  'Manager -> Reviewer : レビュー依頼
+  'Reviewer --> Manager :
+
+  Manager -> Planner : 再計画
+  Planner --> Manager : タスクリスト（内容、ステータス）
+end loop
+
+@enduml

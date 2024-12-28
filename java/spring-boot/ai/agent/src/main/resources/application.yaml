@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: secret
+  main:
+    web-application-type: none
+  ai:
+    openai:
+      chat:
+        options:
+          model: gpt-4o-mini
