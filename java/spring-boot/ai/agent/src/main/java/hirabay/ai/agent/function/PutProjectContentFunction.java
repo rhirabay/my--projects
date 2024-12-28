@@ -29,13 +29,12 @@ public class PutProjectContentFunction implements Function<PutProjectContentFunc
     @Override
     public Response apply(Request request) {
         try {
-            // request.packageNameのディレクトリを作成する
-            var directory = "src/main/java/" + request.packageName.replace(".", "/");
-            Files.createDirectories(Paths.get(directory));
+            // ディレクトリを作成する
+            Files.createDirectories(Paths.get(request.directory));
 
             // request.packageNameのディレクトリにrequest.className.javaファイルを作成する
-            var filePath = directory + "/" + request.className + ".java";
-            Files.writeString(Paths.get(filePath), request.content);
+            var filePath = Paths.get(request.directory, request.filename);
+            Files.writeString(filePath, request.content);
 
             System.out.printf("""
                     PutProjectContentFunction success.
