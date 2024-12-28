@@ -48,7 +48,7 @@ public class Engineer {
         }
     }
 
-    public CodingResultList coding(String prompt, String request, String project, CodingResultList codingResultList) {
+    public CodingResultList coding(String prompt, String instruction, String project, CodingResultList codingResultList) {
         var customizedPrompt = """
                 %s
                 
@@ -70,7 +70,7 @@ public class Engineer {
                 
                 [実装済みクラス]
                 %s
-                """.formatted(prompt, request, project, codingResultList.toString());
+                """.formatted(prompt, instruction, project, codingResultList.toString());
 
         return openAiChatClient.chat(customizedPrompt, CodingResultList.class, Set.of(PutProjectContentFunction.class));
     }
