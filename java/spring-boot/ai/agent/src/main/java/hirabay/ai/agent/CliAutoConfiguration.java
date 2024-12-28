@@ -25,22 +25,19 @@ public class CliAutoConfiguration {
             // プロンプトを読み込む
             var prompts = String.join("\n", Files.readAllLines(Paths.get("README.md")));
 
-            System.out.println("設計書: \n" + design + "\n");
-            System.out.println("プロンプト: \n" + prompts + "\n");
-
             // 計画
             var engineers = planner.handlePrompts(prompts);
-            System.out.println("担当エンジニア: \n" + engineers + "\n");
 
             // 計画通りにエンジニアにタスクを振り分け
             var planList = planner.plan(engineers.keySet(), design);
-            System.out.println("計画: \n" + planList + "\n");
+            System.out.println("### 計画 ###\n" + planList + "\n");
 
             var codingResult = new Engineer.CodingResultList();
             for (var plan : planList) {
-                var result = engineer.coding(plan.getInstruction(), plan.getAssignee(), design, codingResult);
+                var prompt = engineers.get(plan.getAssignee());
+                var result = engineer.coding(prompt, plan.getInstruction(), design, codingResult);
                 codingResult = Engineer.CodingResultList.merge(codingResult, result);
-                System.out.println("コーディング結果: \n" + codingResult + "\n");
+                System.out.println("### コーディング結果 by " + plan.getAssignee() + " ###\n" + codingResult + "\n");
             }
         };
     }
