@@ -25,7 +25,7 @@ OR Mapperにはmybatis-spring-boot-starterを利用してくてださい。
   - POJOでgetter, setterはlombokの@Dataを利用する
 2. Mapperクラスを作成する
   - クラス名：<TableName>Mapper
-  - パッケージ：ai.agent.infrastructure.db.mapper
+  - パッケージ：hirabay.ai.agent.infrastructure.db.mapper
   - Mapperアノテーションを付与する
   - 関数名はjpaの命名規則に従う
 3. Mapper.xmlを作成する
