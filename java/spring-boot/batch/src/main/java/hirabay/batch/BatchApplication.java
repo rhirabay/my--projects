@@ -17,7 +17,7 @@ public class BatchApplication {
         ConfigurableApplicationContext context = SpringApplication.run(BatchApplication.class);
 
         JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
-        Job job = (Job) context.getBean("helloWorldJob");
+        Job job = (Job) context.getBean("helloWorldTaskletJob");
         log.info("Starting the batch job");
         try {
             JobExecution execution = jobLauncher.run(job, new JobParameters());
