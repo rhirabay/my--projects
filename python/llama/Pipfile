@@ -1,7 +1,7 @@
 [[source]]
-url = "https://edge.artifactory.corp.yahoo.co.jp:4443/artifactory/api/pypi/apj-pypi/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
-name = "pip_conf_index_global"
+name = "pypi"
 
 [packages]
 
