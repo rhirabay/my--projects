@@ -27,3 +27,5 @@ node_modules/
 .ipynb_checkpoints/
 
 .next/
+
+__pycache__/
