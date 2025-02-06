@@ -1,12 +1,10 @@
 {
-  "name": "confluence",
+  "name": "mcp-servers",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "bin": {
-    "confluence": "./build/index.js"
-  },
   "scripts": {
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\""
+    "build": "tsc"
   },
   "files": [
     "build"
@@ -14,10 +12,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.4.1",
-    "@types/turndown": "^5.0.5",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "turndown": "^7.2.0",
@@ -26,7 +22,8 @@
   "devDependencies": {
     "@types/axios": "^0.14.4",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.0",
+    "@types/node": "^22.13.1",
+    "@types/turndown": "^5.0.5",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3"

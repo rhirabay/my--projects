@@ -5,7 +5,6 @@ import {getContentByPageId} from "./getContent";
 import {createAxiosInstance} from "./createAxiosInstance";
 import dotenv from "dotenv";
 
-console.log(__dirname);
 dotenv.config({path: __dirname + '/../../../.env'});
 
 const confluenceBaseUrl = process.env.CONFLUENCE_BASE_URL;
