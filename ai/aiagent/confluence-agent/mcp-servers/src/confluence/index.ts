@@ -31,7 +31,7 @@ server.tool(
     `・コンフルエンス（Wiki）の内容をマークダウン形式で取得する\n・利用可能なURLの形式：${confluenceBaseUrl}/pages/viewpage.action?pageId=<pageId>`,
     {
         pageId: z.string().describe(`・コンフルエンス（wiki）のpageId
-・https://wiki.workers-hub.com/pages/viewpage.action?pageId=<pageId>のpageIdパラメータの値`),
+・${confluenceBaseUrl}/pages/viewpage.action?pageId=<pageId>のpageIdパラメータの値`),
     },
     async ({ pageId }) => {
         const content = await getContentByPageId({ axiosInstance, pageId });

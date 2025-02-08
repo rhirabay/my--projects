@@ -4,12 +4,15 @@ from streamlit.components.v1 import html
 from typing import Callable
 
 def show() -> Callable[[str], None]:
-    st.header("Logs")
-    log_container = st.container(height=500, key="log_container")
+    st.header("Background Task")
+    log_container = st.container(key="log_container")
+    log_container.empty()
 
     def write(message: str):
         with log_container:
-            st.write(message)
+            log_container.empty()
+            with st.chat_message("assistant"):
+                st.write(message)
 
     return write
     

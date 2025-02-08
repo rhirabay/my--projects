@@ -12,6 +12,7 @@ class OpenAiRepository:
         self.client = OpenAI()
         self.confluence_mcp_client = mcp_client.MCPClient(server_script_path="../mcp-servers/build/confluence/index.js")
         self.file_mcp_client = mcp_client.MCPClient(server_script_path="../mcp-servers/build/file/index.js")
+        self.os_mcp_client = mcp_client.MCPClient(server_script_path="../mcp-servers/build/os/index.js")
         self.log_write = log_write
 
     async def completion(
@@ -19,7 +20,7 @@ class OpenAiRepository:
             message: str,
             ) -> str:
         
-        mcp_client_list = [self.confluence_mcp_client, self.file_mcp_client]
+        mcp_client_list = [self.confluence_mcp_client, self.file_mcp_client, self.os_mcp_client]
         function_list = []
         server_dict = {} # 逆引き用に辞書を作成
         for mcp_client in mcp_client_list:
@@ -32,7 +33,7 @@ class OpenAiRepository:
                     "parameters": tool.inputSchema
                 }
             } for tool in tool_list])
-            print(f"function_list: {function_list}")
+            # print(f"function_list: {function_list}")
             
             server_dict = server_dict | {tool.name: mcp_client for tool in tool_list}
 
