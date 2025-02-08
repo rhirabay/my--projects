@@ -14,7 +14,7 @@ from openai_repository import OpenAiRepository
 st.set_page_config(layout="wide")
 
 # カスタムCSSを追加
-st.markdown("<style>body {font-size: 80%;}</style>", unsafe_allow_html=True)
+st.markdown("<style>body {font-size: 75%;}</style>", unsafe_allow_html=True)
 
 # ユーザー入力
 user_input = st.chat_input("Enter your message...")
