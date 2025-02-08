@@ -17,12 +17,12 @@ server.tool(
         command: z.string().describe("実行するコマンド"),
         workingDirectory: z.string().describe("コマンド実行ディレクトリ"),
     },
-    async ({ command }) => {
+    async ({ command, workingDirectory }) => {
         return {
             content: [
                 {
                     type: "text",
-                    text: await execCommand(command)
+                    text: await execCommand(command, workingDirectory)
                 }
             ],
         };

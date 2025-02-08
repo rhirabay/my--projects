@@ -2,21 +2,24 @@ import { exec } from 'child_process';
 
 interface ExecParams {
     command: string;
-    workingDirectory?: string; // オプションの作業ディレクトリ
+    workingDirectory: string; // オプションの作業ディレクトリ
 }
 
 async function execCommand(command: string, workingDirectory: string): Promise<string> {
     return new Promise((resolve, reject) => {
         exec(command, { cwd: workingDirectory }, (error, stdout, stderr) => {
+            let result = ''
+
             if (error) {
-                reject(`実行中にエラーが発生しました: ${error.message}`);
-                return;
+                result += `・実行中にエラーが発生しました\n${error.message}`;
             }
             if (stderr) {
-                reject(`エラー出力: ${stderr}`);
-                return;
+                result += `・標準エラー出力\n${stderr}`;
             }
-            resolve(stdout);
+            if (stdout) {
+                result += `・標準出力\n${stdout}`;
+            }
+            resolve(result);
         });
     });
 }

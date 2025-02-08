@@ -1,6 +1,5 @@
 from presentation import chat
 from presentation import logs
-from test import test1, test2
 import streamlit as st
 import time
 import asyncio
@@ -13,6 +12,12 @@ sys.path.append('.')
 from openai_repository import OpenAiRepository
 
 st.set_page_config(layout="wide")
+
+# カスタムCSSを追加
+st.markdown("<style>body {font-size: 80%;}</style>", unsafe_allow_html=True)
+
+# ユーザー入力
+user_input = st.chat_input("Enter your message...")
 # レイアウトを2カラムに分割
 col1, col2 = st.columns(2)
 
@@ -25,6 +30,9 @@ async def main():
 
     # 左カラム: チャット
     with col1:
-        result_write_callback = await chat.show(openai_repository=openai_repository)
+        result_write_callback = await chat.show(
+            user_input=user_input,
+            openai_repository=openai_repository
+        )
 
 asyncio.run(main())

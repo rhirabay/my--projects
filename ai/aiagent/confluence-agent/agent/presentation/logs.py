@@ -5,7 +5,7 @@ from typing import Callable
 
 def show() -> Callable[[str], None]:
     st.header("Background Task")
-    log_container = st.container(key="log_container")
+    log_container = st.container(key="log_container", height=500)
     log_container.empty()
 
     def write(message: str):
