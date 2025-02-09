@@ -12,14 +12,18 @@ def show() -> Callable[[str], None]:
     if "background_task_history" not in st.session_state:
         st.session_state.background_task_history = []
 
+    with log_container:
+        log_container.empty()
+        for message in st.session_state.background_task_history:  # セッションに保存されたメッセージをすべて表示
+            with st.chat_message("assistant"):
+                st.json(body=message, expanded=1)
+
     def write(data: dict):
         # 新しいメッセージを履歴に追加
         st.session_state.background_task_history.append(data)
 
         with log_container:
-            log_container.empty()
-            for message in st.session_state.background_task_history:  # セッションに保存されたメッセージをすべて表示
-                with st.chat_message("assistant"):
-                    st.json(body=message, expanded=1)
+            with st.chat_message("assistant"):
+                st.json(body=data, expanded=1)
 
     return write

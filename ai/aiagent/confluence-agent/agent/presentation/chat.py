@@ -14,14 +14,21 @@ async def show(user_input, openai_repository: OpenAiRepository) -> None:
     chat_container.empty()
 
     # チャット履歴表示
-    with chat_container:
-        for chat in st.session_state.chat_log:
-            if chat['role'] == 'user':
-                with st.chat_message('user'):
-                    st.write(chat["content"])
-            elif chat['role'] == 'assistant':
-                with st.chat_message('assistant'):
-                    st.write(chat["content"])
+    def show_chat_log():
+        with chat_container:
+            for chat in st.session_state.chat_log:
+                # contentが空の場合は表示しない
+                if not chat["content"]:
+                    continue
+
+                if chat['role'] == 'user':
+                    with st.chat_message('user'):
+                        st.write(chat["content"])
+                elif chat['role'] == 'assistant':
+                    with st.chat_message('assistant'):
+                        st.write(chat["content"])
+    show_chat_log()
+
 
     if user_input:
         # ユーザーのメッセージを表示
@@ -36,13 +43,9 @@ async def show(user_input, openai_repository: OpenAiRepository) -> None:
                 st.button('承認', type='primary', on_click=on_button_click)
 
         def show_result_callback(result: CompletionResult):
-            with chat_container:
-                with st.chat_message("assistant"):
-                    st.write(result.result)
             # ログに追加
             st.session_state.chat_log = result.messages
-            stack_trace = traceback.format_stack()
-            print(f"Current stack trace: \n - {"\n - ".join(stack_trace)}")
+            show_chat_log()
 
         await openai_repository.completion(
             message=user_input,
