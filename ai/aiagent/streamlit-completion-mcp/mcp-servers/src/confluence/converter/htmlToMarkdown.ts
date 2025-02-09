@@ -1,6 +1,7 @@
 import TurndownService from 'turndown';
 
 const turndownService = new TurndownService();
+const confluenceBaseUrl = process.env.CONFLUENCE_BASE_URL;
 
 // 見出しタグをMarkdownの見出し形式に変換するカスタムルールを追加
 turndownService.addRule('heading', {
@@ -43,7 +44,7 @@ turndownService.addRule('relativeLink', {
     replacement: function(content: string, node: TurndownService.Node) {
         if ('getAttribute' in node) {
             const href = node.getAttribute('href') || '';
-            const fullUrl = href.startsWith('/') ? `https://wiki.workers-hub.com${href}` : href;
+            const fullUrl = href.startsWith('/') ? `${confluenceBaseUrl}${href}` : href;
             return `[${content}](${fullUrl})`;
         }
         return content;

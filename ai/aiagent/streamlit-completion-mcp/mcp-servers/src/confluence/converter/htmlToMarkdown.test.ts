@@ -1,5 +1,7 @@
 import { convertHtmlToMarkdown } from './htmlToMarkdown';
 
+process.env.CONFLUENCE_BASE_URL = 'https://sample.com';
+
 test('html to markdown', () => {
     const html = `
   <h1>Confluence Page Title</h1>
@@ -18,7 +20,7 @@ test('html to markdown', () => {
       </tr>
       <tr>
         <td>Data 3</td>
-        <td><a href="https://yahoo.co.jp">Yahoo</a></td>
+        <td><a href="https://google.com">Yahoo</a></td>
       </tr>
     </tbody>
   </table>
@@ -31,7 +33,7 @@ This is a **sample** Confluence HTML content.
 | Header 1 | Header 2 |
 | --- | --- |
 | Data 1 | Data 2 |
-| Data 3 | [Yahoo](https://yahoo.co.jp) |
-[Link](https://wiki.workers-hub.com/pages/viewpage.action?pageId=103552635)`;
+| Data 3 | [Yahoo](https://google.com) |
+[Link](https://sample.com/pages/viewpage.action?pageId=103552635)`;
     expect(convertHtmlToMarkdown(html)).toBe(expected);
 });
