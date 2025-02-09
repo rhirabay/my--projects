@@ -11,7 +11,7 @@ const server = new McpServer({
 
 // Register tools
 server.tool(
-    "exec-command",
+    "execCommand",
     "指定されたコマンドを実行します。",
     {
         command: z.string().describe("実行するコマンド"),

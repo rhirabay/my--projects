@@ -8,22 +8,18 @@ def show() -> Callable[[str], None]:
     log_container = st.container(key="log_container", height=500)
     log_container.empty()
 
-    def write(message: str):
+    # セッションステートを初期化
+    if "background_task_history" not in st.session_state:
+        st.session_state.background_task_history = []
+
+    def write(data: dict):
+        # 新しいメッセージを履歴に追加
+        st.session_state.background_task_history.append(data)
+
         with log_container:
             log_container.empty()
-            with st.chat_message("assistant"):
-                st.write(message)
+            for message in st.session_state.background_task_history:  # セッションに保存されたメッセージをすべて表示
+                with st.chat_message("assistant"):
+                    st.json(body=message, expanded=1)
 
     return write
-    
-    # if 'messages' not in st.session_state: 
-    #     st.session_state.messages = []
-
-    # with log_container:
-    #     for message in st.session_state.messages:
-    #         st.write(message)
-
-    #     for i in range(100):
-    #         message = f"ログエントリ {i+1}: 処理内容"
-    #         st.session_state.messages.append(message)
-    #         st.write(message)

@@ -30,7 +30,7 @@ async def main():
 
     # 左カラム: チャット
     with col1:
-        result_write_callback = await chat.show(
+        await chat.show(
             user_input=user_input,
             openai_repository=openai_repository
         )

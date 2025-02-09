@@ -1,8 +1,9 @@
+import traceback
 import streamlit as st
 from typing import Callable
-from openai_repository import OpenAiRepository
+from openai_repository import OpenAiRepository, CompletionResult
 
-async def show(user_input, openai_repository: OpenAiRepository) -> Callable[[str], None]:
+async def show(user_input, openai_repository: OpenAiRepository) -> None:
     st.header("Chat")
 
 
@@ -15,32 +16,39 @@ async def show(user_input, openai_repository: OpenAiRepository) -> Callable[[str
     # チャット履歴表示
     with chat_container:
         for chat in st.session_state.chat_log:
-            with st.chat_message(chat["role"]):
-                st.write(chat["content"])
+            if chat['role'] == 'user':
+                with st.chat_message('user'):
+                    st.write(chat["content"])
+            elif chat['role'] == 'assistant':
+                with st.chat_message('assistant'):
+                    st.write(chat["content"])
 
     if user_input:
         # ユーザーのメッセージを表示
         with chat_container:
             with st.chat_message("user"):
                 st.write(user_input)
-        result = await openai_repository.completion(user_input)
 
-        with chat_container:
-            with st.chat_message("assistant"):
-                st.write(result)
-        
-        # ログに追加
-        st.session_state.chat_log.append({"role": "user", "content": user_input})
-        st.session_state.chat_log.append({"role": "assistant", "content": result})
+        def show_tool_confirm_button(tool_name, args: dict[str, str], on_button_click: Callable):
+            with chat_container:
+                with st.chat_message("assistant"):
+                    st.write(f'以下のツールを実行します。\nツール名: {tool_name}\nパラメータ: {args}')
+                st.button('承認', type='primary', on_click=on_button_click)
 
+        def show_result_callback(result: CompletionResult):
+            with chat_container:
+                with st.chat_message("assistant"):
+                    st.write(result.result)
+            # ログに追加
+            st.session_state.chat_log = result.messages
+            stack_trace = traceback.format_stack()
+            print(f"Current stack trace: \n - {"\n - ".join(stack_trace)}")
 
-    def write_result(message: str, button: bool = False):
-        if button:
-            if st.button(message):
-                st.write(f"Button clicked: {message}")
-        else:
-            with st.chat_message("assistant"):
-                st.write(message)
-            st.session_state.chat_log.append({"role": "assistant", "content": message})
+        await openai_repository.completion(
+            message=user_input,
+            completion_history=st.session_state.chat_log,
+            confirm_callback=show_tool_confirm_button,
+            result_callback=show_result_callback,
+        )
 
-    return write_result
+    return None
